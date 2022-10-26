@@ -6,10 +6,7 @@ package models;
 
 import java.util.ArrayList;
 
-/**
- *
- * @author vaibhav
- */
+
 public class Doctor {
     private String about;
     private ArrayList<Patient> patientList;

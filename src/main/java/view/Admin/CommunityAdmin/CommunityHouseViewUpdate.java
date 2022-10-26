@@ -13,10 +13,7 @@ import models.Community;
 import models.House;
 import view.MainJFrame;
 
-/**
- *
- * @author vaibhav
- */
+
 public class CommunityHouseViewUpdate extends javax.swing.JPanel {
 
     /**

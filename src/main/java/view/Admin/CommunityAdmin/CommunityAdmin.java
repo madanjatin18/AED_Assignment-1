@@ -7,10 +7,7 @@ package view.Admin.CommunityAdmin;
 import models.CityDirectory;
 import view.Admin.AdminJFrame;
 
-/**
- *
- * @author vaibhav
- */
+
 public class CommunityAdmin extends javax.swing.JFrame {
 
     /**
@@ -84,11 +81,11 @@ public class CommunityAdmin extends javax.swing.JFrame {
             controlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(controlPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(controlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(controlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btn_back_admin)
-                    .addComponent(btn_community)
-                    .addComponent(btn_houses))
-                .addContainerGap(8, Short.MAX_VALUE))
+                    .addComponent(btn_community, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btn_houses, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         controlPanelLayout.setVerticalGroup(
             controlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

@@ -13,10 +13,7 @@ import models.Doctor;
 import resources.Validations;
 import view.MainJFrame;
 
-/**
- *
- * @author vaibhav
- */
+
 public class DoctorViewUpdate extends javax.swing.JPanel {
 
     /**

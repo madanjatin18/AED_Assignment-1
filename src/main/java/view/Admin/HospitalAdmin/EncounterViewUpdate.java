@@ -4,27 +4,31 @@
  */
 package view.Admin.HospitalAdmin;
 
+import java.util.ArrayList;
 import java.util.Vector;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
 import models.Doctor;
+import models.Encounter;
+import models.Patient;
 import resources.Validations;
+import view.Doctor.DoctorMainJFrame;
 import view.MainJFrame;
 
-/**
- *
- * @author vaibhav
- */
+
 public class EncounterViewUpdate extends javax.swing.JPanel {
 
     /**
      * Creates new form EncounterViewUpdate
      */
-    Validations validations;
+    //Validations validations;
+    Vector originalTableModel;
     public EncounterViewUpdate() {
         initComponents();
+        populateTable();
+        originalTableModel = (Vector) ((DefaultTableModel) tblDetails.getModel()).getDataVector().clone();
     }
 
     /**
@@ -36,7 +40,6 @@ public class EncounterViewUpdate extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        btnUpdate = new javax.swing.JButton();
         txtSearch = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblDetails = new javax.swing.JTable();
@@ -48,13 +51,12 @@ public class EncounterViewUpdate extends javax.swing.JPanel {
         txtCommunity = new javax.swing.JTextField();
         lblCommunity1 = new javax.swing.JLabel();
         txtHospital = new javax.swing.JTextField();
-
-        btnUpdate.setText("Update");
-        btnUpdate.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnUpdateActionPerformed(evt);
-            }
-        });
+        lblCommunity2 = new javax.swing.JLabel();
+        txtDoctor = new javax.swing.JTextField();
+        lblCommunity3 = new javax.swing.JLabel();
+        txtPatient = new javax.swing.JTextField();
+        lblCommunity4 = new javax.swing.JLabel();
+        txtDate = new javax.swing.JTextField();
 
         txtSearch.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -64,17 +66,17 @@ public class EncounterViewUpdate extends javax.swing.JPanel {
 
         tblDetails.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "City", "Community", "Hospital", "Name", "Age", "Gender", "Phone Number", "Email", "Username", "Password", "About", "object"
+                "Hospital", "Doctor", "Date", "null"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false, false, false, false, false
+                false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -87,6 +89,11 @@ public class EncounterViewUpdate extends javax.swing.JPanel {
             }
         });
         jScrollPane1.setViewportView(tblDetails);
+        if (tblDetails.getColumnModel().getColumnCount() > 0) {
+            tblDetails.getColumnModel().getColumn(3).setMinWidth(0);
+            tblDetails.getColumnModel().getColumn(3).setPreferredWidth(0);
+            tblDetails.getColumnModel().getColumn(3).setMaxWidth(0);
+        }
 
         lblDoctorRecord.setFont(new java.awt.Font("Hiragino Mincho ProN", 1, 24)); // NOI18N
         lblDoctorRecord.setText("Encounter Records");
@@ -113,6 +120,21 @@ public class EncounterViewUpdate extends javax.swing.JPanel {
 
         txtHospital.setEditable(false);
 
+        lblCommunity2.setFont(new java.awt.Font("Hiragino Mincho ProN", 1, 18)); // NOI18N
+        lblCommunity2.setText("  Doctor :");
+
+        txtDoctor.setEditable(false);
+
+        lblCommunity3.setFont(new java.awt.Font("Hiragino Mincho ProN", 1, 18)); // NOI18N
+        lblCommunity3.setText("Patient :");
+
+        txtPatient.setEditable(false);
+
+        lblCommunity4.setFont(new java.awt.Font("Hiragino Mincho ProN", 1, 18)); // NOI18N
+        lblCommunity4.setText("Date :");
+
+        txtDate.setEditable(false);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -130,22 +152,29 @@ public class EncounterViewUpdate extends javax.swing.JPanel {
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(lblCommunity1, javax.swing.GroupLayout.Alignment.TRAILING)
                                 .addComponent(lblCommunity, javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(lblCity, javax.swing.GroupLayout.Alignment.TRAILING)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(lblCity, javax.swing.GroupLayout.Alignment.TRAILING))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(31, 31, 31)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblCommunity2)
+                                    .addComponent(lblCommunity3)
+                                    .addComponent(lblCommunity4)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(128, 128, 128)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(txtDoctor, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(txtPatient, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(txtDate, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(188, 188, 188)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(txtCommunity, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(133, 133, 133)
-                                .addComponent(btnUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtCommunity, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(txtCity, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(133, 133, 133)
                                 .addComponent(btn_create, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(txtHospital, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(22, 22, 22)))
-                .addGap(314, 314, Short.MAX_VALUE))
+                            .addComponent(txtHospital, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(336, 336, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -165,144 +194,65 @@ public class EncounterViewUpdate extends javax.swing.JPanel {
                 .addGap(6, 6, 6)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblCommunity)
-                    .addComponent(txtCommunity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnUpdate))
+                    .addComponent(txtCommunity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(6, 6, 6)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtHospital, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblCommunity1))
-                .addGap(327, 327, 327))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtDoctor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblCommunity2))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtPatient, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblCommunity3))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblCommunity4))
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
+    
+    private void populateTable() {
+        
+        DefaultTableModel model = (DefaultTableModel) tblDetails.getModel();
+        model.setRowCount(0);
+        
+        for (Encounter c : MainJFrame.encounterDirectory.getEncouterList()){
+            Object[] row = new Object[4];
+            row[0] = c.getHospital().getName();
+            row[1] = c.getDoctor().getPerson().getName();
+            row[2] = c.getDate();
+            row[3] = c;
 
-    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
-        int selectRowIndex = tblDetails.getSelectedRow();
-        if (selectRowIndex<0){
-            JOptionPane.showMessageDialog(this, "Please select a row to update");
-            return;
+            
+            model.addRow(row);
         }
-        DefaultTableModel model = (DefaultTableModel)tblDetails.getModel();
-        Doctor selectedDetails = (Doctor) model.getValueAt(selectRowIndex, 11);
-        String email = model.getValueAt(selectRowIndex, 7).toString();
-        String username = model.getValueAt(selectRowIndex, 8).toString();
-
-        var valid = true;
-
-        if (!this.validations.ValidateName(txtName.getText()) ) {
-            valName.setText("Name is Invalid");
-            valid = false;
-        }
-
-        if (!this.validations.ValidateAbout(txtAbout.getText()) ) {
-            valAbout.setText("Details are required");
-            valid = false;
-        }
-/*
-        if (btnMale.getSelection() == null) {
-            valGender.setText("Gender is required");
-            valid = false;
-        }
-*/
-        if (!this.validations.ValidateEmail(txtEmail.getText()) ) {
-            valEmail.setText("Email address is Invalid");
-            valid = false;
-        } else if (!(txtEmail.getText().equals(email)) && MainJFrame.personDirectory.isPersonByEmailExist(txtEmail.getText())) {
-            valEmail.setText("Email address already exist");
-            valid = false;
-        }
-
-        if (!this.validations.ValidatePhoneNumber(txtPhoneNumber.getText()) ) {
-            valPhone.setText("Phone Number is Invalid");
-            valid = false;
-        }
-
-        if (!this.validations.ValidateAge(txtAge.getText()) ) {
-            valAge.setText("Age is Invalid");
-            valid = false;
-        }
-
-        if (!this.validations.ValidateUsername(txtUsername.getText()) ) {
-            valUsername.setText("Username is Invalid");
-            valid = false;
-        } else if (!(txtUsername.getText().equals(username)) && MainJFrame.personDirectory.isPersonByUsernameExist(txtUsername.getText())) {
-            valUsername.setText("Username already exist");
-            valid = false;
-        }
-
-        String password = String.valueOf(txtPassword.getPassword());
-        if (!this.validations.ValidatePassword(password) ) {
-            valPassword.setText("Should be 5-12 character long");
-            valid = false;
-        }
-
-        //
-        if (valid) {
-
-            String gender;
-            if (btnMale.isSelected()) {
-                gender = "Male";
-            }
-            else if (btnFemale.isSelected()) {
-                gender = "Female";
-            }
-            else {
-                gender = "Other";
-            }
-
-            selectedDetails.getPerson().setAge(Integer.parseInt(txtAge.getText()));
-            selectedDetails.getPerson().setName(txtName.getText());
-            selectedDetails.getPerson().setGender(gender);
-            selectedDetails.getPerson().setPhoneNumber(txtPhoneNumber.getText());
-            selectedDetails.getPerson().setUsername(txtUsername.getText());
-            selectedDetails.getPerson().setPassword(String.valueOf(txtPassword.getPassword()));
-            selectedDetails.getPerson().setEmail(txtEmail.getText());
-            selectedDetails.setAbout(txtAbout.getText());
-
-            JOptionPane.showMessageDialog(this, "Doctor details Updated");
-            //setTextNull();
-            //setValidationNull();
-            //populateTable();
-
-        }
-    }//GEN-LAST:event_btnUpdateActionPerformed
-
+    }
     private void tblDetailsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDetailsMouseClicked
 
         DefaultTableModel tblModel = (DefaultTableModel) tblDetails.getModel();
 
         // set data to textfield when raw is selected
 
-        String tblCity = tblModel.getValueAt(tblDetails.getSelectedRow(),0).toString();
-        String tblCommunity = tblModel.getValueAt(tblDetails.getSelectedRow(),1).toString();
-        String tblHospital = tblModel.getValueAt(tblDetails.getSelectedRow(),2).toString();
-        String tblName = tblModel.getValueAt(tblDetails.getSelectedRow(),3).toString();
-        String tblAge = tblModel.getValueAt(tblDetails.getSelectedRow(),4).toString();
-        String tblGender = tblModel.getValueAt(tblDetails.getSelectedRow(),5).toString();
-        String tblPhoneNumber = tblModel.getValueAt(tblDetails.getSelectedRow(),6).toString();
-        String tblEmail = tblModel.getValueAt(tblDetails.getSelectedRow(),7).toString();
-        String tblUsername = tblModel.getValueAt(tblDetails.getSelectedRow(),8).toString();
-        String tblPassword = tblModel.getValueAt(tblDetails.getSelectedRow(),9).toString();
-        String tblAbout = tblModel.getValueAt(tblDetails.getSelectedRow(),10).toString();
-
-        if (null == tblGender) {
-            btnOther.setSelected(true);
-        }
-        else switch (tblGender) {
-            case "Male" : btnMale.setSelected(true);
-            case "Female" : btnFemale.setSelected(true);
-            default: btnOther.setSelected(true);
-        }
-
-        txtCity.setText(tblCity);
-        txtCommunity.setText(tblCommunity);
-        txtHospital.setText(tblHospital);
-        txtName.setText(tblName);
-        txtAge.setText(tblAge);
-        txtPhoneNumber.setText(tblPhoneNumber);
-        txtEmail.setText(tblEmail);
-        txtUsername.setText(tblUsername);
-        txtPassword.setText(tblPassword);
-        txtAbout.setText(tblAbout);
+        String hospName = tblModel.getValueAt(tblDetails.getSelectedRow(),0).toString();
+        String docName = tblModel.getValueAt(tblDetails.getSelectedRow(),1).toString();
+        String date = tblModel.getValueAt(tblDetails.getSelectedRow(),2).toString();
+        Encounter ec = (Encounter) tblModel.getValueAt(tblDetails.getSelectedRow(),3);
+        
+        ArrayList<Patient> pl = new ArrayList<>();
+        ArrayList<Doctor> dl = new ArrayList<>();
+        pl = ec.getHospital().getPatientList();
+        dl = ec.getHospital().getDoctorList();
+       
+        txtDoctor.setText(docName);
+        txtDate.setText(date);
+        txtHospital.setText(hospName);
+        txtCity.setText(ec.getHospital().getCity().getName().toString());
+        txtCommunity.setText(ec.getHospital().getCommunity().getName().toString());
+        txtPatient.setText(pl.get(0).getPerson().getName());
 
        // setValidationNull();
     }//GEN-LAST:event_tblDetailsMouseClicked
@@ -311,9 +261,9 @@ public class EncounterViewUpdate extends javax.swing.JPanel {
 
         JFrame parent = (JFrame) SwingUtilities.getWindowAncestor(this);
         parent.dispose();
-        HospitalAdminJFrame adminArea = new HospitalAdminJFrame();
-        adminArea.setVisible(true);
-        adminArea.setEncounterCreateView();
+        DoctorMainJFrame docArea = new DoctorMainJFrame();
+        docArea.setVisible(true);
+        docArea.setEncounterCreateView();
     }//GEN-LAST:event_btn_createActionPerformed
 
     private void txtSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSearchActionPerformed
@@ -322,17 +272,22 @@ public class EncounterViewUpdate extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnUpdate;
     private javax.swing.JButton btn_create;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblCity;
     private javax.swing.JLabel lblCommunity;
     private javax.swing.JLabel lblCommunity1;
+    private javax.swing.JLabel lblCommunity2;
+    private javax.swing.JLabel lblCommunity3;
+    private javax.swing.JLabel lblCommunity4;
     private javax.swing.JLabel lblDoctorRecord;
     private javax.swing.JTable tblDetails;
     private javax.swing.JTextField txtCity;
     private javax.swing.JTextField txtCommunity;
+    private javax.swing.JTextField txtDate;
+    private javax.swing.JTextField txtDoctor;
     private javax.swing.JTextField txtHospital;
+    private javax.swing.JTextField txtPatient;
     private javax.swing.JTextField txtSearch;
     // End of variables declaration//GEN-END:variables
 }

@@ -15,10 +15,7 @@ import models.Patient;
 import resources.Validations;
 import view.MainJFrame;
 
-/**
- *
- * @author vaibhav
- */
+
 public class PatientViewUpdate extends javax.swing.JPanel {
 
     /**
@@ -90,6 +87,11 @@ public class PatientViewUpdate extends javax.swing.JPanel {
         valIssue.setFont(new java.awt.Font("Helvetica Neue", 2, 13)); // NOI18N
         valIssue.setForeground(new java.awt.Color(255, 0, 0));
 
+        txtIssue.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtIssueActionPerformed(evt);
+            }
+        });
         txtIssue.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtIssueKeyReleased(evt);
@@ -780,6 +782,10 @@ public class PatientViewUpdate extends javax.swing.JPanel {
     private void txtSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSearchActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtSearchActionPerformed
+
+    private void txtIssueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIssueActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtIssueActionPerformed
 
     private void populateTable() {
         

@@ -20,10 +20,7 @@ import models.Person;
 import resources.Validations;
 import view.MainJFrame;
 
-/**
- *
- * @author vaibhav
- */
+
 public class EncounterCreate extends javax.swing.JPanel {
 
     /**

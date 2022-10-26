@@ -13,10 +13,7 @@ import models.Community;
 import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
 import view.MainJFrame;
 
-/**
- *
- * @author vaibhav
- */
+
 public class CommunityHouseCreate extends javax.swing.JPanel {
 
     /**

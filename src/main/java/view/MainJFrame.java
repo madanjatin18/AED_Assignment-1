@@ -11,16 +11,15 @@ import javax.swing.JTextField;
 import models.CityDirectory;
 import models.CommunityDirectory;
 import models.DoctorDirectory;
+import models.EncounterDirectory;
 import models.HospitalDirectory;
 import models.PatientDirectory;
 import models.PersonDirectory;
 import view.Admin.AdminJFrame;
 import resources.CreateDefaultData;
+import view.Doctor.DoctorMainJFrame;
 
-/**
- *
- * @author vaibhav
- */
+
 public class MainJFrame extends javax.swing.JFrame {
 
     /**
@@ -34,6 +33,7 @@ public class MainJFrame extends javax.swing.JFrame {
     public static DoctorDirectory doctorDirectory  = new DoctorDirectory();
     public static PersonDirectory personDirectory = new PersonDirectory();
     public static PatientDirectory patientDirectory = new PatientDirectory();
+    public static EncounterDirectory encounterDirectory = new EncounterDirectory();
     
     public MainJFrame() {
         initComponents();
@@ -194,6 +194,8 @@ public class MainJFrame extends javax.swing.JFrame {
 
     private void btn_doctorsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_doctorsActionPerformed
         // TODO add your handling code here:
+        this.dispose();
+        new DoctorMainJFrame().setVisible(true);
     }//GEN-LAST:event_btn_doctorsActionPerformed
 
     private void txtUsernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUsernameActionPerformed

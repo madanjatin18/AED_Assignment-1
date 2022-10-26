@@ -21,10 +21,7 @@ import models.Person;
 import resources.Validations;
 import view.MainJFrame;
 
-/**
- *
- * @author vaibhav
- */
+
 public class EncounterCreate extends javax.swing.JPanel {
 
     /**
@@ -436,9 +433,9 @@ public class EncounterCreate extends javax.swing.JPanel {
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         JFrame parent = (JFrame) SwingUtilities.getWindowAncestor(this);
         parent.dispose();
-        HospitalAdminJFrame adminArea = new HospitalAdminJFrame();
-        adminArea.setVisible(true);
-        adminArea.setEncounterUpdateView();
+        DoctorMainJFrame docArea = new DoctorMainJFrame();
+        docArea.setVisible(true);
+        docArea.setEncounterUpdateView();
     }//GEN-LAST:event_btnBackActionPerformed
 /*
     private void datePickerKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_datePickerKeyReleased

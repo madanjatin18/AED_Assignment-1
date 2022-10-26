@@ -4,19 +4,18 @@
  */
 package resources;
 
+import java.util.Date;
 import models.City;
 import models.Community;
 import models.Doctor;
+import models.Encounter;
 import models.Hospital;
 import models.House;
 import models.Patient;
 import models.Person;
 import view.MainJFrame;
 
-/**
- *
- * @author vaibhav
- */
+
 public class CreateDefaultData {
     public static void createData() {
         
@@ -78,5 +77,10 @@ public class CreateDefaultData {
         Patient pa3 = MainJFrame.patientDirectory.newPatient("Regular checkup", h3, p8, c);
         Patient pa4 = MainJFrame.patientDirectory.newPatient("heart break", h1, p9, d);
         Patient pa5 = MainJFrame.patientDirectory.newPatient("Heark attack", h2, p10, e);
+        
+        
+       //Encounter
+       Date date = new Date();
+       Encounter e1 = MainJFrame.encounterDirectory.newEncounter(date,d1,a);
     }
 }

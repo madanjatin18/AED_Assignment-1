@@ -8,10 +8,7 @@ import view.Admin.CommunityAdmin.CommunityAdmin;
 import view.Admin.HospitalAdmin.HospitalAdminJFrame;
 import view.MainJFrame;
 
-/**
- *
- * @author vaibhav
- */
+
 public class AdminJFrame extends javax.swing.JFrame {
 
     /**

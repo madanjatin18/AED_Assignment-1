@@ -13,10 +13,7 @@ import models.Hospital;
 import resources.Validations;
 import view.MainJFrame;
 
-/**
- *
- * @author vaibhav
- */
+
 public class HospitalViewUpdate extends javax.swing.JPanel {
 
     /**

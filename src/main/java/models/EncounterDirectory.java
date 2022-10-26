@@ -7,10 +7,7 @@ package models;
 import java.util.ArrayList;
 import java.util.Date;
 
-/**
- *
- * @author vaibhav
- */
+
 public class EncounterDirectory {
     ArrayList<Encounter> encounterList ;
     

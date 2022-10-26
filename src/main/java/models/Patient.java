@@ -2,10 +2,7 @@ package models;
 
 import java.util.ArrayList;
 
-/**
- *
- * @author vaibhav
- */
+
 public class Patient {
     
     private int patientID;

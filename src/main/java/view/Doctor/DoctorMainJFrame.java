@@ -4,24 +4,32 @@
  */
 package view.Doctor;
 
+import models.CityDirectory;
+import models.CommunityDirectory;
+import models.DoctorDirectory;
+import models.EncounterDirectory;
+import models.HospitalDirectory;
+import models.PatientDirectory;
+import models.PersonDirectory;
 import view.Admin.HospitalAdmin.*;
 import view.Admin.AdminJFrame;
+import view.MainJFrame;
 
-/**
- *
- * @author vaibhav
- */
+
 public class DoctorMainJFrame extends javax.swing.JFrame {
 
     /**
      * Creates new form HospitalAdminJFrame
      */
+ 
+
+    
     public DoctorMainJFrame() {
         initComponents();
         workArea.setSize(900, 900);
         setLocationRelativeTo(null);
-        HospitalViewUpdate hospitalView = new HospitalViewUpdate();
-        splitPane.setRightComponent(hospitalView);
+        DoctorEncounterViewUpdate encView = new DoctorEncounterViewUpdate();
+        splitPane.setRightComponent(encView);
         
     }
 
@@ -129,8 +137,8 @@ public class DoctorMainJFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnVitalSignActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVitalSignActionPerformed
-        PatientViewUpdate d = new PatientViewUpdate();
-        splitPane.setRightComponent(d);
+        //PatientViewUpdate d = new PatientViewUpdate();
+        //splitPane.setRightComponent(d);
     }//GEN-LAST:event_btnVitalSignActionPerformed
 
     private void btn_encountersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_encountersActionPerformed
@@ -140,7 +148,7 @@ public class DoctorMainJFrame extends javax.swing.JFrame {
 
     private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutActionPerformed
         this.dispose();
-        new AdminJFrame().setVisible(true);
+        new MainJFrame().setVisible(true);
     }//GEN-LAST:event_btnLogoutActionPerformed
 
     /**

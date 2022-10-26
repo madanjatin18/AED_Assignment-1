@@ -7,10 +7,7 @@ package models;
 import java.util.ArrayList;
 import java.util.Random;
 
-/**
- *
- * @author vaibhav
- */
+
 public class PatientDirectory {
     ArrayList<Patient> patientList ;
     

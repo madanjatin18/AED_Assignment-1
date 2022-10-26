@@ -6,10 +6,7 @@ package view.Admin.HospitalAdmin;
 
 import view.Admin.AdminJFrame;
 
-/**
- *
- * @author vaibhav
- */
+
 public class HospitalAdminJFrame extends javax.swing.JFrame {
 
     /**

@@ -14,10 +14,7 @@ import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
 import view.MainJFrame;
 import resources.Validations;
 
-/**
- *
- * @author vaibhav
- */
+
 public class HospitalCreate extends javax.swing.JPanel {
 
     /**
