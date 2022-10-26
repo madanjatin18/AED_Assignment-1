@@ -10,4 +10,5 @@ package com.assignment2.hospital;
  */
 public class City {
     
+    
 }
