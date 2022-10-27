@@ -196,6 +196,14 @@ public class MainJFrame extends javax.swing.JFrame {
             }
         }
         
+        if (cbChoice.getSelectedItem().toString().equals("Patient")){
+            
+            if (txtUsername.getText().equals("abc") && txtPassword.getText().equals("abc12")){
+                this.dispose();
+            new AdminJFrame().setVisible(true);
+            }
+        }
+        
     }//GEN-LAST:event_btnLoginActionPerformed
 
     private void cbChoiceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbChoiceActionPerformed
