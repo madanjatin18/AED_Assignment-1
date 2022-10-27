@@ -184,6 +184,11 @@ public class CreateJPanel extends javax.swing.JPanel {
                 txtNameFocusLost(evt);
             }
         });
+        txtName.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNameActionPerformed(evt);
+            }
+        });
         jPanel4.add(txtName, new org.netbeans.lib.awtextra.AbsoluteConstraints(208, 136, 190, -1));
 
         txtAge.setText("Enter Age");
@@ -695,6 +700,10 @@ public class CreateJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
         txtLevel.setText(null);
     }//GEN-LAST:event_txtLevelFocusGained
+
+    private void txtNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtNameActionPerformed
     /**/
 
     
