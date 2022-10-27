@@ -46,7 +46,7 @@ public class CommunityAdmin extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(153, 255, 204));
 
-        controlPanel.setBackground(new java.awt.Color(153, 255, 204));
+        controlPanel.setBackground(new java.awt.Color(102, 102, 102));
 
         btn_community.setBackground(new java.awt.Color(255, 255, 255));
         btn_community.setForeground(new java.awt.Color(51, 51, 255));
@@ -82,9 +82,9 @@ public class CommunityAdmin extends javax.swing.JFrame {
             .addGroup(controlPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(controlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btn_back_admin)
                     .addComponent(btn_community, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btn_houses, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btn_houses, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btn_back_admin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         controlPanelLayout.setVerticalGroup(
@@ -96,12 +96,12 @@ public class CommunityAdmin extends javax.swing.JFrame {
                 .addComponent(btn_community)
                 .addGap(18, 18, 18)
                 .addComponent(btn_houses)
-                .addContainerGap(446, Short.MAX_VALUE))
+                .addContainerGap(449, Short.MAX_VALUE))
         );
 
         splitPane.setLeftComponent(controlPanel);
 
-        workArea.setBackground(new java.awt.Color(204, 255, 255));
+        workArea.setBackground(new java.awt.Color(153, 153, 153));
         workArea.setPreferredSize(new java.awt.Dimension(800, 700));
 
         javax.swing.GroupLayout workAreaLayout = new javax.swing.GroupLayout(workArea);
@@ -172,6 +172,7 @@ public class CommunityAdmin extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 new CommunityAdmin().setVisible(true);
             }

@@ -297,7 +297,7 @@
     <Component class="javax.swing.JLabel" name="lblUsername">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Hiragino Mincho ProN" size="18" style="0"/>
+          <Font name="Hiragino Mincho ProN" size="18" style="1"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Username :"/>
       </Properties>
@@ -305,7 +305,7 @@
     <Component class="javax.swing.JLabel" name="lblPassword">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Hiragino Mincho ProN" size="18" style="0"/>
+          <Font name="Hiragino Mincho ProN" size="18" style="1"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Password :"/>
       </Properties>
@@ -490,7 +490,7 @@
     <Component class="javax.swing.JLabel" name="lblName">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Hiragino Mincho ProN" size="18" style="0"/>
+          <Font name="Hiragino Mincho ProN" size="18" style="1"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Name :"/>
       </Properties>
@@ -529,7 +529,7 @@
     <Component class="javax.swing.JLabel" name="lblAge">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Hiragino Mincho ProN" size="18" style="0"/>
+          <Font name="Hiragino Mincho ProN" size="18" style="1"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Age :"/>
       </Properties>
@@ -542,7 +542,7 @@
     <Component class="javax.swing.JLabel" name="lblGender">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Hiragino Mincho ProN" size="18" style="0"/>
+          <Font name="Hiragino Mincho ProN" size="18" style="1"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Gender :"/>
       </Properties>
@@ -588,7 +588,7 @@
     <Component class="javax.swing.JLabel" name="lblIssue">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Hiragino Mincho ProN" size="18" style="0"/>
+          <Font name="Hiragino Mincho ProN" size="18" style="1"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Issue :"/>
       </Properties>
@@ -596,7 +596,7 @@
     <Component class="javax.swing.JLabel" name="lblPhoneNumber">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Hiragino Mincho ProN" size="18" style="0"/>
+          <Font name="Hiragino Mincho ProN" size="18" style="1"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Number :"/>
       </Properties>
@@ -614,7 +614,7 @@
     <Component class="javax.swing.JLabel" name="lblEmail">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Hiragino Mincho ProN" size="18" style="0"/>
+          <Font name="Hiragino Mincho ProN" size="18" style="1"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Email :"/>
       </Properties>

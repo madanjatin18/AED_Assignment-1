@@ -17,7 +17,7 @@ import models.PatientDirectory;
 import models.PersonDirectory;
 import view.Admin.AdminJFrame;
 import resources.CreateDefaultData;
-import view.Doctor.DoctorMainJFrame;
+
 
 
 public class MainJFrame extends javax.swing.JFrame {
@@ -37,7 +37,7 @@ public class MainJFrame extends javax.swing.JFrame {
     
     public MainJFrame() {
         initComponents();
-        getContentPane().setBackground(new java.awt.Color(102, 255, 204));
+        getContentPane().setBackground(new java.awt.Color(102, 102, 102));
         CreateDefaultData.createData();
         setLocationRelativeTo(null);
         lblComment.setText("Enter Admin Credentials");
@@ -53,44 +53,21 @@ public class MainJFrame extends javax.swing.JFrame {
     private void initComponents() {
 
         lbl_title = new javax.swing.JLabel();
-        btn_admins = new javax.swing.JButton();
-        btn_doctors = new javax.swing.JButton();
-        btn_person = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         cbChoice = new javax.swing.JComboBox<>();
         txtUsername = new javax.swing.JTextField();
         txtPassword = new javax.swing.JTextField();
         btnLogin = new javax.swing.JButton();
         lblComment = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setBackground(new java.awt.Color(102, 255, 204));
+        setBackground(new java.awt.Color(153, 153, 153));
 
-        lbl_title.setBackground(new java.awt.Color(255, 51, 51));
+        lbl_title.setBackground(new java.awt.Color(153, 153, 153));
         lbl_title.setFont(new java.awt.Font("Hiragino Maru Gothic ProN", 1, 36)); // NOI18N
-        lbl_title.setForeground(new java.awt.Color(255, 51, 51));
-        lbl_title.setText("Health UP");
-
-        btn_admins.setText("Admins");
-        btn_admins.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_adminsActionPerformed(evt);
-            }
-        });
-
-        btn_doctors.setText("Doctors");
-        btn_doctors.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_doctorsActionPerformed(evt);
-            }
-        });
-
-        btn_person.setText("Patient");
-        btn_person.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_personActionPerformed(evt);
-            }
-        });
+        lbl_title.setForeground(new java.awt.Color(204, 153, 0));
+        lbl_title.setText("     HHS.gov");
 
         jLabel1.setText("Please select the login type");
 
@@ -102,6 +79,11 @@ public class MainJFrame extends javax.swing.JFrame {
         });
 
         txtUsername.setText("Enter Username");
+        txtUsername.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtUsernameFocusGained(evt);
+            }
+        });
         txtUsername.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtUsernameActionPerformed(evt);
@@ -109,6 +91,11 @@ public class MainJFrame extends javax.swing.JFrame {
         });
 
         txtPassword.setText("Enter Password");
+        txtPassword.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtPasswordFocusGained(evt);
+            }
+        });
         txtPassword.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtPasswordActionPerformed(evt);
@@ -124,51 +111,47 @@ public class MainJFrame extends javax.swing.JFrame {
 
         lblComment.setText("jLabel2");
 
+        jLabel2.setText("U.S. Department of Health & Human Services");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(36, 36, 36)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btn_person)
-                            .addComponent(btn_doctors)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(btn_admins)
-                                .addGap(71, 71, 71)
-                                .addComponent(lbl_title, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                            .addGap(196, 196, 196)
-                            .addComponent(jLabel1))
-                        .addGroup(layout.createSequentialGroup()
-                            .addContainerGap()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(lblComment, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(cbChoice, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(txtPassword)
-                                .addComponent(txtUsername, javax.swing.GroupLayout.DEFAULT_SIZE, 119, Short.MAX_VALUE)))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
+                .addGap(219, 219, 219)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(lblComment, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(cbChoice, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txtPassword)
+                    .addComponent(txtUsername, javax.swing.GroupLayout.DEFAULT_SIZE, 119, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 74, Short.MAX_VALUE)
                 .addComponent(btnLogin)
                 .addGap(117, 117, 117))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(59, 59, 59))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(208, 208, 208)
+                        .addComponent(jLabel1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(160, 160, 160)
+                        .addComponent(lbl_title, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(18, 18, 18)
+                .addGap(36, 36, 36)
                 .addComponent(lbl_title, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel1)
-                .addGap(15, 15, 15)
-                .addComponent(btn_admins)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btn_doctors)
+                .addComponent(jLabel2)
+                .addGap(31, 31, 31)
+                .addComponent(jLabel1)
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btn_person)
-                    .addComponent(cbChoice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(cbChoice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
                 .addComponent(lblComment)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -182,21 +165,6 @@ public class MainJFrame extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btn_personActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_personActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btn_personActionPerformed
-
-    private void btn_adminsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_adminsActionPerformed
-        this.dispose();
-        new AdminJFrame().setVisible(true);
-    }//GEN-LAST:event_btn_adminsActionPerformed
-
-    private void btn_doctorsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_doctorsActionPerformed
-        // TODO add your handling code here:
-        this.dispose();
-        new DoctorMainJFrame().setVisible(true);
-    }//GEN-LAST:event_btn_doctorsActionPerformed
 
     private void txtUsernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUsernameActionPerformed
         // TODO add your handling code here:
@@ -220,11 +188,29 @@ public class MainJFrame extends javax.swing.JFrame {
             }
         }
         
+        if (cbChoice.getSelectedItem().toString().equals("Doctor")){
+            
+            if (txtUsername.getText().equals("abc") && txtPassword.getText().equals("abc12")){
+                this.dispose();
+            new AdminJFrame().setVisible(true);
+            }
+        }
+        
     }//GEN-LAST:event_btnLoginActionPerformed
 
     private void cbChoiceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbChoiceActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cbChoiceActionPerformed
+
+    private void txtUsernameFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtUsernameFocusGained
+        // TODO add your handling code here:
+        txtUsername.setText(null);
+    }//GEN-LAST:event_txtUsernameFocusGained
+
+    private void txtPasswordFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtPasswordFocusGained
+        // TODO add your handling code here:
+        txtPassword.setText(null);
+    }//GEN-LAST:event_txtPasswordFocusGained
 
     /**
      * @param args the command line arguments
@@ -256,6 +242,7 @@ public class MainJFrame extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 new MainJFrame().setVisible(true);
             }
@@ -292,11 +279,9 @@ public class MainJFrame extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnLogin;
-    private javax.swing.JButton btn_admins;
-    private javax.swing.JButton btn_doctors;
-    private javax.swing.JButton btn_person;
     private javax.swing.JComboBox<String> cbChoice;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel lblComment;
     private javax.swing.JLabel lbl_title;
     private javax.swing.JTextField txtPassword;

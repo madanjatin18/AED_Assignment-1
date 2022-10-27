@@ -10,6 +10,7 @@ import java.util.ArrayList;
 public class DoctorDirectory {
     ArrayList<Doctor> doctorList ;
     
+    
     public DoctorDirectory (){
           
         doctorList = new ArrayList();
@@ -28,6 +29,8 @@ public class DoctorDirectory {
 
         return doctorList;
     }
+    
+    
 
     public Doctor findDoctorByName(String name) {
 

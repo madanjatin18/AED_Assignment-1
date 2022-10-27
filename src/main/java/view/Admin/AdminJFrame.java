@@ -6,6 +6,7 @@ package view.Admin;
 
 import view.Admin.CommunityAdmin.CommunityAdmin;
 import view.Admin.HospitalAdmin.HospitalAdminJFrame;
+import view.Admin.SystemAdmin.SystemAdminJFrame;
 import view.MainJFrame;
 
 
@@ -16,7 +17,7 @@ public class AdminJFrame extends javax.swing.JFrame {
      */
     public AdminJFrame() {
         initComponents();
-        getContentPane().setBackground(new java.awt.Color(102, 255, 204));
+        getContentPane().setBackground(new java.awt.Color(102, 102, 102));
         setLocationRelativeTo(null);
     }
 
@@ -36,6 +37,7 @@ public class AdminJFrame extends javax.swing.JFrame {
         btn_hospital_admin = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(153, 153, 153));
 
         lbl_admin.setFont(new java.awt.Font("Hiragino Maru Gothic ProN", 1, 18)); // NOI18N
         lbl_admin.setText("Select the type of admin");
@@ -73,33 +75,35 @@ public class AdminJFrame extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(48, 48, 48)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(69, 69, 69)
                         .addComponent(btn_system_admin)
-                        .addGap(38, 38, 38)
-                        .addComponent(btn_community_admin)
                         .addGap(36, 36, 36)
+                        .addComponent(btn_community_admin)
+                        .addGap(28, 28, 28)
                         .addComponent(btn_hospital_admin))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(btn_back_main)
-                        .addGap(32, 32, 32)
-                        .addComponent(lbl_admin)))
-                .addContainerGap(95, Short.MAX_VALUE))
+                        .addGap(176, 176, 176)
+                        .addComponent(lbl_admin))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(26, 26, 26)
+                        .addComponent(btn_back_main)))
+                .addContainerGap(84, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(40, 40, 40)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lbl_admin)
-                    .addComponent(btn_back_main))
-                .addGap(77, 77, 77)
+                .addGap(26, 26, 26)
+                .addComponent(btn_back_main)
+                .addGap(16, 16, 16)
+                .addComponent(lbl_admin)
+                .addGap(54, 54, 54)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_system_admin)
                     .addComponent(btn_community_admin)
                     .addComponent(btn_hospital_admin))
-                .addContainerGap(189, Short.MAX_VALUE))
+                .addContainerGap(186, Short.MAX_VALUE))
         );
 
         pack();
@@ -114,7 +118,8 @@ public class AdminJFrame extends javax.swing.JFrame {
 
     private void btn_system_adminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_system_adminActionPerformed
         // TODO add your handling code here:
-        this.setVisible(false);
+        this.dispose();
+        new SystemAdminJFrame().setVisible(true);
     }//GEN-LAST:event_btn_system_adminActionPerformed
 
     private void btn_hospital_adminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_hospital_adminActionPerformed
@@ -157,6 +162,7 @@ public class AdminJFrame extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 new AdminJFrame().setVisible(true);
             }

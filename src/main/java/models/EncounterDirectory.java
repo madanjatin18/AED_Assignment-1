@@ -4,6 +4,7 @@
  */
 package models;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -17,9 +18,9 @@ public class EncounterDirectory {
 
     }
 
-    public Encounter newEncounter(Date date, Doctor doctor, Hospital hospital) {
+    public Encounter newEncounter(LocalDateTime date, Doctor doctor, Hospital hospital,Patient p) {
 
-        Encounter d = new Encounter(date, doctor, hospital);
+        Encounter d = new Encounter(date, doctor, hospital,p);
         encounterList.add(d);
         return d;
     }
@@ -27,5 +28,9 @@ public class EncounterDirectory {
     public ArrayList<Encounter> getEncouterList() {
 
         return encounterList;
+    }
+
+    public void deleteEncounter(Encounter selectedEncounter) {
+        encounterList.remove(selectedEncounter);
     }
 }

@@ -1,5 +1,6 @@
 package models;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 /*
@@ -9,22 +10,32 @@ import java.util.Date;
 
 
 public class Encounter {
-    private Date date;
+    private LocalDateTime date;
     private Doctor doctor;
     private Hospital hospital;
     private VitalSigns vitalSigns; 
+    private Patient patient;
     
-    public Encounter(Date date, Doctor doctor, Hospital hospital) {
+    public Encounter(LocalDateTime date, Doctor doctor, Hospital hospital,Patient patient) {
         this.date = date;
         this.doctor = doctor;
         this.hospital = hospital;
+        this.patient = patient;
     }
 
-    public Date getDate() {
+    public Patient getPatient() {
+        return patient;
+    }
+
+    public void setPatient(Patient patient) {
+        this.patient = patient;
+    }
+
+    public LocalDateTime getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(LocalDateTime date) {
         this.date = date;
     }
 

@@ -64,4 +64,8 @@ public class HospitalDirectory {
         }}
         return searchHospitalDirectory;
     }
+    
+    public void deleteHospital(Hospital selectedHospital) {
+        hospitalList.remove(selectedHospital);       
+    }
 }

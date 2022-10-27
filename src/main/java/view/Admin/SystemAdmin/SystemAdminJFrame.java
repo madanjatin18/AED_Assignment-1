@@ -2,34 +2,24 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package view.Doctor;
+package view.Admin.SystemAdmin;
 
-import models.CityDirectory;
-import models.CommunityDirectory;
-import models.DoctorDirectory;
-import models.EncounterDirectory;
-import models.HospitalDirectory;
-import models.PatientDirectory;
-import models.PersonDirectory;
 import view.Admin.HospitalAdmin.*;
 import view.Admin.AdminJFrame;
-import view.MainJFrame;
 
 
-public class DoctorMainJFrame extends javax.swing.JFrame {
+public class SystemAdminJFrame extends javax.swing.JFrame {
 
     /**
      * Creates new form HospitalAdminJFrame
      */
- 
-
-    
-    public DoctorMainJFrame() {
+    static String type = "sys";
+    public SystemAdminJFrame() {
         initComponents();
         workArea.setSize(900, 900);
         setLocationRelativeTo(null);
-        DoctorEncounterViewUpdate encView = new DoctorEncounterViewUpdate();
-        splitPane.setRightComponent(encView);
+        HospitalViewUpdate hospitalView = new HospitalViewUpdate(type);
+        splitPane.setRightComponent(hospitalView);
         
     }
 
@@ -44,22 +34,42 @@ public class DoctorMainJFrame extends javax.swing.JFrame {
 
         splitPane = new javax.swing.JSplitPane();
         controlPanel = new javax.swing.JPanel();
-        btnVitalSign = new javax.swing.JButton();
+        btn_hospitals = new javax.swing.JButton();
+        btn_doctors = new javax.swing.JButton();
+        btn_patients = new javax.swing.JButton();
         btn_encounters = new javax.swing.JButton();
-        btnLogout = new javax.swing.JButton();
+        btn_back_admin = new javax.swing.JButton();
         workArea = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(153, 255, 204));
 
-        controlPanel.setBackground(new java.awt.Color(153, 255, 204));
+        controlPanel.setBackground(new java.awt.Color(102, 102, 102));
 
-        btnVitalSign.setBackground(new java.awt.Color(255, 255, 255));
-        btnVitalSign.setForeground(new java.awt.Color(51, 51, 255));
-        btnVitalSign.setText("Vital Signs");
-        btnVitalSign.addActionListener(new java.awt.event.ActionListener() {
+        btn_hospitals.setBackground(new java.awt.Color(255, 255, 255));
+        btn_hospitals.setForeground(new java.awt.Color(51, 51, 255));
+        btn_hospitals.setText("Hospitals");
+        btn_hospitals.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnVitalSignActionPerformed(evt);
+                btn_hospitalsActionPerformed(evt);
+            }
+        });
+
+        btn_doctors.setBackground(new java.awt.Color(255, 255, 255));
+        btn_doctors.setForeground(new java.awt.Color(51, 51, 255));
+        btn_doctors.setText("Doctors");
+        btn_doctors.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_doctorsActionPerformed(evt);
+            }
+        });
+
+        btn_patients.setBackground(new java.awt.Color(255, 255, 255));
+        btn_patients.setForeground(new java.awt.Color(51, 51, 255));
+        btn_patients.setText("Patients");
+        btn_patients.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_patientsActionPerformed(evt);
             }
         });
 
@@ -72,12 +82,12 @@ public class DoctorMainJFrame extends javax.swing.JFrame {
             }
         });
 
-        btnLogout.setBackground(new java.awt.Color(255, 255, 255));
-        btnLogout.setForeground(new java.awt.Color(51, 51, 255));
-        btnLogout.setText("Logout");
-        btnLogout.addActionListener(new java.awt.event.ActionListener() {
+        btn_back_admin.setBackground(new java.awt.Color(255, 255, 255));
+        btn_back_admin.setForeground(new java.awt.Color(51, 51, 255));
+        btn_back_admin.setText("<- Back");
+        btn_back_admin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnLogoutActionPerformed(evt);
+                btn_back_adminActionPerformed(evt);
             }
         });
 
@@ -88,26 +98,32 @@ public class DoctorMainJFrame extends javax.swing.JFrame {
             .addGroup(controlPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(controlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnLogout)
                     .addComponent(btn_encounters, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnVitalSign, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btn_patients, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btn_doctors, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btn_hospitals, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btn_back_admin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(9, Short.MAX_VALUE))
         );
         controlPanelLayout.setVerticalGroup(
             controlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(controlPanelLayout.createSequentialGroup()
                 .addGap(28, 28, 28)
-                .addComponent(btnLogout)
-                .addGap(112, 112, 112)
-                .addComponent(btn_encounters)
+                .addComponent(btn_back_admin)
+                .addGap(120, 120, 120)
+                .addComponent(btn_hospitals)
                 .addGap(18, 18, 18)
-                .addComponent(btnVitalSign)
-                .addContainerGap(776, Short.MAX_VALUE))
+                .addComponent(btn_doctors)
+                .addGap(18, 18, 18)
+                .addComponent(btn_patients)
+                .addGap(18, 18, 18)
+                .addComponent(btn_encounters)
+                .addContainerGap(688, Short.MAX_VALUE))
         );
 
         splitPane.setLeftComponent(controlPanel);
 
-        workArea.setBackground(new java.awt.Color(204, 255, 255));
+        workArea.setBackground(new java.awt.Color(153, 153, 153));
 
         javax.swing.GroupLayout workAreaLayout = new javax.swing.GroupLayout(workArea);
         workArea.setLayout(workAreaLayout);
@@ -136,20 +152,30 @@ public class DoctorMainJFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnVitalSignActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVitalSignActionPerformed
-        //PatientViewUpdate d = new PatientViewUpdate();
-        //splitPane.setRightComponent(d);
-    }//GEN-LAST:event_btnVitalSignActionPerformed
+    private void btn_hospitalsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_hospitalsActionPerformed
+        HospitalViewUpdate h = new HospitalViewUpdate(type);
+        splitPane.setRightComponent(h);
+    }//GEN-LAST:event_btn_hospitalsActionPerformed
+
+    private void btn_doctorsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_doctorsActionPerformed
+        DoctorViewUpdate d = new DoctorViewUpdate();
+        splitPane.setRightComponent(d);
+    }//GEN-LAST:event_btn_doctorsActionPerformed
+
+    private void btn_patientsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_patientsActionPerformed
+        PatientViewUpdate d = new PatientViewUpdate();
+        splitPane.setRightComponent(d);
+    }//GEN-LAST:event_btn_patientsActionPerformed
 
     private void btn_encountersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_encountersActionPerformed
-        EncounterViewUpdate d = new EncounterViewUpdate();
+        EncounterViewUpdate d = new EncounterViewUpdate(type);
         splitPane.setRightComponent(d);
     }//GEN-LAST:event_btn_encountersActionPerformed
 
-    private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutActionPerformed
+    private void btn_back_adminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_back_adminActionPerformed
         this.dispose();
-        new MainJFrame().setVisible(true);
-    }//GEN-LAST:event_btnLogoutActionPerformed
+        new AdminJFrame().setVisible(true);
+    }//GEN-LAST:event_btn_back_adminActionPerformed
 
     /**
      * @param args the command line arguments
@@ -168,7 +194,7 @@ public class DoctorMainJFrame extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(DoctorMainJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SystemAdminJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         //</editor-fold>
@@ -179,16 +205,18 @@ public class DoctorMainJFrame extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+           
+            @Override
             public void run() {
-                new DoctorMainJFrame().setVisible(true);
+                new SystemAdminJFrame().setVisible(true);
             }
         });
     }
     
     
-    public void setHospitalCreateView() {                                               
+    public void setHospitalCreateView(String type) {                                               
         // TODO add your handling code here:
-        HospitalCreate createPanel = new HospitalCreate();
+        HospitalCreate createPanel = new HospitalCreate(type);
         splitPane.setRightComponent(createPanel);
     }
     
@@ -198,9 +226,9 @@ public class DoctorMainJFrame extends javax.swing.JFrame {
         splitPane.setRightComponent(createPanel);
     }
     
-    public void setEncounterCreateView() {                                               
+    public void setEncounterCreateView(String type) {                                               
         // TODO add your handling code here:
-        EncounterCreate createPanel = new EncounterCreate();
+        EncounterCreate createPanel = new EncounterCreate(type);
         splitPane.setRightComponent(createPanel);
     }
     
@@ -212,7 +240,7 @@ public class DoctorMainJFrame extends javax.swing.JFrame {
     
     public void setEncounterUpdateView() {                                               
         // TODO add your handling code here:
-        EncounterViewUpdate createPanel = new EncounterViewUpdate();
+        EncounterViewUpdate createPanel = new EncounterViewUpdate(type);
         splitPane.setRightComponent(createPanel);
     }
     
@@ -228,9 +256,11 @@ public class DoctorMainJFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnLogout;
-    private javax.swing.JButton btnVitalSign;
+    private javax.swing.JButton btn_back_admin;
+    private javax.swing.JButton btn_doctors;
     private javax.swing.JButton btn_encounters;
+    private javax.swing.JButton btn_hospitals;
+    private javax.swing.JButton btn_patients;
     private javax.swing.JPanel controlPanel;
     private javax.swing.JSplitPane splitPane;
     private javax.swing.JPanel workArea;

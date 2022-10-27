@@ -4,6 +4,7 @@
  */
 package resources;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 import models.City;
 import models.Community;
@@ -48,16 +49,16 @@ public class CreateDefaultData {
         Hospital e = MainJFrame.hospitalDirectory.newHospital("mengo", "At nowhere", 452004, "637 sd", lowell, ai);
         
         // create person
-        Person p1 = MainJFrame.personDirectory.newPerson("vaibhav", 24, "vaibhav@gmail.com", "Male", "7878787878", boston, jp, "vbhv", "vbhv10");
-        Person p2 = MainJFrame.personDirectory.newPerson("megha", 25, "megha@gmail.com", "Female", "7878743878", springField, gb, "megha", "vbhv10");
-        Person p3 = MainJFrame.personDirectory.newPerson("nalin", 26, "nalin@gmail.com", "Male", "9878787878", worcester, vn, "nalin", "vbhv10");
-        Person p4 = MainJFrame.personDirectory.newPerson("amit", 27, "amit@gmail.com", "Male", "2378787878", cambridge, sn, "amit", "vbhv10");
-        Person p5 = MainJFrame.personDirectory.newPerson("adi", 24, "adi@gmail.com", "Male", "3578787878", brockton, r, "adi", "vbhv10");
-        Person p6 = MainJFrame.personDirectory.newPerson("avi", 24, "avi@gmail.com", "Male", "7878787878", boston, jp, "avi", "vbhv10");
-        Person p7 = MainJFrame.personDirectory.newPerson("ankit", 24, "ankit@gmail.com", "Male", "7878787878", worcester, rn, "ankit", "vbhv10");
-        Person p8 = MainJFrame.personDirectory.newPerson("anki", 29, "anki@gmail.com", "Male", "9878787878", lowell, ai, "anki", "vbhv10");
-        Person p9 = MainJFrame.personDirectory.newPerson("mahi", 24, "mahi@gmail.com", "Female", "9878783478", boston, sb, "mahi", "vbhv10");
-        Person p10 = MainJFrame.personDirectory.newPerson("sayoni", 24, "sayoni@gmail.com", "Female", "2547878787", lowell, mr, "sayoni", "vbhv10");
+        Person p1 = MainJFrame.personDirectory.newPerson("jatin", 24, "jatin@gmail.com", "Male", "7878787878", boston, jp, "jatin", "madan18");
+        Person p2 = MainJFrame.personDirectory.newPerson("heer", 25, "heer@gmail.com", "Female", "7878743878", springField, gb, "megha", "madan18");
+        Person p3 = MainJFrame.personDirectory.newPerson("adnan", 26, "adnan@gmail.com", "Male", "9878787878", worcester, vn, "nalin", "madan18");
+        Person p4 = MainJFrame.personDirectory.newPerson("amit", 27, "amit@gmail.com", "Male", "2378787878", cambridge, sn, "amit", "madan18");
+        Person p5 = MainJFrame.personDirectory.newPerson("adi", 24, "adi@gmail.com", "Male", "3578787878", brockton, r, "adi", "madan18");
+        Person p6 = MainJFrame.personDirectory.newPerson("avi", 24, "avi@gmail.com", "Male", "7878787878", boston, jp, "avi", "madan18");
+        Person p7 = MainJFrame.personDirectory.newPerson("ankit", 24, "ankit@gmail.com", "Male", "7878787878", worcester, rn, "ankit", "madan18");
+        Person p8 = MainJFrame.personDirectory.newPerson("anki", 29, "anki@gmail.com", "Male", "9878787878", lowell, ai, "anki", "madan18");
+        Person p9 = MainJFrame.personDirectory.newPerson("mahi", 24, "mahi@gmail.com", "Female", "9878783478", boston, sb, "mahi", "madan18");
+        Person p10 = MainJFrame.personDirectory.newPerson("sayoni", 24, "sayoni@gmail.com", "Female", "2547878787", lowell, mr, "sayoni", "madan18");
         
         // create doctor
         Doctor d1 = MainJFrame.doctorDirectory.newDoctor("gynic", a, p1);
@@ -80,7 +81,7 @@ public class CreateDefaultData {
         
         
        //Encounter
-       Date date = new Date();
-       Encounter e1 = MainJFrame.encounterDirectory.newEncounter(date,d1,a);
+       LocalDateTime date = LocalDateTime.now();
+       Encounter e1 = MainJFrame.encounterDirectory.newEncounter(date,d1,a,pa1);
     }
 }

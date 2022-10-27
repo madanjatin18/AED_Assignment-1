@@ -6,6 +6,7 @@ package view.Admin.HospitalAdmin;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import javax.swing.JFrame;
@@ -17,7 +18,10 @@ import models.Doctor;
 import models.Hospital;
 import models.Patient;
 import models.Person;
+import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
 import resources.Validations;
+import static view.Admin.HospitalAdmin.HospitalCreate.type;
+import view.Admin.SystemAdmin.SystemAdminJFrame;
 import view.MainJFrame;
 
 
@@ -33,9 +37,25 @@ public class EncounterCreate extends javax.swing.JPanel {
     Doctor doctor;
     Patient patient;
     Validations validations;
-    public EncounterCreate() {
+    static String type;
+     LocalDateTime date;
+    public EncounterCreate(String type) {
         initComponents();
         validations = new Validations();
+        this.type =type;
+        date = LocalDateTime.now();
+        LabelDate.setText(date.toString());
+        AutoCompleteDecorator.decorate(ddCity);
+        AutoCompleteDecorator.decorate(ddCommunity);
+        AutoCompleteDecorator.decorate(ddHospital);
+        AutoCompleteDecorator.decorate(ddDoctor);
+        AutoCompleteDecorator.decorate(ddPatient);
+        ddCity.removeAllItems();
+        ddCity.addItem("");
+        for (City c: MainJFrame.cityDirectory.getCityList()) {
+            ddCity.addItem(c.getName());
+        }
+        ddCity.setSelectedItem("");
     }
 
     /**
@@ -64,9 +84,9 @@ public class EncounterCreate extends javax.swing.JPanel {
         valDoctor = new javax.swing.JLabel();
         valPatient = new javax.swing.JLabel();
         lblDate = new javax.swing.JLabel();
-        valDate = new javax.swing.JLabel();
         btnSave = new javax.swing.JButton();
         btnBack = new javax.swing.JButton();
+        LabelDate = new javax.swing.JLabel();
 
         valCommunity.setFont(new java.awt.Font("Helvetica Neue", 2, 13)); // NOI18N
         valCommunity.setForeground(new java.awt.Color(255, 0, 0));
@@ -134,9 +154,6 @@ public class EncounterCreate extends javax.swing.JPanel {
         lblDate.setFont(new java.awt.Font("Hiragino Mincho ProN", 1, 18)); // NOI18N
         lblDate.setText("Date :");
 
-        valDate.setFont(new java.awt.Font("Helvetica Neue", 2, 13)); // NOI18N
-        valDate.setForeground(new java.awt.Color(255, 0, 0));
-
         btnSave.setText("Save");
         btnSave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -173,7 +190,8 @@ public class EncounterCreate extends javax.swing.JPanel {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(btnBack)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnSave))))
+                                .addComponent(btnSave))
+                            .addComponent(LabelDate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(193, 193, 193)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -186,9 +204,8 @@ public class EncounterCreate extends javax.swing.JPanel {
                     .addComponent(valCommunity, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(valHospital, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(valDoctor, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(valPatient, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(valDate, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(69, Short.MAX_VALUE))
+                    .addComponent(valPatient, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(72, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addContainerGap()
@@ -226,16 +243,18 @@ public class EncounterCreate extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addComponent(ddDoctor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(valPatient, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(lblPatient)
-                        .addComponent(ddPatient, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(12, 12, 12)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(valPatient, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblPatient))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(ddPatient, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(8, 8, 8)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblDate)
-                    .addComponent(valDate, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(LabelDate))
                 .addGap(23, 23, 23)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnBack)
@@ -409,32 +428,41 @@ public class EncounterCreate extends javax.swing.JPanel {
         }
         if (valid) {
 
-            Date date;
-            
-            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-M-dd");
-            
-            //date = formatter.parse(datePicker.getDateStringOrEmptyString());
-            /*
-            Person p = MainJFrame.personDirectory.newPerson(txtName.getText(), Integer.parseInt(txtAge.getText()), txtEmail.getText(), gender, txtPhoneNumber.getText(), city, community, txtUsername.getText(), String.valueOf(txtPassword.getPassword()));
-            if (!community.isAddressExist(ddHouse.getSelectedItem().toString(), "") ) {
-            house = community.addHouse(ddHouse.getSelectedItem().toString(), "");
-            } else {
-            house = community.getHouseObject(ddHouse.getSelectedItem().toString(), "");
-            }
-            MainJFrame.patientDirectory.newPatient(txtIssue.getText(), house, p, hospital);
-            JOptionPane.showMessageDialog(this, "Patient details Added");
-            //setTextNull();
-            //setValidationNull();
-             */
+                      
+            MainJFrame.encounterDirectory.newEncounter(date,doctor,hospital,patient);
+            JOptionPane.showMessageDialog(this, "Encounter details Added");
+            ddCity.setSelectedItem("");
+            ddCommunity.setSelectedItem("");
+            ddDoctor.setSelectedItem("");
+            ddPatient.setSelectedItem("");
+            ddHospital.setSelectedItem("");
+            LabelDate.setText("");
+            valCity.setText(null);
+            valCommunity.setText(null);
+            valDoctor.setText(null);
+            valPatient.setText(null);
+            valHospital.setText(null);
+
+       
         }
     }//GEN-LAST:event_btnSaveActionPerformed
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         JFrame parent = (JFrame) SwingUtilities.getWindowAncestor(this);
         parent.dispose();
-        HospitalAdminJFrame adminArea = new HospitalAdminJFrame();
-        adminArea.setVisible(true);
-        adminArea.setEncounterUpdateView();
+        
+        if (type == "sys"){
+   
+            SystemAdminJFrame adminArea = new SystemAdminJFrame();
+            adminArea.setVisible(true);
+            adminArea.setEncounterUpdateView();
+        }
+        else{
+            HospitalAdminJFrame adminArea = new HospitalAdminJFrame();
+            adminArea.setVisible(true);
+            adminArea.setEncounterUpdateView();
+        }
+        
     }//GEN-LAST:event_btnBackActionPerformed
 /*
     private void datePickerKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_datePickerKeyReleased
@@ -447,6 +475,7 @@ public class EncounterCreate extends javax.swing.JPanel {
     }//GEN-LAST:event_datePickerKeyReleased
 */
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel LabelDate;
     private javax.swing.JButton btnBack;
     private javax.swing.JButton btnSave;
     private javax.swing.JComboBox<String> ddCity;
@@ -463,7 +492,6 @@ public class EncounterCreate extends javax.swing.JPanel {
     private javax.swing.JLabel lblPatient;
     private javax.swing.JLabel valCity;
     private javax.swing.JLabel valCommunity;
-    private javax.swing.JLabel valDate;
     private javax.swing.JLabel valDoctor;
     private javax.swing.JLabel valHospital;
     private javax.swing.JLabel valPatient;

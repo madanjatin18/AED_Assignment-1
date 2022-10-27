@@ -12,11 +12,13 @@ public class HospitalAdminJFrame extends javax.swing.JFrame {
     /**
      * Creates new form HospitalAdminJFrame
      */
+    static String type = "hosp";
     public HospitalAdminJFrame() {
         initComponents();
+        //this.type = type;
         workArea.setSize(900, 900);
         setLocationRelativeTo(null);
-        HospitalViewUpdate hospitalView = new HospitalViewUpdate();
+        HospitalViewUpdate hospitalView = new HospitalViewUpdate(type);
         splitPane.setRightComponent(hospitalView);
         
     }
@@ -43,7 +45,7 @@ public class HospitalAdminJFrame extends javax.swing.JFrame {
         setBackground(new java.awt.Color(153, 255, 204));
         setPreferredSize(new java.awt.Dimension(900, 800));
 
-        controlPanel.setBackground(new java.awt.Color(153, 255, 204));
+        controlPanel.setBackground(new java.awt.Color(102, 102, 102));
 
         btn_hospitals.setBackground(new java.awt.Color(255, 255, 255));
         btn_hospitals.setForeground(new java.awt.Color(51, 51, 255));
@@ -96,12 +98,12 @@ public class HospitalAdminJFrame extends javax.swing.JFrame {
             controlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(controlPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(controlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btn_back_admin)
-                    .addComponent(btn_hospitals)
-                    .addComponent(btn_doctors)
-                    .addComponent(btn_patients)
-                    .addComponent(btn_encounters))
+                .addGroup(controlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btn_encounters, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btn_patients, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btn_doctors, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btn_hospitals, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btn_back_admin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(9, Short.MAX_VALUE))
         );
         controlPanelLayout.setVerticalGroup(
@@ -117,12 +119,12 @@ public class HospitalAdminJFrame extends javax.swing.JFrame {
                 .addComponent(btn_patients)
                 .addGap(18, 18, 18)
                 .addComponent(btn_encounters)
-                .addContainerGap(683, Short.MAX_VALUE))
+                .addContainerGap(688, Short.MAX_VALUE))
         );
 
         splitPane.setLeftComponent(controlPanel);
 
-        workArea.setBackground(new java.awt.Color(204, 255, 255));
+        workArea.setBackground(new java.awt.Color(153, 153, 153));
 
         javax.swing.GroupLayout workAreaLayout = new javax.swing.GroupLayout(workArea);
         workArea.setLayout(workAreaLayout);
@@ -152,7 +154,7 @@ public class HospitalAdminJFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_hospitalsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_hospitalsActionPerformed
-        HospitalViewUpdate h = new HospitalViewUpdate();
+        HospitalViewUpdate h = new HospitalViewUpdate(type);
         splitPane.setRightComponent(h);
     }//GEN-LAST:event_btn_hospitalsActionPerformed
 
@@ -167,7 +169,7 @@ public class HospitalAdminJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_patientsActionPerformed
 
     private void btn_encountersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_encountersActionPerformed
-        EncounterViewUpdate d = new EncounterViewUpdate();
+        EncounterViewUpdate d = new EncounterViewUpdate(type);
         splitPane.setRightComponent(d);
     }//GEN-LAST:event_btn_encountersActionPerformed
 
@@ -202,6 +204,7 @@ public class HospitalAdminJFrame extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+       
             public void run() {
                 new HospitalAdminJFrame().setVisible(true);
             }
@@ -209,9 +212,9 @@ public class HospitalAdminJFrame extends javax.swing.JFrame {
     }
     
     
-    public void setHospitalCreateView() {                                               
+    public void setHospitalCreateView(String type) {                                               
         // TODO add your handling code here:
-        HospitalCreate createPanel = new HospitalCreate();
+        HospitalCreate createPanel = new HospitalCreate(type);
         splitPane.setRightComponent(createPanel);
     }
     
@@ -221,9 +224,9 @@ public class HospitalAdminJFrame extends javax.swing.JFrame {
         splitPane.setRightComponent(createPanel);
     }
     
-    public void setEncounterCreateView() {                                               
+    public void setEncounterCreateView(String type) {                                               
         // TODO add your handling code here:
-        EncounterCreate createPanel = new EncounterCreate();
+        EncounterCreate createPanel = new EncounterCreate(type);
         splitPane.setRightComponent(createPanel);
     }
     
@@ -235,7 +238,7 @@ public class HospitalAdminJFrame extends javax.swing.JFrame {
     
     public void setEncounterUpdateView() {                                               
         // TODO add your handling code here:
-        EncounterViewUpdate createPanel = new EncounterViewUpdate();
+        EncounterViewUpdate createPanel = new EncounterViewUpdate(type);
         splitPane.setRightComponent(createPanel);
     }
     
