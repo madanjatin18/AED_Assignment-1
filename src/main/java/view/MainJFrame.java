@@ -7,16 +7,22 @@ package view;
 import java.awt.Color;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
+import java.util.ArrayList;
 import javax.swing.JTextField;
+import models.AdminDirectory;
+import models.Admins;
 import models.CityDirectory;
 import models.CommunityDirectory;
+import models.Doctor;
 import models.DoctorDirectory;
 import models.EncounterDirectory;
 import models.HospitalDirectory;
+import models.Patient;
 import models.PatientDirectory;
 import models.PersonDirectory;
 import view.Admin.AdminJFrame;
 import resources.CreateDefaultData;
+import view.Doctor.DoctorAdminJFrame;
 
 
 
@@ -34,13 +40,15 @@ public class MainJFrame extends javax.swing.JFrame {
     public static PersonDirectory personDirectory = new PersonDirectory();
     public static PatientDirectory patientDirectory = new PatientDirectory();
     public static EncounterDirectory encounterDirectory = new EncounterDirectory();
+    public static AdminDirectory adminDirectory = new AdminDirectory();
+    //public static Doctor doctorMain = new Doctor();
     
     public MainJFrame() {
         initComponents();
         getContentPane().setBackground(new java.awt.Color(102, 102, 102));
         CreateDefaultData.createData();
         setLocationRelativeTo(null);
-        lblComment.setText("Enter Admin Credentials");
+        //lblComment.setText("Enter Admin Credentials");
     }
 
     /**
@@ -56,10 +64,12 @@ public class MainJFrame extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         cbChoice = new javax.swing.JComboBox<>();
         txtUsername = new javax.swing.JTextField();
-        txtPassword = new javax.swing.JTextField();
         btnLogin = new javax.swing.JButton();
-        lblComment = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        txtPassword = new javax.swing.JPasswordField();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        lblError = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(153, 153, 153));
@@ -78,27 +88,9 @@ public class MainJFrame extends javax.swing.JFrame {
             }
         });
 
-        txtUsername.setText("Enter Username");
-        txtUsername.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                txtUsernameFocusGained(evt);
-            }
-        });
         txtUsername.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtUsernameActionPerformed(evt);
-            }
-        });
-
-        txtPassword.setText("Enter Password");
-        txtPassword.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                txtPasswordFocusGained(evt);
-            }
-        });
-        txtPassword.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtPasswordActionPerformed(evt);
             }
         });
 
@@ -109,21 +101,28 @@ public class MainJFrame extends javax.swing.JFrame {
             }
         });
 
-        lblComment.setText("jLabel2");
-
         jLabel2.setText("U.S. Department of Health & Human Services");
+
+        jLabel3.setText("Username :");
+
+        jLabel4.setText("Password :");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(219, 219, 219)
+                .addGap(142, 142, 142)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel3))
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(lblComment, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(cbChoice, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtPassword)
-                    .addComponent(txtUsername, javax.swing.GroupLayout.DEFAULT_SIZE, 119, Short.MAX_VALUE))
+                    .addComponent(lblError, javax.swing.GroupLayout.DEFAULT_SIZE, 119, Short.MAX_VALUE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(cbChoice, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(txtUsername, javax.swing.GroupLayout.DEFAULT_SIZE, 119, Short.MAX_VALUE)
+                        .addComponent(txtPassword)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 74, Short.MAX_VALUE)
                 .addComponent(btnLogin)
                 .addGap(117, 117, 117))
@@ -152,14 +151,18 @@ public class MainJFrame extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
                 .addComponent(cbChoice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
-                .addComponent(lblComment)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtUsername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtUsername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4))
                 .addGap(10, 10, 10)
-                .addComponent(btnLogin)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnLogin)
+                    .addComponent(lblError))
                 .addContainerGap(33, Short.MAX_VALUE))
         );
 
@@ -169,10 +172,6 @@ public class MainJFrame extends javax.swing.JFrame {
     private void txtUsernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUsernameActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtUsernameActionPerformed
-
-    private void txtPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPasswordActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtPasswordActionPerformed
 /*if (cbChoice.getSelectedItem().toString().equals("Admin")){
             lblComment.setText("Enter Admin Credentials");}
         if (cbChoice.getSelectedItem().toString().equals("Doctor")){
@@ -182,43 +181,58 @@ public class MainJFrame extends javax.swing.JFrame {
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
         // TODO add your handling code here:
         if (cbChoice.getSelectedItem().toString().equals("Admin")){
-            if (txtUsername.getText().equals("abc") && txtPassword.getText().equals("abc12")){
-                this.dispose();
-        new AdminJFrame().setVisible(true);
+            ArrayList<Admins> adminList = new ArrayList<>();
+            adminList =adminDirectory.getAdminsList();
+            for(Admins a : adminList){
+                if (txtUsername.getText().equals(a.getUsername()) && txtPassword.getText().equals(a.getPassword())){
+                    this.dispose();
+                    new AdminJFrame().setVisible(true);
+                }
+                else{
+                    lblError.setText("Invalid Credentials");
+                    lblError.setForeground(new java.awt.Color(255, 0, 0));
+                }
             }
+            
         }
         
         if (cbChoice.getSelectedItem().toString().equals("Doctor")){
+            ArrayList<Doctor> doctorList= new ArrayList<>();
+            doctorList = doctorDirectory.getDoctorList();
             
-            if (txtUsername.getText().equals("abc") && txtPassword.getText().equals("abc12")){
-                this.dispose();
-            new AdminJFrame().setVisible(true);
+            for(Doctor d : doctorList){
+                if (txtUsername.getText().equals(d.getPerson().getUsername()) && txtPassword.getText().equals(d.getPerson().getPassword())){
+                    this.setVisible(false);
+                    this.dispose();
+                    new DoctorAdminJFrame("doc",d.getPerson().getUsername()).setVisible(true);
+                }
+                else{
+                    lblError.setText("Invalid Credentials");
+                    lblError.setForeground(new java.awt.Color(255, 0, 0));
+                }
             }
         }
         
         if (cbChoice.getSelectedItem().toString().equals("Patient")){
             
-            if (txtUsername.getText().equals("abc") && txtPassword.getText().equals("abc12")){
-                this.dispose();
-            new AdminJFrame().setVisible(true);
+            ArrayList<Patient> patientList = new ArrayList<>();
+            patientList = patientDirectory.getPatientList();
+            for(Patient p : patientList){
+                if (txtUsername.getText().equals(p.getPerson().getUsername()) && txtPassword.getText().equals(p.getPerson().getPassword())){
+                    this.dispose();
+                    new AdminJFrame().setVisible(true);
+                }
+                else{
+                    lblError.setText("Invalid Credentials");
+                    lblError.setForeground(new java.awt.Color(255, 0, 0));
+                }
             }
         }
-        
     }//GEN-LAST:event_btnLoginActionPerformed
 
     private void cbChoiceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbChoiceActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cbChoiceActionPerformed
-
-    private void txtUsernameFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtUsernameFocusGained
-        // TODO add your handling code here:
-        txtUsername.setText(null);
-    }//GEN-LAST:event_txtUsernameFocusGained
-
-    private void txtPasswordFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtPasswordFocusGained
-        // TODO add your handling code here:
-        txtPassword.setText(null);
-    }//GEN-LAST:event_txtPasswordFocusGained
 
     /**
      * @param args the command line arguments
@@ -290,9 +304,11 @@ public class MainJFrame extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cbChoice;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel lblComment;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel lblError;
     private javax.swing.JLabel lbl_title;
-    private javax.swing.JTextField txtPassword;
+    private javax.swing.JPasswordField txtPassword;
     private javax.swing.JTextField txtUsername;
     // End of variables declaration//GEN-END:variables
 
