@@ -4,8 +4,12 @@
  */
 package resources;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
+import models.Admins;
 import models.City;
 import models.Community;
 import models.Doctor;
@@ -18,6 +22,8 @@ import view.MainJFrame;
 
 
 public class CreateDefaultData {
+    
+    static Date datenow;
     public static void createData() {
         
         // create city
@@ -73,15 +79,36 @@ public class CreateDefaultData {
         House h3 = cn.addHouse("123 kalani nagar", "aerodrome road");
         
         // Create patient
-        Patient pa1 = MainJFrame.patientDirectory.newPatient("Headache", h1, p6, a);
-        Patient pa2 = MainJFrame.patientDirectory.newPatient("Accident", h2, p7, b);
-        Patient pa3 = MainJFrame.patientDirectory.newPatient("Regular checkup", h3, p8, c);
-        Patient pa4 = MainJFrame.patientDirectory.newPatient("heart break", h1, p9, d);
-        Patient pa5 = MainJFrame.patientDirectory.newPatient("Heark attack", h2, p10, e);
+        Patient pa1 = MainJFrame.patientDirectory.newPatient("Headache", h1, p6, a, d1);
+        Patient pa2 = MainJFrame.patientDirectory.newPatient("Accident", h2, p7, b,d1);
+        Patient pa3 = MainJFrame.patientDirectory.newPatient("Regular checkup", h3, p8, c,d2);
+        Patient pa4 = MainJFrame.patientDirectory.newPatient("heart break", h1, p9, d,d3);
+        Patient pa5 = MainJFrame.patientDirectory.newPatient("Heark attack", h2, p10, e, d3);
         
+        //person main
+        Person pdefault = MainJFrame.personDirectory.newPerson("person", 24, "peron@gmail.com", "Male", "2547878787", lowell, mr, "default", "123456");
+       
+        //doctor main
+        Doctor doctor = MainJFrame.doctorDirectory.newDoctor("obs", e, pdefault);
         
-       //Encounter
-       LocalDateTime date = LocalDateTime.now();
-       Encounter e1 = MainJFrame.encounterDirectory.newEncounter(date,d1,a,pa1);
+        //pateint main
+        Patient pat1 = MainJFrame.patientDirectory.newPatient("Headache", h1, p1, e, doctor);
+       //Encounter);     
+       SimpleDateFormat formatter= new SimpleDateFormat("yyyy-MM-dd HH:mm");
+       Date date = new Date(System.currentTimeMillis());
+       String dateTimeString = formatter.format(date);
+       try 
+        { 
+           datenow = formatter.parse(dateTimeString);
+        }  
+        catch (ParseException e12){}  
+       //Encounter e1 = MainJFrame.encounterDirectory.newEncounter(datenow,doctor,e,pat1);
+       
+       
+       //Admins
+       Admins system = MainJFrame.adminDirectory.newAdmins("Jatin", 24, "jatin@gmail.com", "Male", "7878787878", "system", "123456");
+       
+       //Person pdefault = MainJFrame.personDirectory.newPerson("person", 24, "peron@gmail.com", "Male", "2547878787", lowell, mr, "default", "123456");
+       //Doctor doctor = MainJFrame.doctorDirectory.newDoctor("obs", e, pdefault);
     }
 }

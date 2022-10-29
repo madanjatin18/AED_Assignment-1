@@ -17,7 +17,7 @@ public class PatientDirectory {
 
     }
 
-    public Patient newPatient(String issue, House house, Person person, Hospital hospital) {
+    public Patient newPatient(String issue, House house, Person person, Hospital hospital, Doctor doctor) {
 
         int patientId = generateRandomId();
         while(isPatientIdExist(patientId)) {
@@ -25,9 +25,10 @@ public class PatientDirectory {
         }
         
         
-        Patient p = new Patient(issue, house, person, patientId, hospital);
+        Patient p = new Patient(issue, house, person, patientId, hospital,doctor);
         patientList.add(p);
         hospital.addPatient(p);
+        doctor.addPatient(p);
         return p;
     }
     
@@ -35,6 +36,7 @@ public class PatientDirectory {
 
         return patientList;
     }
+    
 
     public Patient findPatientByName(String name) {
 
@@ -67,5 +69,9 @@ public class PatientDirectory {
     
     private int generateRandomId() {
         return new Random().nextInt(900000) + 100000;
+    }
+
+    public void deletePateint(Patient selectedPatient) {
+        patientList.remove(selectedPatient);
     }
 }

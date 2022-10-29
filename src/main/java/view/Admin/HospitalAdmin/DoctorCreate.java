@@ -27,13 +27,16 @@ public class DoctorCreate extends javax.swing.JPanel {
     City city;
     Community community;
     Hospital hospital;
+    static String type;
+    static String username;
     
-    public DoctorCreate() {
+    public DoctorCreate(String type,String username) {
         initComponents();
         AutoCompleteDecorator.decorate(ddCity);
         AutoCompleteDecorator.decorate(ddCommunity);
         AutoCompleteDecorator.decorate(ddHospital);
-        
+        this.type = type;
+        this.username = username;
         ddCity.removeAllItems();
         ddCity.addItem("");
         for (City c: MainJFrame.cityDirectory.getCityList()) {
@@ -508,7 +511,7 @@ public class DoctorCreate extends javax.swing.JPanel {
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         JFrame parent = (JFrame) SwingUtilities.getWindowAncestor(this);
         parent.dispose();
-        HospitalAdminJFrame adminArea = new HospitalAdminJFrame();
+        HospitalAdminJFrame adminArea = new HospitalAdminJFrame(type,username);
         adminArea.setVisible(true);
         adminArea.setDoctorCreateView();
     }//GEN-LAST:event_btnBackActionPerformed

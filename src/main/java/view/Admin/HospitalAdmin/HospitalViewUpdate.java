@@ -26,9 +26,11 @@ public class HospitalViewUpdate extends javax.swing.JPanel {
     Vector originalTableModel;
     Validations validations;
     static String type;
-    public HospitalViewUpdate(String type) {
+    static String username;
+    public HospitalViewUpdate(String type,String username) {
         initComponents();
         this.type=type;
+        this.username= username;
         btnDelete.setVisible(false);
         MainJFrame.defaultSearchText(txtSearch, "Search by city or community");
         validations = new Validations();
@@ -333,14 +335,14 @@ public class HospitalViewUpdate extends javax.swing.JPanel {
         JFrame parent = (JFrame) SwingUtilities.getWindowAncestor(this);
         parent.dispose();
          if (type == "sys"){
-            SystemAdminJFrame adminArea = new SystemAdminJFrame();
+            SystemAdminJFrame adminArea = new SystemAdminJFrame("sys",null);
             adminArea.setVisible(true);
-            adminArea.setHospitalCreateView(type);
+            adminArea.setHospitalCreateView();
         }
         else{
-            HospitalAdminJFrame adminArea = new HospitalAdminJFrame();
+            HospitalAdminJFrame adminArea = new HospitalAdminJFrame("hosp",null);
             adminArea.setVisible(true);
-            adminArea.setHospitalCreateView(type);
+            adminArea.setHospitalCreateView();
         }
          
 
@@ -398,6 +400,9 @@ public class HospitalViewUpdate extends javax.swing.JPanel {
             setValidationsNull();
             setTextNull();
 
+        }
+        else{
+            JOptionPane.showMessageDialog(this, "Check errors !!");
         }
     }//GEN-LAST:event_btnUpdateActionPerformed
 

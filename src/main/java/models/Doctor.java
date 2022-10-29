@@ -42,6 +42,10 @@ public class Doctor {
     public ArrayList<Patient> getPatientList() {
         return patientList;
     }
+    
+    public void addPatient(Patient patient) {
+        patientList.add(patient);
+    }
 
     public void setPatientList(ArrayList<Patient> patientList) {
         this.patientList = patientList;
@@ -66,5 +70,14 @@ public class Doctor {
     public boolean isMatch(String name){
         if(this.person.getName().equals(name)) return true;
         return false;
+    }
+    
+    public Patient getPatientByName(String patient) {
+        for (Patient d: patientList) {
+            if (d.getPerson().getName().equals(patient)) {
+                return d;
+            }
+        }    
+        return null;
     }
 }

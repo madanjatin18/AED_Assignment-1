@@ -1,6 +1,8 @@
 package models;
 
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Date;
 
 /*
@@ -10,19 +12,41 @@ import java.util.Date;
 
 
 public class Encounter {
-    private LocalDateTime date;
+    private Date date;
     private Doctor doctor;
     private Hospital hospital;
     private VitalSigns vitalSigns; 
     private Patient patient;
+    private ArrayList<Doctor> doctorList;
+    private ArrayList<Patient> patientList; 
     
-    public Encounter(LocalDateTime date, Doctor doctor, Hospital hospital,Patient patient) {
+    public Encounter(Date date, Doctor doctor, Hospital hospital,Patient patient) {
         this.date = date;
         this.doctor = doctor;
         this.hospital = hospital;
         this.patient = patient;
+        this.doctorList = hospital.getDoctorList();
     }
-
+    
+    public Doctor getDoctorByUsername(String username) {
+        for (Doctor d: doctorList) {
+            if (d.getPerson().getUsername().equals(username)) {
+                return d;
+            }
+        }
+        
+        return null;
+    }
+    
+    public Patient getPatientByUsername(String username) {
+        for (Patient p: patientList) {
+            if (p.getPerson().getUsername().equals(username)) {
+                return p;
+            }
+        }
+        
+        return null;
+    }
     public Patient getPatient() {
         return patient;
     }
@@ -31,11 +55,12 @@ public class Encounter {
         this.patient = patient;
     }
 
-    public LocalDateTime getDate() {
+    public Date getDate() {
         return date;
     }
 
-    public void setDate(LocalDateTime date) {
+    public void setDate(Date date) {
+        
         this.date = date;
     }
 

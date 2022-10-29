@@ -23,6 +23,7 @@ import models.PersonDirectory;
 import view.Admin.AdminJFrame;
 import resources.CreateDefaultData;
 import view.Doctor.DoctorAdminJFrame;
+import view.Patient.PatientAdminJFrame;
 
 
 
@@ -220,7 +221,7 @@ public class MainJFrame extends javax.swing.JFrame {
             for(Patient p : patientList){
                 if (txtUsername.getText().equals(p.getPerson().getUsername()) && txtPassword.getText().equals(p.getPerson().getPassword())){
                     this.dispose();
-                    new AdminJFrame().setVisible(true);
+                    new PatientAdminJFrame("pat",p.getPerson().getUsername()).setVisible(true);
                 }
                 else{
                     lblError.setText("Invalid Credentials");

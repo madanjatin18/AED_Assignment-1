@@ -26,10 +26,12 @@ public class HospitalCreate extends javax.swing.JPanel {
     Community community;
     Validations validations;
     static String type;
-    public HospitalCreate(String type) {
+    static String username;
+    public HospitalCreate(String type,String username) {
         initComponents();
         validations = new Validations();
         this.type =type;
+        this.username=username;
         AutoCompleteDecorator.decorate(ddCity);
         AutoCompleteDecorator.decorate(ddCommunity);
             
@@ -248,14 +250,13 @@ public class HospitalCreate extends javax.swing.JPanel {
                     .addComponent(valAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(lblZipCode)
-                        .addComponent(txtZipCode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblZipCode)
+                    .addComponent(txtZipCode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(valZipCode, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnBack)
-                    .addComponent(btnSave))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnSave)
+                    .addComponent(btnBack))
                 .addContainerGap(85, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -358,11 +359,11 @@ public class HospitalCreate extends javax.swing.JPanel {
         parent.dispose();
         
         if (type == "sys"){
-        SystemAdminJFrame adminArea = new SystemAdminJFrame();
+        SystemAdminJFrame adminArea = new SystemAdminJFrame("sys",null);
         adminArea.setVisible(true);
         }
         else{
-            HospitalAdminJFrame adminArea = new HospitalAdminJFrame();
+            HospitalAdminJFrame adminArea = new HospitalAdminJFrame("hosp",null);
         adminArea.setVisible(true);
         }
     }//GEN-LAST:event_btnBackActionPerformed

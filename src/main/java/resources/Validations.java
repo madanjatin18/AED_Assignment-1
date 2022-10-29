@@ -4,11 +4,20 @@
  */
 package resources;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 
 public class Validations {
+    
+    DateTimeFormatter formatter;
+    
+    public void Validations(){
+         formatter = DateTimeFormatter.ofPattern("dd-mm-yyyy HH:mm");
+    }
     public boolean ValidatePhoneNumber(String value) {
         String PATTERN = "^(\\+\\d{1,3}( )?)?(\\d{3}[ ]?){2}\\d{4}$";
         return MatchPattern(PATTERN, value);
@@ -48,10 +57,23 @@ public class Validations {
         String PATTERN = "^[0-9]{1,2}$";
         return MatchPattern(PATTERN, value);
     }
-    
+    /*
     public boolean ValidateDate(String value) {
-        return !value.isEmpty();
+        String error = "Date should be in DD-MM-YYYY HH:MM";
+        try 
+            { 
+                formatter.parse(value);              
+            }  
+	catch (ParseException e)  
+            { 
+
+                System.out.println(error);
+                return false;
+            }
+        return true;
+        }
     }
+    */
     
     public boolean ValidateGender(String value) {
         return !value.isEmpty();

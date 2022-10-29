@@ -65,6 +65,18 @@ public class HospitalDirectory {
         return searchHospitalDirectory;
     }
     
+    public ArrayList<Doctor> searcDoctorByCommunity(Community community)
+    {
+        ArrayList<Doctor> searchDoctorDirectory = new ArrayList();
+        for(Hospital hospital: searchHospitalByCommunity(community))
+        {   
+            for (Doctor d:hospital.getDoctorList()){
+                searchDoctorDirectory.add(d);
+            }  
+        }
+        return searchDoctorDirectory;
+    }
+    
     public void deleteHospital(Hospital selectedHospital) {
         hospitalList.remove(selectedHospital);       
     }

@@ -2,19 +2,25 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package view.Admin.HospitalAdmin;
+package view.Patient;
 
+import java.util.ArrayList;
+import view.Admin.HospitalAdmin.*;
 import java.util.Vector;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
+import models.City;
+import models.Community;
 import models.Doctor;
+import models.Hospital;
+import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
 import resources.Validations;
 import view.MainJFrame;
 
 
-public class DoctorViewUpdate extends javax.swing.JPanel {
+public class DoctorByCommunity extends javax.swing.JPanel {
 
     /**
      * Creates new form DoctorViewUpdate
@@ -24,18 +30,23 @@ public class DoctorViewUpdate extends javax.swing.JPanel {
     Validations validations;
     static String type;
     static String username;
-    public DoctorViewUpdate(String type,String username) {
+    static Community com;
+    static City city;
+    public DoctorByCommunity(String type,String username) {
         initComponents();
         this.type = type;
         this.username = username;
-        btnDelete.setVisible(false);
-        MainJFrame.defaultSearchText(txtSearch, "Search ...");
-        validations = new Validations();
-        populateTable();
-        originalTableModel = (Vector) ((DefaultTableModel) tblDetails.getModel()).getDataVector().clone();
-        if(type=="sys"){
-            btnDelete.setVisible(true);
+        AutoCompleteDecorator.decorate(ddCity);
+        AutoCompleteDecorator.decorate(ddCommunity);
+        ddCity.removeAllItems();
+        ddCity.addItem("");
+        for (City c: MainJFrame.cityDirectory.getCityList()) {
+            ddCity.addItem(c.getName());
         }
+        ddCity.setSelectedItem("");
+        validations = new Validations();
+        //populateTable();
+        originalTableModel = (Vector) ((DefaultTableModel) tblDetails.getModel()).getDataVector().clone();
     }
 
     /**
@@ -48,12 +59,9 @@ public class DoctorViewUpdate extends javax.swing.JPanel {
     private void initComponents() {
 
         btnGender = new javax.swing.ButtonGroup();
-        btnUpdate = new javax.swing.JButton();
-        txtSearch = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblDetails = new javax.swing.JTable();
         lblDoctorRecord = new javax.swing.JLabel();
-        btn_create = new javax.swing.JButton();
         lblCity = new javax.swing.JLabel();
         lblCommunity = new javax.swing.JLabel();
         txtCity = new javax.swing.JTextField();
@@ -86,20 +94,12 @@ public class DoctorViewUpdate extends javax.swing.JPanel {
         valPassword = new javax.swing.JLabel();
         valAbout = new javax.swing.JLabel();
         txtAbout = new javax.swing.JTextField();
-        btnDelete = new javax.swing.JButton();
-
-        btnUpdate.setText("Update");
-        btnUpdate.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnUpdateActionPerformed(evt);
-            }
-        });
-
-        txtSearch.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                txtSearchKeyReleased(evt);
-            }
-        });
+        ddCommunity = new javax.swing.JComboBox<>();
+        lblCommunity2 = new javax.swing.JLabel();
+        valCommunity = new javax.swing.JLabel();
+        ddCity = new javax.swing.JComboBox<>();
+        lblCity1 = new javax.swing.JLabel();
+        valCity = new javax.swing.JLabel();
 
         tblDetails.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -152,13 +152,6 @@ public class DoctorViewUpdate extends javax.swing.JPanel {
 
         lblDoctorRecord.setFont(new java.awt.Font("Hiragino Mincho ProN", 1, 24)); // NOI18N
         lblDoctorRecord.setText("Doctor Records");
-
-        btn_create.setText("Create");
-        btn_create.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_createActionPerformed(evt);
-            }
-        });
 
         lblCity.setFont(new java.awt.Font("Hiragino Mincho ProN", 1, 18)); // NOI18N
         lblCity.setText("City :");
@@ -289,12 +282,29 @@ public class DoctorViewUpdate extends javax.swing.JPanel {
             }
         });
 
-        btnDelete.setText("Delete");
-        btnDelete.addActionListener(new java.awt.event.ActionListener() {
+        ddCommunity.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnDeleteActionPerformed(evt);
+                ddCommunityActionPerformed(evt);
             }
         });
+
+        lblCommunity2.setFont(new java.awt.Font("Hiragino Mincho ProN", 1, 18)); // NOI18N
+        lblCommunity2.setText("Community:");
+
+        valCommunity.setFont(new java.awt.Font("Helvetica Neue", 2, 13)); // NOI18N
+        valCommunity.setForeground(new java.awt.Color(255, 0, 0));
+
+        ddCity.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ddCityActionPerformed(evt);
+            }
+        });
+
+        lblCity1.setFont(new java.awt.Font("Hiragino Mincho ProN", 1, 18)); // NOI18N
+        lblCity1.setText("City:");
+
+        valCity.setFont(new java.awt.Font("Helvetica Neue", 2, 13)); // NOI18N
+        valCity.setForeground(new java.awt.Color(255, 0, 0));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -305,11 +315,6 @@ public class DoctorViewUpdate extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(29, 29, 29)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(lblDoctorRecord, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(38, 38, 38)
-                                .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 291, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 586, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
@@ -338,15 +343,27 @@ public class DoctorViewUpdate extends javax.swing.JPanel {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addComponent(valPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                .addComponent(btnUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addGap(40, 40, 40)
-                                                .addComponent(txtAbout)))
+                                        .addGap(40, 40, 40)
+                                        .addComponent(txtAbout)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(valAbout, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                        .addComponent(valAbout, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 586, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(valCommunity, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 64, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(lblDoctorRecord, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblCommunity2)
+                                    .addComponent(lblCity1))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(ddCity, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(ddCommunity, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(valCity, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(188, 188, 188)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -373,39 +390,40 @@ public class DoctorViewUpdate extends javax.swing.JPanel {
                                     .addComponent(valAge, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(valPhone, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(valEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(txtCity, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(133, 133, 133)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(btnDelete, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(btn_create, javax.swing.GroupLayout.DEFAULT_SIZE, 87, Short.MAX_VALUE))))
+                            .addComponent(txtCity, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE)))
-                .addGap(308, 308, Short.MAX_VALUE))
+                .addGap(110, 110, 110))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(30, 30, 30)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblDoctorRecord, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(27, 27, 27)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lblDoctorRecord, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(27, 27, 27))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(lblCity1)
+                                .addComponent(ddCity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(valCity, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblCommunity2)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(valCommunity, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(ddCommunity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(42, 42, 42)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtCity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblCity))
+                .addGap(6, 6, 6)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(txtCity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(lblCity))
-                    .addComponent(btn_create))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblCommunity)
-                            .addComponent(txtCommunity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnDelete)))
+                    .addComponent(lblCommunity)
+                    .addComponent(txtCommunity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(6, 6, 6)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtHospital, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -461,125 +479,9 @@ public class DoctorViewUpdate extends javax.swing.JPanel {
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(lblPassword1)
                         .addComponent(txtAbout, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
-                .addComponent(btnUpdate)
-                .addContainerGap())
+                .addGap(46, 46, 46))
         );
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
-        int selectRowIndex = tblDetails.getSelectedRow();
-        if (selectRowIndex<0){
-            JOptionPane.showMessageDialog(this, "Please select a row to update");
-            return;
-        }
-        DefaultTableModel model = (DefaultTableModel)tblDetails.getModel();
-        Doctor selectedDetails = (Doctor) model.getValueAt(selectRowIndex, 11);
-        String email = model.getValueAt(selectRowIndex, 7).toString();
-        String username = model.getValueAt(selectRowIndex, 8).toString();
-        
-        var valid = true;
-
-        if (!this.validations.ValidateName(txtName.getText()) ) {
-            valName.setText("Name is Invalid");
-            valid = false;
-        }
-
-        if (!this.validations.ValidateAbout(txtAbout.getText()) ) {
-            valAbout.setText("Details are required");
-            valid = false;
-        }
-        
-        if (btnGender.getSelection() == null) {
-            valGender.setText("Gender is required");
-            valid = false;
-        }
-        
-        if (!this.validations.ValidateEmail(txtEmail.getText()) ) {
-            valEmail.setText("Email address is Invalid");
-            valid = false;
-        } else if (!(txtEmail.getText().equals(email)) && MainJFrame.personDirectory.isPersonByEmailExist(txtEmail.getText())) {
-                valEmail.setText("Email address already exist");
-                valid = false;
-            }
-        
-        if (!this.validations.ValidatePhoneNumber(txtPhoneNumber.getText()) ) {
-            valPhone.setText("Phone Number is Invalid");
-            valid = false;
-        }
-        
-        if (!this.validations.ValidateAge(txtAge.getText()) ) {
-            valAge.setText("Age is Invalid");
-            valid = false;
-        }
-        
-        if (!this.validations.ValidateUsername(txtUsername.getText()) ) {
-            valUsername.setText("Username is Invalid");
-            valid = false;
-        } else if (!(txtUsername.getText().equals(username)) && MainJFrame.personDirectory.isPersonByUsernameExist(txtUsername.getText())) {
-                valUsername.setText("Username already exist");
-                valid = false;
-            }
-        
-        String password = String.valueOf(txtPassword.getPassword());
-        if (!this.validations.ValidatePassword(password) ) {
-            valPassword.setText("Should be 5-12 character long");
-            valid = false;
-        }
-
-        //
-        if (valid) {
-            
-            String gender;
-            if (btnMale.isSelected()) {
-                gender = "Male";
-            }
-            else if (btnFemale.isSelected()) {
-                gender = "Female";
-            }
-            else {
-                gender = "Other";
-            }
-            
-            selectedDetails.getPerson().setAge(Integer.parseInt(txtAge.getText()));
-            selectedDetails.getPerson().setName(txtName.getText());
-            selectedDetails.getPerson().setGender(gender);
-            selectedDetails.getPerson().setPhoneNumber(txtPhoneNumber.getText());
-            selectedDetails.getPerson().setUsername(txtUsername.getText());
-            selectedDetails.getPerson().setPassword(String.valueOf(txtPassword.getPassword()));
-            selectedDetails.getPerson().setEmail(txtEmail.getText());
-            selectedDetails.setAbout(txtAbout.getText());
-            
-            JOptionPane.showMessageDialog(this, "Doctor details Updated");
-            setTextNull();
-            setValidationNull();
-            populateTable();
-
-        }
-        else{
-            JOptionPane.showMessageDialog(this, "Check errors !!");
-        }
-    }//GEN-LAST:event_btnUpdateActionPerformed
-
-    private void txtSearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSearchKeyReleased
-
-        setTextNull();
-        setValidationNull();
-        DefaultTableModel model = (DefaultTableModel)tblDetails.getModel();
-
-        model.setRowCount(0);
-        for (Object rows : originalTableModel) {
-            Vector rowVector = (Vector) rows;
-            for (Object column : rowVector) {
-                if (column.toString().toLowerCase().contains(txtSearch.getText())) {
-                    //content found so adding to table
-                    model.addRow(rowVector);
-                    break;
-                }
-            }
-
-        }
-    }//GEN-LAST:event_txtSearchKeyReleased
 
     private void tblDetailsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDetailsMouseClicked
 
@@ -621,15 +523,6 @@ public class DoctorViewUpdate extends javax.swing.JPanel {
 
         setValidationNull();
     }//GEN-LAST:event_tblDetailsMouseClicked
-
-    private void btn_createActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_createActionPerformed
-
-        JFrame parent = (JFrame) SwingUtilities.getWindowAncestor(this);
-        parent.dispose();
-        HospitalAdminJFrame adminArea = new HospitalAdminJFrame(type,username);
-        adminArea.setVisible(true);
-        adminArea.setDoctorCreateView();
-    }//GEN-LAST:event_btn_createActionPerformed
 
     private void txtNameKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNameKeyReleased
 
@@ -736,31 +629,61 @@ public class DoctorViewUpdate extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_txtAboutKeyReleased
 
-    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
-        // TODO add your handling code here:
-        int selectedRowIndex = tblDetails.getSelectedRow();
-        if (selectedRowIndex<0)
-        {
-            JOptionPane.showMessageDialog(this,"No Record selected to delete");
-            return;
+    private void ddCommunityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ddCommunityActionPerformed
+
+        Object communityName = ddCommunity.getSelectedItem();
+        Object cityName = ddCity.getSelectedItem();
+
+        if (communityName == null) {
+            communityName = "";
         }
 
-        DefaultTableModel model = (DefaultTableModel) tblDetails.getModel();
-        Doctor selectedDoctor = (Doctor) model.getValueAt(selectedRowIndex , 11);
+        if (communityName.toString().equals("")) {
+            valCommunity.setText("Please Select Community");
+            //.removeAllItems();
+            //valHospital.setText(null);
+        } else {
+            //valHospital.setText(null);
+            valCommunity.setText(null);
+            //ddHospital.removeAllItems();
+            com = MainJFrame.communityDirectory.getCommunity(cityName.toString(),communityName.toString());
+            ArrayList<Hospital> hospitalList = MainJFrame.hospitalDirectory.searchHospitalByCommunity(com);
+            populateTable();
+        }
+    }//GEN-LAST:event_ddCommunityActionPerformed
 
-        MainJFrame.doctorDirectory.deleteHospital(selectedDoctor);
+    private void ddCityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ddCityActionPerformed
 
-        populateTable();
-        setTextNull();
-        JOptionPane.showMessageDialog(this,"The selected record has been deleted");
-    }//GEN-LAST:event_btnDeleteActionPerformed
+        Object city_name = ddCity.getSelectedItem();
+
+        if (city_name == null || city_name.toString().equals("")) {
+            valCity.setText("Please Select City");
+            ddCommunity.removeAllItems();
+            //ddHospital.removeAllItems();
+            //valHospital.setText(null);
+            valCommunity.setText(null);
+        } else {
+            valCity.setText(null);
+            //valHospital.setText(null);
+            ddCommunity.removeAllItems();
+            //ddHospital.removeAllItems();
+            city = MainJFrame.cityDirectory.findCity(city_name.toString());
+            ArrayList<Community> communityList = MainJFrame.communityDirectory.searchCommunitiesByCityObject(city);
+
+            ddCommunity.addItem("");
+            for (Community c: communityList) {
+                ddCommunity.addItem(c.getName());
+            }
+            ddCommunity.setSelectedItem("");
+        }
+    }//GEN-LAST:event_ddCityActionPerformed
 
     private void populateTable() {
         
         DefaultTableModel model = (DefaultTableModel) tblDetails.getModel();
         model.setRowCount(0);
         
-        for (Doctor c : MainJFrame.doctorDirectory.getDoctorList()){
+        for (Doctor c : MainJFrame.hospitalDirectory.searcDoctorByCommunity(com)){
             Object[] row = new Object[12];
             row[0] = c.getPerson().getCity().getName();
             row[1] = c.getPerson().getCommunity().getName();
@@ -806,18 +729,19 @@ public class DoctorViewUpdate extends javax.swing.JPanel {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnDelete;
     private javax.swing.JRadioButton btnFemale;
     private javax.swing.ButtonGroup btnGender;
     private javax.swing.JRadioButton btnMale;
     private javax.swing.JRadioButton btnOther;
-    private javax.swing.JButton btnUpdate;
-    private javax.swing.JButton btn_create;
+    private javax.swing.JComboBox<String> ddCity;
+    private javax.swing.JComboBox<String> ddCommunity;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblAge;
     private javax.swing.JLabel lblCity;
+    private javax.swing.JLabel lblCity1;
     private javax.swing.JLabel lblCommunity;
     private javax.swing.JLabel lblCommunity1;
+    private javax.swing.JLabel lblCommunity2;
     private javax.swing.JLabel lblDoctorRecord;
     private javax.swing.JLabel lblEmail;
     private javax.swing.JLabel lblGender;
@@ -836,10 +760,11 @@ public class DoctorViewUpdate extends javax.swing.JPanel {
     private javax.swing.JTextField txtName;
     private javax.swing.JPasswordField txtPassword;
     private javax.swing.JTextField txtPhoneNumber;
-    private javax.swing.JTextField txtSearch;
     private javax.swing.JTextField txtUsername;
     private javax.swing.JLabel valAbout;
     private javax.swing.JLabel valAge;
+    private javax.swing.JLabel valCity;
+    private javax.swing.JLabel valCommunity;
     private javax.swing.JLabel valEmail;
     private javax.swing.JLabel valGender;
     private javax.swing.JLabel valName;

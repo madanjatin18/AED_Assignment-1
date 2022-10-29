@@ -11,14 +11,24 @@ public class Patient {
     private Person person;
     private House house;
     private Hospital hospital;
+    private Doctor doctor;
+
+    public Doctor getDoctor() {
+        return doctor;
+    }
+
+    public void setDoctor(Doctor doctor) {
+        this.doctor = doctor;
+    }
     
-    public Patient (String issue, House house, Person person, int patientID, Hospital hospital){
+    public Patient (String issue, House house, Person person, int patientID, Hospital hospital,Doctor doctor){
         
         this.issue = issue;
         this.patientID = patientID;
         this.house = house;
         this.person = person;
         this.hospital = hospital;
+        this.doctor = doctor;
         
         encounterList = new  ArrayList();
     }

@@ -42,7 +42,7 @@ public class AdminJFrame extends javax.swing.JFrame {
         lbl_admin.setFont(new java.awt.Font("Hiragino Maru Gothic ProN", 1, 18)); // NOI18N
         lbl_admin.setText("Select the type of admin");
 
-        btn_back_main.setText("<- Back");
+        btn_back_main.setText("<- Logout");
         btn_back_main.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_back_mainActionPerformed(evt);
@@ -112,6 +112,7 @@ public class AdminJFrame extends javax.swing.JFrame {
     private void btn_back_mainActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_back_mainActionPerformed
         
         this.setVisible(false);
+        this.dispose();
         new MainJFrame().setVisible(true); // Main Form to show after the Login Form..
     
     }//GEN-LAST:event_btn_back_mainActionPerformed
@@ -119,12 +120,12 @@ public class AdminJFrame extends javax.swing.JFrame {
     private void btn_system_adminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_system_adminActionPerformed
         // TODO add your handling code here:
         this.dispose();
-        new SystemAdminJFrame().setVisible(true);
+        new SystemAdminJFrame("sys",null).setVisible(true);
     }//GEN-LAST:event_btn_system_adminActionPerformed
 
     private void btn_hospital_adminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_hospital_adminActionPerformed
         this.dispose();
-        new HospitalAdminJFrame().setVisible(true);
+        new HospitalAdminJFrame("hosp",null).setVisible(true);
     }//GEN-LAST:event_btn_hospital_adminActionPerformed
 
     private void btn_community_adminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_community_adminActionPerformed

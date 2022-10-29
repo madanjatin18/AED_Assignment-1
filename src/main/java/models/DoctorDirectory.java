@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 
 public class DoctorDirectory {
-    ArrayList<Doctor> doctorList ;
+    private ArrayList<Doctor> doctorList ;
     
     
     public DoctorDirectory (){
@@ -29,7 +29,14 @@ public class DoctorDirectory {
 
         return doctorList;
     }
-    
+    public Doctor getDoctorObject(String name) {
+        for (Doctor d : doctorList) {
+            if (d.getPerson().getName().equals(name)) {
+                    return d;
+                }
+            }  
+        return null;
+    }
     
 
     public Doctor findDoctorByName(String name) {
@@ -42,4 +49,8 @@ public class DoctorDirectory {
         }
             return null; //not found after going through the whole list
          }
+
+    public void deleteHospital(Doctor selectedDoctor) {
+        doctorList.remove(selectedDoctor);
+    }
 }

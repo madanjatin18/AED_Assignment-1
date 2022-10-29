@@ -16,6 +16,7 @@ import javax.swing.SwingUtilities;
 import models.City;
 import models.Community;
 import models.Doctor;
+import models.Encounter;
 import models.Hospital;
 import models.Patient;
 import models.Person;
@@ -26,6 +27,7 @@ import view.Admin.SystemAdmin.SystemAdminJFrame;
 import view.Doctor.DoctorAdminJFrame;
 import view.MainJFrame;
 import static view.MainJFrame.doctorDirectory;
+import static view.MainJFrame.patientDirectory;
 
 
 public class EncounterCreate extends javax.swing.JPanel {
@@ -37,12 +39,13 @@ public class EncounterCreate extends javax.swing.JPanel {
     City city;
     Community community;
     Hospital hospital;
-    Doctor doctor;
+    static Doctor doctor;
+    static Doctor invidoctor;
     Patient patient;
     //Validations validations;
     SimpleDateFormat formatter;
-    String type;
-    String username;
+    static String type;
+    static String username;
     static Date date;
     String dateTimeString;
     
@@ -51,49 +54,19 @@ public class EncounterCreate extends javax.swing.JPanel {
         //validations = new Validations();
         this.type =type;
         this.username=username;
-        
         formatter= new SimpleDateFormat("yyyy-MM-dd HH:mm");
         date = new Date(System.currentTimeMillis());
         dateTimeString = formatter.format(date);    
         
         LabelDate.setText(dateTimeString);
+        AutoCompleteDecorator.decorate(ddCity);
+        AutoCompleteDecorator.decorate(ddCommunity);
+        AutoCompleteDecorator.decorate(ddHospital);
+        AutoCompleteDecorator.decorate(ddDoctor);
+        AutoCompleteDecorator.decorate(ddPatient);
         
-        if(username != null && type == "doc"){
-            AutoCompleteDecorator.decorate(ddPatient);
-            ArrayList<Doctor> doctorList = new ArrayList<>();
-            doctorList = doctorDirectory.getDoctorList();
-            for (Doctor d : doctorList){
-                if(username.equals(d.getPerson().getUsername())){
-                    ddDoctor.removeAllItems();
-                    ddCity.removeAllItems();
-                    ddCommunity.removeAllItems();
-                    ddHospital.removeAllItems();
-                    
-                    ddCity.addItem(d.getHospital().getCity().toString());
-                    ddHospital.addItem(d.getHospital().getName());
-                    ddCommunity.addItem(d.getHospital().getCommunity().toString());
-                    ddDoctor.addItem(d.getPerson().getName());
-                    
-                    ddCity.setSelectedIndex(0);
-                    ddHospital.setSelectedIndex(0);
-                    ddCommunity.setSelectedIndex(0);
-                    ddDoctor.setSelectedIndex(0);
-                    
-                    ddCity.setEditable(false);
-                    ddHospital.setEditable(false);
-                    ddCommunity.setEditable(false);
-                    ddDoctor.setEditable(false);
-                    
-                }
-        
-            }
-        }
+        if(checkDoctor()){}
         else{
-            AutoCompleteDecorator.decorate(ddCity);
-            AutoCompleteDecorator.decorate(ddCommunity);
-            AutoCompleteDecorator.decorate(ddHospital);
-            AutoCompleteDecorator.decorate(ddDoctor);
-            AutoCompleteDecorator.decorate(ddPatient);
             ddCity.removeAllItems();
             ddCity.addItem("");
             for (City c: MainJFrame.cityDirectory.getCityList()) {
@@ -316,118 +289,141 @@ public class EncounterCreate extends javax.swing.JPanel {
                     .addContainerGap(273, Short.MAX_VALUE)))
         );
     }// </editor-fold>//GEN-END:initComponents
-
-    private void ddCityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ddCityActionPerformed
-
-        Object city_name = ddCity.getSelectedItem();
-
-        if (city_name == null || city_name.toString().equals("")) {
-            valCity.setText("Please Select City");
-            ddCommunity.removeAllItems();
-            ddHospital.removeAllItems();
-            ddDoctor.removeAllItems();
-            ddPatient.removeAllItems();
-            valHospital.setText(null);
-            valCommunity.setText(null);
-            valDoctor.setText(null);
-            valPatient.setText(null);
-            
-        } else {
-            valCity.setText(null);
-            valHospital.setText(null);
-            valDoctor.setText(null);
-            valPatient.setText(null);
-            ddCommunity.removeAllItems();
-            ddHospital.removeAllItems();
-            ddDoctor.removeAllItems();
-            ddPatient.removeAllItems();
-            city = MainJFrame.cityDirectory.findCity(city_name.toString());
-            ArrayList<Community> communityList = MainJFrame.communityDirectory.searchCommunitiesByCityObject(city);
-
-            ddCommunity.addItem("");
-            for (Community c: communityList) {
-                ddCommunity.addItem(c.getName());
+    public boolean checkDoctor(){
+        if(username != null && type == "doc"){
+            ArrayList<Doctor> doctorList = new ArrayList<>();
+            doctorList = doctorDirectory.getDoctorList();
+            for (Doctor d : doctorList){
+                if(username.equals(d.getPerson().getUsername())){
+                    invidoctor = d;
+                    ddCity.removeAllItems();
+                    ddCity.addItem(invidoctor.getHospital().getCity().getName());
+                    ddCity.setSelectedIndex(0);
+                    ddCity.setEditable(false);
+                    ddCommunity.removeAllItems();
+                    ddCommunity.addItem(invidoctor.getHospital().getCommunity().getName());
+                    ddCommunity.setSelectedIndex(0);
+                    ddCommunity.setEditable(false);
+                    ddHospital.removeAllItems();
+                    ddHospital.addItem(invidoctor.getHospital().getName());
+                    ddHospital.setSelectedIndex(0);
+                    ddHospital.setEditable(false);
+                    ddDoctor.removeAllItems();
+                    ddDoctor.addItem(invidoctor.getPerson().getName());
+                    ddDoctor.setSelectedIndex(0);
+                    ddDoctor.setEditable(false);
+                }
             }
-            ddCommunity.setSelectedItem("");
+            return true;
         }
+       return false; 
+    }
+    
+    private void ddCityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ddCityActionPerformed
+        if(checkDoctor()){}
+        else{
+            Object city_name = ddCity.getSelectedItem();
+                if (city_name == null || city_name.toString().equals("")) {
+                    valCity.setText("Please Select City");
+                    ddCommunity.removeAllItems();
+                    ddHospital.removeAllItems();
+                    ddDoctor.removeAllItems();
+                    ddPatient.removeAllItems();
+                    valHospital.setText(null);
+                    valCommunity.setText(null);
+                    valDoctor.setText(null);
+                    valPatient.setText(null);
+
+                } else {
+                    valCity.setText(null);
+                    valHospital.setText(null);
+                    valDoctor.setText(null);
+                    valPatient.setText(null);
+                    ddCommunity.removeAllItems();
+                    ddHospital.removeAllItems();
+                    ddDoctor.removeAllItems();
+                    ddPatient.removeAllItems();
+                    city = MainJFrame.cityDirectory.findCity(city_name.toString());
+                    ArrayList<Community> communityList = MainJFrame.communityDirectory.searchCommunitiesByCityObject(city);
+
+                    ddCommunity.addItem("");
+                    for (Community c: communityList) {
+                        ddCommunity.addItem(c.getName());
+                    }
+                    ddCommunity.setSelectedItem("");
+                }
+        }        
     }//GEN-LAST:event_ddCityActionPerformed
 
     private void ddCommunityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ddCommunityActionPerformed
 
         Object communityName = ddCommunity.getSelectedItem();
         Object cityName = ddCity.getSelectedItem();
+        if(checkDoctor()){}
+        else{
+            if (communityName == null || communityName.toString().equals("")) {
+                valCommunity.setText("Please Select Community");
+                ddHospital.removeAllItems();
+                valHospital.setText(null);
+                ddDoctor.removeAllItems();
+                ddPatient.removeAllItems();
+                valDoctor.setText(null);
+                valPatient.setText(null);
+            } else {
+                valHospital.setText(null);
+                valCommunity.setText(null);
+                valDoctor.setText(null);
+                valPatient.setText(null);
+                ddHospital.removeAllItems();
+                ddDoctor.removeAllItems();
+                ddPatient.removeAllItems();
+                community = MainJFrame.communityDirectory.getCommunity(cityName.toString(),communityName.toString());
+                ArrayList<Hospital> hospitalList = MainJFrame.hospitalDirectory.searchHospitalByCommunity(community);
 
-        if (communityName == null || communityName.toString().equals("")) {
-            valCommunity.setText("Please Select Community");
-            ddHospital.removeAllItems();
-            valHospital.setText(null);
-            ddDoctor.removeAllItems();
-            ddPatient.removeAllItems();
-            valDoctor.setText(null);
-            valPatient.setText(null);
-        } else {
-            valHospital.setText(null);
-            valCommunity.setText(null);
-            valDoctor.setText(null);
-            valPatient.setText(null);
-            ddHospital.removeAllItems();
-            ddDoctor.removeAllItems();
-            ddPatient.removeAllItems();
-            community = MainJFrame.communityDirectory.getCommunity(cityName.toString(),communityName.toString());
-            ArrayList<Hospital> hospitalList = MainJFrame.hospitalDirectory.searchHospitalByCommunity(community);
-
-            ddHospital.addItem("");
-            for (Hospital c: hospitalList) {
-                ddHospital.addItem(c.getName());
+                ddHospital.addItem("");
+                for (Hospital c: hospitalList) {
+                    ddHospital.addItem(c.getName());
+                }
+                ddHospital.setSelectedItem("");
             }
-            ddHospital.setSelectedItem("");
         }
     }//GEN-LAST:event_ddCommunityActionPerformed
 
     private void ddHospitalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ddHospitalActionPerformed
         Object hospitalName = ddHospital.getSelectedItem();
+        if(checkDoctor()){}
+        else{
+            if (hospitalName == null || hospitalName.toString().equals("")) {
+                valHospital.setText("Please Select Hospital");
+                ddDoctor.removeAllItems();
+                ddPatient.removeAllItems();
+                valDoctor.setText(null);
+                valPatient.setText(null);
+            } else {
+                ddDoctor.removeAllItems();
+                ddPatient.removeAllItems();
+                valHospital.setText(null);
+                hospital = MainJFrame.hospitalDirectory.getHospitalObject(hospitalName.toString(), city, community);
 
-        if (hospitalName == null || hospitalName.toString().equals("")) {
-            valHospital.setText("Please Select Hospital");
-            ddDoctor.removeAllItems();
-            ddPatient.removeAllItems();
-            valDoctor.setText(null);
-            valPatient.setText(null);
-        } else {
-            ddDoctor.removeAllItems();
-            ddPatient.removeAllItems();
-            valHospital.setText(null);
-            hospital = MainJFrame.hospitalDirectory.getHospitalObject(hospitalName.toString(), city, community);
-            
-            ddDoctor.addItem("");
-            for (Doctor c: hospital.getDoctorList()) {
-                ddDoctor.addItem(c.getPerson().getName());
-            }
-            ddDoctor.setSelectedItem("");
-            
-            ddPatient.addItem("");
-            for (Patient c: hospital.getPatientList()) {
-                ddPatient.addItem(c.getPerson().getName());
-            }
-            ddPatient.setSelectedItem("");
+                ddDoctor.addItem("");
+                for (Doctor c: hospital.getDoctorList()) {
+                    ddDoctor.addItem(c.getPerson().getName());
+                }
+                ddDoctor.setSelectedItem("");
 
+                /*ddPatient.addItem("");
+                for (Patient c: doctor.getPatientList()) {
+                    ddPatient.addItem(c.getPerson().getName());
+                }
+                ddPatient.setSelectedItem("");*/
+
+            }
         }
     }//GEN-LAST:event_ddHospitalActionPerformed
 
     private void ddDoctorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ddDoctorActionPerformed
         Object doctorName = ddDoctor.getSelectedItem();
-        if(username != null && type == "doc"){
-            ArrayList<Doctor> doctorList = new ArrayList<>();
-            for (Doctor d : doctorList){
-                if(username.equals(d.getPerson().getUsername())){
-                    ddDoctor.removeAllItems();
-                    ddDoctor.addItem(d.getPerson().getName());
-                    ddDoctor.setSelectedIndex(0);
-                    ddDoctor.setEditable(false);
-                }
-        
-            }
-        }
+        if(checkDoctor()){}
         else{
             if (doctorName == null || doctorName.toString().equals("")) {
                 valDoctor.setText("Please Select Doctor");
@@ -441,26 +437,28 @@ public class EncounterCreate extends javax.swing.JPanel {
 
     private void ddPatientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ddPatientActionPerformed
         Object patientName = ddPatient.getSelectedItem();
-        if(username != null && type == "doc"){
-            ArrayList<Patient> patientList = new ArrayList<>();
-            for (Patient p : patientList){
-                if(username.equals(p.getPerson().getUsername())){
-                    ddPatient.removeAllItems();
+        Object doctorName = ddDoctor.getSelectedItem();
+        if(checkDoctor()){ 
+            if (patientName == null || patientName.toString().equals("")) {
+                valPatient.setText("Please Select Patient");
+                
+            }
+            else{
+                for (Patient p: invidoctor.getPatientList()) {
                     ddPatient.addItem(p.getPerson().getName());
-                    ddPatient.setSelectedIndex(0);
-                    ddPatient.setEditable(false);
                 }
-
+                ddPatient.setSelectedItem("");
+                        
             }
         }
         else{
-            if (patientName == null || patientName.toString().equals("")) {
-                valPatient.setText("Please Select Doctor");
-            } else {
+            doctor = MainJFrame.doctorDirectory.getDoctorObject(doctorName.toString());
+                ddPatient.addItem("");
                 valPatient.setText(null);
-                patient = doctor.getPatientByName(patientName.toString());
-
-            }
+                for (Patient c: doctor.getPatientList()) {
+                    ddPatient.addItem(c.getPerson().getName());
+                }
+                ddPatient.setSelectedItem("");
         }
     }//GEN-LAST:event_ddPatientActionPerformed
 
@@ -500,8 +498,11 @@ public class EncounterCreate extends javax.swing.JPanel {
         if (valid) {
 
                       
-            MainJFrame.encounterDirectory.newEncounter(date,doctor,hospital,patient);
+            Encounter enc = MainJFrame.encounterDirectory.newEncounter(date,doctor,hospital,patient);
+            doctor.setEncounter(enc);
             JOptionPane.showMessageDialog(this, "Encounter details Added");
+            
+           
             ddCity.setSelectedItem("");
             ddCommunity.setSelectedItem("");
             ddDoctor.setSelectedItem("");
@@ -513,6 +514,9 @@ public class EncounterCreate extends javax.swing.JPanel {
             valDoctor.setText(null);
             valPatient.setText(null);
             valHospital.setText(null);
+            date = new Date(System.currentTimeMillis());
+            dateTimeString = formatter.format(date);
+            LabelDate.setText(dateTimeString);
 
        
         }
@@ -522,34 +526,37 @@ public class EncounterCreate extends javax.swing.JPanel {
         JFrame parent = (JFrame) SwingUtilities.getWindowAncestor(this);
         parent.dispose();
         
-        if (type == "sys"){
-   
-            SystemAdminJFrame adminArea = new SystemAdminJFrame();
-            adminArea.setVisible(true);
-            adminArea.setEncounterUpdateView();
-        }
-        else if(type == "doc"){
-            DoctorAdminJFrame adminArea = new DoctorAdminJFrame(username);
-            adminArea.setVisible(true);
-            adminArea.setEncounterUpdateView();
-        }
-        else{
-            HospitalAdminJFrame adminArea = new HospitalAdminJFrame();
-            adminArea.setVisible(true);
-            adminArea.setEncounterUpdateView();
+
+        switch (type) {
+            case "sys":
+                {
+                    SystemAdminJFrame adminArea = new SystemAdminJFrame("sys",null);
+                    adminArea.setVisible(true);
+                    adminArea.setEncounterUpdateView();
+                    break;
+                }
+            case "doc":
+                {
+                    DoctorAdminJFrame adminArea = new DoctorAdminJFrame("doc",username);
+                    adminArea.setVisible(true);
+                    //adminArea.setEncounterUpdateView();
+                    break;
+                }
+            default:
+                {
+                    HospitalAdminJFrame adminArea = new HospitalAdminJFrame("hosp",null);
+                    adminArea.setVisible(true);
+                    adminArea.setEncounterUpdateView();
+                    break;
+                }
         }
         
     }//GEN-LAST:event_btnBackActionPerformed
-/*
+
     private void datePickerKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_datePickerKeyReleased
-        if (!this.validations.ValidateDate(datePicker.getDateStringOrEmptyString()) ) {
-            valDate.setText("Date of joining is required");
-        }
-        else {
-            valDate.setText(null);
-        }
+    
     }//GEN-LAST:event_datePickerKeyReleased
-*/
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel LabelDate;
     private javax.swing.JButton btnBack;
