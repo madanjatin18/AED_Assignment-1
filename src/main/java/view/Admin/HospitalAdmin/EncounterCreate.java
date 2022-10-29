@@ -7,6 +7,7 @@ package view.Admin.HospitalAdmin;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import javax.swing.JFrame;
@@ -22,7 +23,9 @@ import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
 import resources.Validations;
 import static view.Admin.HospitalAdmin.HospitalCreate.type;
 import view.Admin.SystemAdmin.SystemAdminJFrame;
+import view.Doctor.DoctorAdminJFrame;
 import view.MainJFrame;
+import static view.MainJFrame.doctorDirectory;
 
 
 public class EncounterCreate extends javax.swing.JPanel {
@@ -36,26 +39,68 @@ public class EncounterCreate extends javax.swing.JPanel {
     Hospital hospital;
     Doctor doctor;
     Patient patient;
-    Validations validations;
-    static String type;
-     LocalDateTime date;
-    public EncounterCreate(String type) {
+    //Validations validations;
+    SimpleDateFormat formatter;
+    String type;
+    String username;
+    static Date date;
+    String dateTimeString;
+    
+    public EncounterCreate(String type,String username) {
         initComponents();
-        validations = new Validations();
+        //validations = new Validations();
         this.type =type;
-        date = LocalDateTime.now();
-        LabelDate.setText(date.toString());
-        AutoCompleteDecorator.decorate(ddCity);
-        AutoCompleteDecorator.decorate(ddCommunity);
-        AutoCompleteDecorator.decorate(ddHospital);
-        AutoCompleteDecorator.decorate(ddDoctor);
-        AutoCompleteDecorator.decorate(ddPatient);
-        ddCity.removeAllItems();
-        ddCity.addItem("");
-        for (City c: MainJFrame.cityDirectory.getCityList()) {
-            ddCity.addItem(c.getName());
+        this.username=username;
+        
+        formatter= new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        date = new Date(System.currentTimeMillis());
+        dateTimeString = formatter.format(date);    
+        
+        LabelDate.setText(dateTimeString);
+        
+        if(username != null && type == "doc"){
+            AutoCompleteDecorator.decorate(ddPatient);
+            ArrayList<Doctor> doctorList = new ArrayList<>();
+            doctorList = doctorDirectory.getDoctorList();
+            for (Doctor d : doctorList){
+                if(username.equals(d.getPerson().getUsername())){
+                    ddDoctor.removeAllItems();
+                    ddCity.removeAllItems();
+                    ddCommunity.removeAllItems();
+                    ddHospital.removeAllItems();
+                    
+                    ddCity.addItem(d.getHospital().getCity().toString());
+                    ddHospital.addItem(d.getHospital().getName());
+                    ddCommunity.addItem(d.getHospital().getCommunity().toString());
+                    ddDoctor.addItem(d.getPerson().getName());
+                    
+                    ddCity.setSelectedIndex(0);
+                    ddHospital.setSelectedIndex(0);
+                    ddCommunity.setSelectedIndex(0);
+                    ddDoctor.setSelectedIndex(0);
+                    
+                    ddCity.setEditable(false);
+                    ddHospital.setEditable(false);
+                    ddCommunity.setEditable(false);
+                    ddDoctor.setEditable(false);
+                    
+                }
+        
+            }
         }
-        ddCity.setSelectedItem("");
+        else{
+            AutoCompleteDecorator.decorate(ddCity);
+            AutoCompleteDecorator.decorate(ddCommunity);
+            AutoCompleteDecorator.decorate(ddHospital);
+            AutoCompleteDecorator.decorate(ddDoctor);
+            AutoCompleteDecorator.decorate(ddPatient);
+            ddCity.removeAllItems();
+            ddCity.addItem("");
+            for (City c: MainJFrame.cityDirectory.getCityList()) {
+                ddCity.addItem(c.getName());
+            }
+            ddCity.setSelectedItem("");
+        }
     }
 
     /**
@@ -371,25 +416,51 @@ public class EncounterCreate extends javax.swing.JPanel {
 
     private void ddDoctorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ddDoctorActionPerformed
         Object doctorName = ddDoctor.getSelectedItem();
+        if(username != null && type == "doc"){
+            ArrayList<Doctor> doctorList = new ArrayList<>();
+            for (Doctor d : doctorList){
+                if(username.equals(d.getPerson().getUsername())){
+                    ddDoctor.removeAllItems();
+                    ddDoctor.addItem(d.getPerson().getName());
+                    ddDoctor.setSelectedIndex(0);
+                    ddDoctor.setEditable(false);
+                }
+        
+            }
+        }
+        else{
+            if (doctorName == null || doctorName.toString().equals("")) {
+                valDoctor.setText("Please Select Doctor");
+            } else {
+                valDoctor.setText(null);
+                doctor = hospital.getDoctorByName(doctorName.toString());
 
-        if (doctorName == null || doctorName.toString().equals("")) {
-            valDoctor.setText("Please Select Doctor");
-        } else {
-            valDoctor.setText(null);
-            doctor = hospital.getDoctorByName(doctorName.toString());
-
+            }
         }
     }//GEN-LAST:event_ddDoctorActionPerformed
 
     private void ddPatientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ddPatientActionPerformed
         Object patientName = ddPatient.getSelectedItem();
+        if(username != null && type == "doc"){
+            ArrayList<Patient> patientList = new ArrayList<>();
+            for (Patient p : patientList){
+                if(username.equals(p.getPerson().getUsername())){
+                    ddPatient.removeAllItems();
+                    ddPatient.addItem(p.getPerson().getName());
+                    ddPatient.setSelectedIndex(0);
+                    ddPatient.setEditable(false);
+                }
 
-        if (patientName == null || patientName.toString().equals("")) {
-            valPatient.setText("Please Select Doctor");
-        } else {
-            valPatient.setText(null);
-            patient = hospital.getPatientByName(patientName.toString());
+            }
+        }
+        else{
+            if (patientName == null || patientName.toString().equals("")) {
+                valPatient.setText("Please Select Doctor");
+            } else {
+                valPatient.setText(null);
+                patient = doctor.getPatientByName(patientName.toString());
 
+            }
         }
     }//GEN-LAST:event_ddPatientActionPerformed
 
@@ -454,6 +525,11 @@ public class EncounterCreate extends javax.swing.JPanel {
         if (type == "sys"){
    
             SystemAdminJFrame adminArea = new SystemAdminJFrame();
+            adminArea.setVisible(true);
+            adminArea.setEncounterUpdateView();
+        }
+        else if(type == "doc"){
+            DoctorAdminJFrame adminArea = new DoctorAdminJFrame(username);
             adminArea.setVisible(true);
             adminArea.setEncounterUpdateView();
         }
