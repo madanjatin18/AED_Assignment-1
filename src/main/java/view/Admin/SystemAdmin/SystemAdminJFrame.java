@@ -4,24 +4,23 @@
  */
 package view.Admin.SystemAdmin;
 
-import view.Admin.HospitalAdmin.*;
 import view.Admin.AdminJFrame;
+import view.MainJFrame;
 
-
+/**
+ *
+ * @author madan
+ */
 public class SystemAdminJFrame extends javax.swing.JFrame {
 
     /**
-     * Creates new form HospitalAdminJFrame
+     * Creates new form SystemAdminJFrame
      */
-    static String type;
-    static String username;
-    public SystemAdminJFrame(String type, String username) {
+    public SystemAdminJFrame() {
         initComponents();
-        this.type = type;
-        this.username = username;
         workArea.setSize(900, 900);
         setLocationRelativeTo(null);
-        HospitalViewUpdate hospitalView = new HospitalViewUpdate(type,username);
+        HospitalViewUpdate hospitalView = new HospitalViewUpdate();
         splitPane.setRightComponent(hospitalView);
         
     }
@@ -42,13 +41,16 @@ public class SystemAdminJFrame extends javax.swing.JFrame {
         btn_patients = new javax.swing.JButton();
         btn_encounters = new javax.swing.JButton();
         btn_back_admin = new javax.swing.JButton();
-        btnAdmin = new javax.swing.JButton();
+        btn_community = new javax.swing.JButton();
+        btn_houses = new javax.swing.JButton();
+        btn_houses1 = new javax.swing.JButton();
         workArea = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(153, 255, 204));
+        setPreferredSize(new java.awt.Dimension(900, 800));
 
-        controlPanel.setBackground(new java.awt.Color(102, 102, 102));
+        controlPanel.setBackground(new java.awt.Color(153, 255, 204));
 
         btn_hospitals.setBackground(new java.awt.Color(255, 255, 255));
         btn_hospitals.setForeground(new java.awt.Color(51, 51, 255));
@@ -88,19 +90,37 @@ public class SystemAdminJFrame extends javax.swing.JFrame {
 
         btn_back_admin.setBackground(new java.awt.Color(255, 255, 255));
         btn_back_admin.setForeground(new java.awt.Color(51, 51, 255));
-        btn_back_admin.setText("<- Back");
+        btn_back_admin.setText("<- Logout");
         btn_back_admin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_back_adminActionPerformed(evt);
             }
         });
 
-        btnAdmin.setBackground(new java.awt.Color(255, 255, 255));
-        btnAdmin.setForeground(new java.awt.Color(51, 51, 255));
-        btnAdmin.setText("Admin");
-        btnAdmin.addActionListener(new java.awt.event.ActionListener() {
+        btn_community.setBackground(new java.awt.Color(255, 255, 255));
+        btn_community.setForeground(new java.awt.Color(51, 51, 255));
+        btn_community.setText("Community");
+        btn_community.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAdminActionPerformed(evt);
+                btn_communityActionPerformed(evt);
+            }
+        });
+
+        btn_houses.setBackground(new java.awt.Color(255, 255, 255));
+        btn_houses.setForeground(new java.awt.Color(51, 51, 255));
+        btn_houses.setText("Houses");
+        btn_houses.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_housesActionPerformed(evt);
+            }
+        });
+
+        btn_houses1.setBackground(new java.awt.Color(255, 255, 255));
+        btn_houses1.setForeground(new java.awt.Color(51, 51, 255));
+        btn_houses1.setText("Create Admin");
+        btn_houses1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_houses1ActionPerformed(evt);
             }
         });
 
@@ -111,16 +131,15 @@ public class SystemAdminJFrame extends javax.swing.JFrame {
             .addGroup(controlPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(controlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(controlPanelLayout.createSequentialGroup()
-                        .addGroup(controlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(btn_encounters, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btn_patients, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btn_doctors, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btn_hospitals, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btn_back_admin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(0, 3, Short.MAX_VALUE))
-                    .addComponent(btnAdmin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+                    .addComponent(btn_back_admin)
+                    .addComponent(btn_hospitals)
+                    .addComponent(btn_doctors)
+                    .addComponent(btn_patients)
+                    .addComponent(btn_encounters)
+                    .addComponent(btn_community)
+                    .addComponent(btn_houses)
+                    .addComponent(btn_houses1))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         controlPanelLayout.setVerticalGroup(
             controlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -136,13 +155,17 @@ public class SystemAdminJFrame extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(btn_encounters)
                 .addGap(18, 18, 18)
-                .addComponent(btnAdmin)
-                .addContainerGap(648, Short.MAX_VALUE))
+                .addComponent(btn_community)
+                .addGap(18, 18, 18)
+                .addComponent(btn_houses)
+                .addGap(18, 18, 18)
+                .addComponent(btn_houses1)
+                .addContainerGap(560, Short.MAX_VALUE))
         );
 
         splitPane.setLeftComponent(controlPanel);
 
-        workArea.setBackground(new java.awt.Color(153, 153, 153));
+        workArea.setBackground(new java.awt.Color(204, 255, 255));
 
         javax.swing.GroupLayout workAreaLayout = new javax.swing.GroupLayout(workArea);
         workArea.setLayout(workAreaLayout);
@@ -172,35 +195,46 @@ public class SystemAdminJFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_hospitalsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_hospitalsActionPerformed
-        HospitalViewUpdate h = new HospitalViewUpdate(type,username);
+        HospitalViewUpdate h = new HospitalViewUpdate();
         splitPane.setRightComponent(h);
     }//GEN-LAST:event_btn_hospitalsActionPerformed
 
     private void btn_doctorsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_doctorsActionPerformed
-        DoctorViewUpdate d = new DoctorViewUpdate(type,username);
+        DoctorViewUpdate d = new DoctorViewUpdate();
         splitPane.setRightComponent(d);
     }//GEN-LAST:event_btn_doctorsActionPerformed
 
     private void btn_patientsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_patientsActionPerformed
-        PatientViewUpdate d = new PatientViewUpdate(type,username);
+        PatientViewUpdate d = new PatientViewUpdate();
         splitPane.setRightComponent(d);
     }//GEN-LAST:event_btn_patientsActionPerformed
 
     private void btn_encountersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_encountersActionPerformed
-        EncounterViewUpdate d = new EncounterViewUpdate(type,username);
+        EncounterViewUpdate d = new EncounterViewUpdate();
         splitPane.setRightComponent(d);
     }//GEN-LAST:event_btn_encountersActionPerformed
 
     private void btn_back_adminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_back_adminActionPerformed
+        MainJFrame.loginSession.setObject(null);
+        
         this.dispose();
         new AdminJFrame().setVisible(true);
     }//GEN-LAST:event_btn_back_adminActionPerformed
 
-    private void btnAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdminActionPerformed
-        // TODO add your handling code here:
-        AdminViewUpdate d = new AdminViewUpdate();
-        splitPane.setRightComponent(d);
-    }//GEN-LAST:event_btnAdminActionPerformed
+    private void btn_communityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_communityActionPerformed
+        CommunityViewUpdate communityView = new CommunityViewUpdate();
+        splitPane.setRightComponent(communityView);
+    }//GEN-LAST:event_btn_communityActionPerformed
+
+    private void btn_housesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_housesActionPerformed
+        CommunityHouseViewUpdate viewHousePanel = new CommunityHouseViewUpdate();
+        splitPane.setRightComponent(viewHousePanel);
+    }//GEN-LAST:event_btn_housesActionPerformed
+
+    private void btn_houses1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_houses1ActionPerformed
+        AdminViewUpdate viewAdminPanel = new AdminViewUpdate();
+        splitPane.setRightComponent(viewAdminPanel);
+    }//GEN-LAST:event_btn_houses1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -230,10 +264,8 @@ public class SystemAdminJFrame extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
-           
-            @Override
             public void run() {
-                new SystemAdminJFrame(type,username).setVisible(true);
+                new SystemAdminJFrame().setVisible(true);
             }
         });
     }
@@ -241,66 +273,90 @@ public class SystemAdminJFrame extends javax.swing.JFrame {
     
     public void setHospitalCreateView() {                                               
         // TODO add your handling code here:
-        HospitalCreate createPanel = new HospitalCreate(type,username);
+        HospitalCreate createPanel = new HospitalCreate();
         splitPane.setRightComponent(createPanel);
     }
     
     public void setDoctorCreateView() {                                               
         // TODO add your handling code here:
-        DoctorCreate createPanel = new DoctorCreate(type,username);
+        DoctorCreate createPanel = new DoctorCreate();
         splitPane.setRightComponent(createPanel);
     }
     
     public void setEncounterCreateView() {                                               
         // TODO add your handling code here:
-        EncounterCreate createPanel = new EncounterCreate(type,username);
+        EncounterCreate createPanel = new EncounterCreate();
         splitPane.setRightComponent(createPanel);
     }
     
     public void setPatientCreateView() {                                               
         // TODO add your handling code here:
-        PatientCreate createPanel = new PatientCreate(type,username);
+        PatientCreate createPanel = new PatientCreate();
         splitPane.setRightComponent(createPanel);
     }
     
     public void setEncounterUpdateView() {                                               
         // TODO add your handling code here:
-        EncounterViewUpdate createPanel = new EncounterViewUpdate(type,username);
+        EncounterViewUpdate createPanel = new EncounterViewUpdate();
         splitPane.setRightComponent(createPanel);
     }
     
     public void setDoctorUpdateView() {                                               
         
-        DoctorViewUpdate createPanel = new DoctorViewUpdate(type,username);
+        DoctorViewUpdate createPanel = new DoctorViewUpdate();
         splitPane.setRightComponent(createPanel);
     }
     public void setPatientUpdateView() {                                               
         
-        PatientViewUpdate createPanel = new PatientViewUpdate(type,username);
+        PatientViewUpdate createPanel = new PatientViewUpdate();
         splitPane.setRightComponent(createPanel);
     }
-    public void setAdminCreateView() {                                               
+    
+    public void setCreateView() {                                               
         // TODO add your handling code here:
-        AdminCreate createPanel = new AdminCreate();
+        CommunityCreate createPanel = new CommunityCreate();
         splitPane.setRightComponent(createPanel);
     }
-    public void setAdminUpdateView() {
-        AdminViewUpdate viewPanel = new AdminViewUpdate();
-        splitPane.setRightComponent(viewPanel);
+    
+    public void setHouseCreateView() {                                               
+        // TODO add your handling code here:
+        CommunityHouseCreate createHousePanel = new CommunityHouseCreate();
+        splitPane.setRightComponent(createHousePanel);
+    }
+    
+    public void setHouseReadView() {                                               
+        // TODO add your handling code here:
+        CommunityHouseViewUpdate viewHousePanel = new CommunityHouseViewUpdate();
+        splitPane.setRightComponent(viewHousePanel);
+    } 
+    
+    public void setCommunityView() {
+        CommunityViewUpdate communityView = new CommunityViewUpdate();
+        splitPane.setRightComponent(communityView);
+    }
+    
+    public void setAdminView() {
+        AdminViewUpdate communityView = new AdminViewUpdate();
+        splitPane.setRightComponent(communityView);
+    }
+    
+    public void setAdminCreate() {
+        AdminCreate communityView = new AdminCreate();
+        splitPane.setRightComponent(communityView);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAdmin;
     private javax.swing.JButton btn_back_admin;
+    private javax.swing.JButton btn_community;
     private javax.swing.JButton btn_doctors;
     private javax.swing.JButton btn_encounters;
     private javax.swing.JButton btn_hospitals;
+    private javax.swing.JButton btn_houses;
+    private javax.swing.JButton btn_houses1;
     private javax.swing.JButton btn_patients;
     private javax.swing.JPanel controlPanel;
     private javax.swing.JSplitPane splitPane;
     private javax.swing.JPanel workArea;
     // End of variables declaration//GEN-END:variables
-
-    
 }
 

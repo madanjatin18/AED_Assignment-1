@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package view.Admin.CommunityAdmin;
+package view.Admin.SystemAdmin;
 
 import java.util.ArrayList;
 import javax.swing.JFrame;
@@ -256,7 +256,7 @@ public class CommunityHouseCreate extends javax.swing.JPanel {
     private void btn_back_community_adminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_back_community_adminActionPerformed
         JFrame parent = (JFrame) SwingUtilities.getWindowAncestor(this);
         parent.dispose();
-        CommunityAdmin adminArea = new CommunityAdmin();
+        SystemAdminJFrame adminArea = new SystemAdminJFrame();
         adminArea.setVisible(true);
         adminArea.setHouseReadView();
 

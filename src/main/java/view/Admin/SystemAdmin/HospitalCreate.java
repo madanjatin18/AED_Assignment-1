@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package view.Admin.HospitalAdmin;
+package view.Admin.SystemAdmin;
 
 import java.util.ArrayList;
 import javax.swing.JFrame;
@@ -349,7 +349,7 @@ public class HospitalCreate extends javax.swing.JPanel {
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         JFrame parent = (JFrame) SwingUtilities.getWindowAncestor(this);
         parent.dispose();
-        HospitalAdminJFrame adminArea = new HospitalAdminJFrame();
+        SystemAdminJFrame adminArea = new SystemAdminJFrame();
         adminArea.setVisible(true);
     }//GEN-LAST:event_btnBackActionPerformed
 

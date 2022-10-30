@@ -16,7 +16,10 @@ import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
 import resources.Validations;
 import view.MainJFrame;
 
-
+/**
+ *
+ * @author madan
+ */
 public class DoctorCreate extends javax.swing.JPanel {
 
     /**
@@ -27,16 +30,13 @@ public class DoctorCreate extends javax.swing.JPanel {
     City city;
     Community community;
     Hospital hospital;
-    static String type;
-    static String username;
     
-    public DoctorCreate(String type,String username) {
+    public DoctorCreate() {
         initComponents();
         AutoCompleteDecorator.decorate(ddCity);
         AutoCompleteDecorator.decorate(ddCommunity);
         AutoCompleteDecorator.decorate(ddHospital);
-        this.type = type;
-        this.username = username;
+        
         ddCity.removeAllItems();
         ddCity.addItem("");
         for (City c: MainJFrame.cityDirectory.getCityList()) {
@@ -157,16 +157,16 @@ public class DoctorCreate extends javax.swing.JPanel {
         valAge.setFont(new java.awt.Font("Helvetica Neue", 2, 13)); // NOI18N
         valAge.setForeground(new java.awt.Color(255, 0, 0));
 
-        lblName.setFont(new java.awt.Font("Hiragino Mincho ProN", 1, 18)); // NOI18N
+        lblName.setFont(new java.awt.Font("Hiragino Mincho ProN", 0, 18)); // NOI18N
         lblName.setText("Name:");
 
         valGender.setFont(new java.awt.Font("Helvetica Neue", 2, 13)); // NOI18N
         valGender.setForeground(new java.awt.Color(255, 0, 0));
 
-        lblAge.setFont(new java.awt.Font("Hiragino Mincho ProN", 1, 18)); // NOI18N
+        lblAge.setFont(new java.awt.Font("Hiragino Mincho ProN", 0, 18)); // NOI18N
         lblAge.setText("Age:");
 
-        lblGender.setFont(new java.awt.Font("Hiragino Mincho ProN", 1, 18)); // NOI18N
+        lblGender.setFont(new java.awt.Font("Hiragino Mincho ProN", 0, 18)); // NOI18N
         lblGender.setText("Gender:");
 
         valPhone.setFont(new java.awt.Font("Helvetica Neue", 2, 13)); // NOI18N
@@ -175,10 +175,10 @@ public class DoctorCreate extends javax.swing.JPanel {
         valEmail.setFont(new java.awt.Font("Helvetica Neue", 2, 13)); // NOI18N
         valEmail.setForeground(new java.awt.Color(255, 0, 0));
 
-        lblPhoneNumber.setFont(new java.awt.Font("Hiragino Mincho ProN", 1, 18)); // NOI18N
+        lblPhoneNumber.setFont(new java.awt.Font("Hiragino Mincho ProN", 0, 18)); // NOI18N
         lblPhoneNumber.setText("Phone Number:");
 
-        lblEmail.setFont(new java.awt.Font("Hiragino Mincho ProN", 1, 18)); // NOI18N
+        lblEmail.setFont(new java.awt.Font("Hiragino Mincho ProN", 0, 18)); // NOI18N
         lblEmail.setText("Email:");
 
         txtName.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -221,10 +221,10 @@ public class DoctorCreate extends javax.swing.JPanel {
             }
         });
 
-        lblUsername.setFont(new java.awt.Font("Hiragino Mincho ProN", 1, 18)); // NOI18N
+        lblUsername.setFont(new java.awt.Font("Hiragino Mincho ProN", 0, 18)); // NOI18N
         lblUsername.setText("Username:");
 
-        lblPassword.setFont(new java.awt.Font("Hiragino Mincho ProN", 1, 18)); // NOI18N
+        lblPassword.setFont(new java.awt.Font("Hiragino Mincho ProN", 0, 18)); // NOI18N
         lblPassword.setText("Password:");
 
         txtUsername.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -295,7 +295,7 @@ public class DoctorCreate extends javax.swing.JPanel {
                                         .addComponent(btnMale)
                                         .addGap(12, 12, 12)
                                         .addComponent(btnFemale)
-                                        .addGap(18, 18, 18)
+                                        .addGap(12, 12, 12)
                                         .addComponent(btnOther))
                                     .addComponent(txtEmail, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 229, Short.MAX_VALUE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -313,10 +313,10 @@ public class DoctorCreate extends javax.swing.JPanel {
                             .addComponent(lblAbout))
                         .addGap(92, 92, 92)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                            .addGroup(layout.createSequentialGroup()
                                 .addComponent(btnBack)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(btnSave))
                             .addComponent(ddCity, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(txtUsername, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 229, Short.MAX_VALUE)
                             .addComponent(txtAbout, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 229, Short.MAX_VALUE)
@@ -331,7 +331,7 @@ public class DoctorCreate extends javax.swing.JPanel {
                             .addComponent(valCommunity, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(valHospital, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(valAbout, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(261, Short.MAX_VALUE))
+                .addContainerGap(274, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -357,9 +357,10 @@ public class DoctorCreate extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(valGender, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(btnMale)
-                        .addComponent(lblGender)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnMale)
+                            .addComponent(lblGender))
                         .addComponent(btnFemale)
                         .addComponent(btnOther)))
                 .addGap(18, 18, 18)
@@ -443,7 +444,7 @@ public class DoctorCreate extends javax.swing.JPanel {
             valid = false;
         }
 
-        if (!this.validations.ValidateAbout(txtAbout.getText()) ) {
+        if (!this.validations.ValidateEmpty(txtAbout.getText()) ) {
             valAbout.setText("Details are required");
             valid = false;
         }
@@ -499,8 +500,7 @@ public class DoctorCreate extends javax.swing.JPanel {
                 gender = "Other";
             }
             
-            Person p = MainJFrame.personDirectory.newPerson(txtName.getText(), Integer.parseInt(txtAge.getText()), txtEmail.getText(), gender, txtPhoneNumber.getText(), city, community, txtUsername.getText(), String.valueOf(txtPassword.getPassword()));
-            MainJFrame.doctorDirectory.newDoctor(txtAbout.getText(), this.hospital, p);
+            MainJFrame.doctorDirectory.newDoctor(txtAbout.getText(), this.hospital, txtName.getText(), Integer.parseInt(txtAge.getText()), txtEmail.getText(), gender, txtPhoneNumber.getText(), city, community, txtUsername.getText(), String.valueOf(txtPassword.getPassword()));
             JOptionPane.showMessageDialog(this, "Doctor details Added");
             setTextNull();
             setValidationNull();
@@ -511,7 +511,7 @@ public class DoctorCreate extends javax.swing.JPanel {
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         JFrame parent = (JFrame) SwingUtilities.getWindowAncestor(this);
         parent.dispose();
-        HospitalAdminJFrame adminArea = new HospitalAdminJFrame(type,username);
+        HospitalAdminJFrame adminArea = new HospitalAdminJFrame();
         adminArea.setVisible(true);
         adminArea.setDoctorCreateView();
     }//GEN-LAST:event_btnBackActionPerformed
@@ -640,7 +640,7 @@ public class DoctorCreate extends javax.swing.JPanel {
     }//GEN-LAST:event_txtUsernameKeyReleased
 
     private void txtAboutKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtAboutKeyReleased
-        if (!this.validations.ValidateAbout(txtAbout.getText()) ) {
+        if (!this.validations.ValidateEmpty(txtAbout.getText()) ) {
             valAbout.setText("Description is required");
         } else {
             valAbout.setText(null);

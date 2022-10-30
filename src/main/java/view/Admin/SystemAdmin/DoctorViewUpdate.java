@@ -1,8 +1,8 @@
-    /*
+/*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package view.Admin.HospitalAdmin;
+package view.Admin.SystemAdmin;
 
 import java.util.Vector;
 import javax.swing.JFrame;
@@ -10,8 +10,6 @@ import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
 import models.Doctor;
-import models.House;
-import models.Patient;
 import resources.Validations;
 import view.MainJFrame;
 
@@ -19,15 +17,15 @@ import view.MainJFrame;
  *
  * @author madan
  */
-public class PatientViewUpdate extends javax.swing.JPanel {
+public class DoctorViewUpdate extends javax.swing.JPanel {
 
     /**
-     * Creates new form PatientViewUpdate
+     * Creates new form DoctorViewUpdate
      */
     
     Vector originalTableModel;
     Validations validations;
-    public PatientViewUpdate() {
+    public DoctorViewUpdate() {
         initComponents();
         MainJFrame.defaultSearchText(txtSearch, "Search ...");
         validations = new Validations();
@@ -45,54 +43,148 @@ public class PatientViewUpdate extends javax.swing.JPanel {
     private void initComponents() {
 
         btnGender = new javax.swing.ButtonGroup();
-        valIssue = new javax.swing.JLabel();
-        txtIssue = new javax.swing.JTextField();
+        btnUpdate = new javax.swing.JButton();
+        txtSearch = new javax.swing.JTextField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tblDetails = new javax.swing.JTable();
+        lblDoctorRecord = new javax.swing.JLabel();
+        btn_create = new javax.swing.JButton();
+        lblCity = new javax.swing.JLabel();
+        lblCommunity = new javax.swing.JLabel();
+        txtCity = new javax.swing.JTextField();
+        txtCommunity = new javax.swing.JTextField();
+        lblCommunity1 = new javax.swing.JLabel();
+        txtHospital = new javax.swing.JTextField();
+        lblPhoneNumber = new javax.swing.JLabel();
+        lblEmail = new javax.swing.JLabel();
+        txtName = new javax.swing.JTextField();
+        txtAge = new javax.swing.JTextField();
         txtPhoneNumber = new javax.swing.JTextField();
         txtEmail = new javax.swing.JTextField();
         btnMale = new javax.swing.JRadioButton();
         btnFemale = new javax.swing.JRadioButton();
         lblUsername = new javax.swing.JLabel();
         lblPassword = new javax.swing.JLabel();
-        btnUpdate = new javax.swing.JButton();
         txtUsername = new javax.swing.JTextField();
-        txtSearch = new javax.swing.JTextField();
         btnOther = new javax.swing.JRadioButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tblDetails = new javax.swing.JTable();
         valName = new javax.swing.JLabel();
         valAge = new javax.swing.JLabel();
-        lblDoctorRecord = new javax.swing.JLabel();
-        btn_create = new javax.swing.JButton();
         lblName = new javax.swing.JLabel();
         txtPassword = new javax.swing.JPasswordField();
-        lblCity = new javax.swing.JLabel();
         valGender = new javax.swing.JLabel();
-        lblCommunity = new javax.swing.JLabel();
         lblAge = new javax.swing.JLabel();
-        txtCity = new javax.swing.JTextField();
         lblGender = new javax.swing.JLabel();
-        txtId = new javax.swing.JTextField();
         valPhone = new javax.swing.JLabel();
-        lblCommunity1 = new javax.swing.JLabel();
         valEmail = new javax.swing.JLabel();
-        txtHospital = new javax.swing.JTextField();
-        lblIssue = new javax.swing.JLabel();
-        lblPhoneNumber = new javax.swing.JLabel();
+        lblPassword1 = new javax.swing.JLabel();
         valUsername = new javax.swing.JLabel();
-        lblEmail = new javax.swing.JLabel();
         valPassword = new javax.swing.JLabel();
-        txtName = new javax.swing.JTextField();
-        txtAge = new javax.swing.JTextField();
-        valHouse = new javax.swing.JLabel();
-        lblHouse = new javax.swing.JLabel();
-        ddHouse = new javax.swing.JComboBox<>();
+        valAbout = new javax.swing.JLabel();
+        txtAbout = new javax.swing.JTextField();
+        btnDelete = new javax.swing.JButton();
 
-        valIssue.setFont(new java.awt.Font("Helvetica Neue", 2, 13)); // NOI18N
-        valIssue.setForeground(new java.awt.Color(255, 0, 0));
+        btnUpdate.setText("Update");
+        btnUpdate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUpdateActionPerformed(evt);
+            }
+        });
 
-        txtIssue.addKeyListener(new java.awt.event.KeyAdapter() {
+        txtSearch.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
-                txtIssueKeyReleased(evt);
+                txtSearchKeyReleased(evt);
+            }
+        });
+
+        tblDetails.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null}
+            },
+            new String [] {
+                "City", "Community", "Hospital", "Name", "Age", "Gender", "Phone Number", "Email", "Username", "Password", "About", "object"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tblDetails.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblDetailsMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(tblDetails);
+        if (tblDetails.getColumnModel().getColumnCount() > 0) {
+            tblDetails.getColumnModel().getColumn(1).setMinWidth(0);
+            tblDetails.getColumnModel().getColumn(1).setPreferredWidth(0);
+            tblDetails.getColumnModel().getColumn(1).setMaxWidth(0);
+            tblDetails.getColumnModel().getColumn(4).setMinWidth(0);
+            tblDetails.getColumnModel().getColumn(4).setPreferredWidth(0);
+            tblDetails.getColumnModel().getColumn(4).setMaxWidth(0);
+            tblDetails.getColumnModel().getColumn(5).setMinWidth(0);
+            tblDetails.getColumnModel().getColumn(5).setPreferredWidth(0);
+            tblDetails.getColumnModel().getColumn(5).setMaxWidth(0);
+            tblDetails.getColumnModel().getColumn(7).setMinWidth(0);
+            tblDetails.getColumnModel().getColumn(7).setPreferredWidth(0);
+            tblDetails.getColumnModel().getColumn(7).setMaxWidth(0);
+            tblDetails.getColumnModel().getColumn(8).setMinWidth(0);
+            tblDetails.getColumnModel().getColumn(8).setPreferredWidth(0);
+            tblDetails.getColumnModel().getColumn(8).setMaxWidth(0);
+            tblDetails.getColumnModel().getColumn(9).setMinWidth(0);
+            tblDetails.getColumnModel().getColumn(9).setPreferredWidth(0);
+            tblDetails.getColumnModel().getColumn(9).setMaxWidth(0);
+            tblDetails.getColumnModel().getColumn(11).setMinWidth(0);
+            tblDetails.getColumnModel().getColumn(11).setPreferredWidth(0);
+            tblDetails.getColumnModel().getColumn(11).setMaxWidth(0);
+        }
+
+        lblDoctorRecord.setText("Doctor Records");
+        lblDoctorRecord.setFont(new java.awt.Font("Hiragino Mincho ProN", 1, 24)); // NOI18N
+
+        btn_create.setText("Create");
+        btn_create.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_createActionPerformed(evt);
+            }
+        });
+
+        lblCity.setText("City :");
+        lblCity.setFont(new java.awt.Font("Hiragino Mincho ProN", 1, 18)); // NOI18N
+
+        lblCommunity.setText("Community :");
+        lblCommunity.setFont(new java.awt.Font("Hiragino Mincho ProN", 1, 18)); // NOI18N
+
+        txtCity.setEditable(false);
+
+        txtCommunity.setEditable(false);
+
+        lblCommunity1.setText("Hospital :");
+        lblCommunity1.setFont(new java.awt.Font("Hiragino Mincho ProN", 1, 18)); // NOI18N
+
+        txtHospital.setEditable(false);
+
+        lblPhoneNumber.setText("Number :");
+        lblPhoneNumber.setFont(new java.awt.Font("Hiragino Mincho ProN", 0, 18)); // NOI18N
+
+        lblEmail.setText("Email :");
+        lblEmail.setFont(new java.awt.Font("Hiragino Mincho ProN", 0, 18)); // NOI18N
+
+        txtName.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtNameKeyReleased(evt);
+            }
+        });
+
+        txtAge.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtAgeKeyReleased(evt);
             }
         });
 
@@ -124,28 +216,15 @@ public class PatientViewUpdate extends javax.swing.JPanel {
             }
         });
 
-        lblUsername.setFont(new java.awt.Font("Hiragino Mincho ProN", 0, 18)); // NOI18N
         lblUsername.setText("Username :");
+        lblUsername.setFont(new java.awt.Font("Hiragino Mincho ProN", 0, 18)); // NOI18N
 
-        lblPassword.setFont(new java.awt.Font("Hiragino Mincho ProN", 0, 18)); // NOI18N
         lblPassword.setText("Password :");
-
-        btnUpdate.setText("Update");
-        btnUpdate.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnUpdateActionPerformed(evt);
-            }
-        });
+        lblPassword.setFont(new java.awt.Font("Hiragino Mincho ProN", 0, 18)); // NOI18N
 
         txtUsername.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtUsernameKeyReleased(evt);
-            }
-        });
-
-        txtSearch.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                txtSearchKeyReleased(evt);
             }
         });
 
@@ -157,76 +236,14 @@ public class PatientViewUpdate extends javax.swing.JPanel {
             }
         });
 
-        tblDetails.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null}
-            },
-            new String [] {
-                "City", "Community", "Hospital", "id", "Name", "Age", "Gender", "Phone Number", "Email", "Username", "Password", "issue", "house", "object"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false, false, false, false, false, false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        tblDetails.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tblDetailsMouseClicked(evt);
-            }
-        });
-        jScrollPane1.setViewportView(tblDetails);
-        if (tblDetails.getColumnModel().getColumnCount() > 0) {
-            tblDetails.getColumnModel().getColumn(1).setMinWidth(0);
-            tblDetails.getColumnModel().getColumn(1).setPreferredWidth(0);
-            tblDetails.getColumnModel().getColumn(1).setMaxWidth(0);
-            tblDetails.getColumnModel().getColumn(7).setMinWidth(0);
-            tblDetails.getColumnModel().getColumn(7).setPreferredWidth(0);
-            tblDetails.getColumnModel().getColumn(7).setMaxWidth(0);
-            tblDetails.getColumnModel().getColumn(8).setMinWidth(0);
-            tblDetails.getColumnModel().getColumn(8).setPreferredWidth(0);
-            tblDetails.getColumnModel().getColumn(8).setMaxWidth(0);
-            tblDetails.getColumnModel().getColumn(9).setMinWidth(0);
-            tblDetails.getColumnModel().getColumn(9).setPreferredWidth(0);
-            tblDetails.getColumnModel().getColumn(9).setMaxWidth(0);
-            tblDetails.getColumnModel().getColumn(10).setMinWidth(0);
-            tblDetails.getColumnModel().getColumn(10).setPreferredWidth(0);
-            tblDetails.getColumnModel().getColumn(10).setMaxWidth(0);
-            tblDetails.getColumnModel().getColumn(11).setMinWidth(0);
-            tblDetails.getColumnModel().getColumn(11).setPreferredWidth(0);
-            tblDetails.getColumnModel().getColumn(11).setMaxWidth(0);
-            tblDetails.getColumnModel().getColumn(12).setMinWidth(0);
-            tblDetails.getColumnModel().getColumn(12).setPreferredWidth(0);
-            tblDetails.getColumnModel().getColumn(12).setMaxWidth(0);
-            tblDetails.getColumnModel().getColumn(13).setMinWidth(0);
-            tblDetails.getColumnModel().getColumn(13).setPreferredWidth(0);
-            tblDetails.getColumnModel().getColumn(13).setMaxWidth(0);
-        }
-
         valName.setFont(new java.awt.Font("Helvetica Neue", 2, 13)); // NOI18N
         valName.setForeground(new java.awt.Color(255, 0, 0));
 
         valAge.setFont(new java.awt.Font("Helvetica Neue", 2, 13)); // NOI18N
         valAge.setForeground(new java.awt.Color(255, 0, 0));
 
-        lblDoctorRecord.setFont(new java.awt.Font("Hiragino Mincho ProN", 1, 24)); // NOI18N
-        lblDoctorRecord.setText("Patient Records");
-
-        btn_create.setText("Create");
-        btn_create.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_createActionPerformed(evt);
-            }
-        });
-
-        lblName.setFont(new java.awt.Font("Hiragino Mincho ProN", 0, 18)); // NOI18N
         lblName.setText("Name :");
+        lblName.setFont(new java.awt.Font("Hiragino Mincho ProN", 0, 18)); // NOI18N
 
         txtPassword.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
@@ -234,73 +251,43 @@ public class PatientViewUpdate extends javax.swing.JPanel {
             }
         });
 
-        lblCity.setFont(new java.awt.Font("Hiragino Mincho ProN", 1, 18)); // NOI18N
-        lblCity.setText("City :");
-
         valGender.setFont(new java.awt.Font("Helvetica Neue", 2, 13)); // NOI18N
         valGender.setForeground(new java.awt.Color(255, 0, 0));
 
-        lblCommunity.setFont(new java.awt.Font("Hiragino Mincho ProN", 1, 18)); // NOI18N
-        lblCommunity.setText("Id :");
-
-        lblAge.setFont(new java.awt.Font("Hiragino Mincho ProN", 0, 18)); // NOI18N
         lblAge.setText("Age :");
+        lblAge.setFont(new java.awt.Font("Hiragino Mincho ProN", 0, 18)); // NOI18N
 
-        txtCity.setEditable(false);
-
-        lblGender.setFont(new java.awt.Font("Hiragino Mincho ProN", 0, 18)); // NOI18N
         lblGender.setText("Gender :");
-
-        txtId.setEditable(false);
+        lblGender.setFont(new java.awt.Font("Hiragino Mincho ProN", 0, 18)); // NOI18N
 
         valPhone.setFont(new java.awt.Font("Helvetica Neue", 2, 13)); // NOI18N
         valPhone.setForeground(new java.awt.Color(255, 0, 0));
 
-        lblCommunity1.setFont(new java.awt.Font("Hiragino Mincho ProN", 1, 18)); // NOI18N
-        lblCommunity1.setText("Hospital :");
-
         valEmail.setFont(new java.awt.Font("Helvetica Neue", 2, 13)); // NOI18N
         valEmail.setForeground(new java.awt.Color(255, 0, 0));
 
-        txtHospital.setEditable(false);
-
-        lblIssue.setFont(new java.awt.Font("Hiragino Mincho ProN", 0, 18)); // NOI18N
-        lblIssue.setText("Issue :");
-
-        lblPhoneNumber.setFont(new java.awt.Font("Hiragino Mincho ProN", 0, 18)); // NOI18N
-        lblPhoneNumber.setText("Number :");
+        lblPassword1.setText("About :");
+        lblPassword1.setFont(new java.awt.Font("Hiragino Mincho ProN", 0, 18)); // NOI18N
 
         valUsername.setFont(new java.awt.Font("Helvetica Neue", 2, 13)); // NOI18N
         valUsername.setForeground(new java.awt.Color(255, 0, 0));
 
-        lblEmail.setFont(new java.awt.Font("Hiragino Mincho ProN", 0, 18)); // NOI18N
-        lblEmail.setText("Email :");
-
         valPassword.setFont(new java.awt.Font("Helvetica Neue", 2, 13)); // NOI18N
         valPassword.setForeground(new java.awt.Color(255, 0, 0));
 
-        txtName.addKeyListener(new java.awt.event.KeyAdapter() {
+        valAbout.setFont(new java.awt.Font("Helvetica Neue", 2, 13)); // NOI18N
+        valAbout.setForeground(new java.awt.Color(255, 0, 0));
+
+        txtAbout.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
-                txtNameKeyReleased(evt);
+                txtAboutKeyReleased(evt);
             }
         });
 
-        txtAge.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                txtAgeKeyReleased(evt);
-            }
-        });
-
-        valHouse.setFont(new java.awt.Font("Helvetica Neue", 2, 13)); // NOI18N
-        valHouse.setForeground(new java.awt.Color(255, 0, 0));
-
-        lblHouse.setFont(new java.awt.Font("Hiragino Mincho ProN", 1, 18)); // NOI18N
-        lblHouse.setText("House :");
-
-        ddHouse.setEditable(true);
-        ddHouse.addActionListener(new java.awt.event.ActionListener() {
+        btnDelete.setText("Delete");
+        btnDelete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ddHouseActionPerformed(evt);
+                btnDeleteActionPerformed(evt);
             }
         });
 
@@ -333,8 +320,7 @@ public class PatientViewUpdate extends javax.swing.JPanel {
                                     .addComponent(lblEmail, javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(lblUsername, javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(lblPassword, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(lblIssue, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(lblHouse, javax.swing.GroupLayout.Alignment.TRAILING))
+                                    .addComponent(lblPassword1, javax.swing.GroupLayout.Alignment.TRAILING))
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
                                         .addGap(41, 41, 41)
@@ -343,34 +329,21 @@ public class PatientViewUpdate extends javax.swing.JPanel {
                                         .addComponent(valName, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(layout.createSequentialGroup()
                                         .addGap(40, 40, 40)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addComponent(ddHouse, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addComponent(valHouse, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                                    .addComponent(txtIssue, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addComponent(txtPassword, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addGroup(layout.createSequentialGroup()
-                                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                        .addComponent(valPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                    .addGroup(layout.createSequentialGroup()
-                                                        .addGap(127, 127, 127)
-                                                        .addComponent(valIssue, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))))))))))
+                                        .addComponent(txtAbout)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(valAbout, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(40, 40, 40)
+                                        .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(valPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(188, 188, 188)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(133, 133, 133)
-                                .addComponent(btnUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
                                 .addComponent(txtCity, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(133, 133, 133)
                                 .addComponent(btn_create, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(txtHospital, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -391,8 +364,16 @@ public class PatientViewUpdate extends javax.swing.JPanel {
                                     .addComponent(valUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(valAge, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(valPhone, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(valEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                .addGap(199, 199, 199))
+                                    .addComponent(valEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtCommunity, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtHospital, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(133, 133, 133)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(btnUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                .addGap(314, 314, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -412,13 +393,17 @@ public class PatientViewUpdate extends javax.swing.JPanel {
                 .addGap(6, 6, 6)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblCommunity)
-                    .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtCommunity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnUpdate))
                 .addGap(6, 6, 6)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtHospital, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblCommunity1)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblCommunity1)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(1, 1, 1)
+                                .addComponent(btnDelete)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(valName, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -465,68 +450,13 @@ public class PatientViewUpdate extends javax.swing.JPanel {
                     .addComponent(valPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(valIssue, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(valAbout, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(lblIssue)
-                        .addComponent(txtIssue, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(lblHouse)
-                        .addComponent(ddHouse, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(valHouse, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(29, Short.MAX_VALUE))
+                        .addComponent(lblPassword1)
+                        .addComponent(txtAbout, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(73, 73, 73))
         );
-    }// </editor-fold>                        ate void txtIssueKeyReleased(java.awt.event.KeyEvent evt) {//GEN-END:initComponents
-                                         
-    private void txtIssueKeyReleased(java.awt.event.KeyEvent evt) {  
-        if (!this.validations.ValidateEmpty(txtIssue.getText()) ) {
-            valIssue.setText("Details are required");
-        }
-        else {
-            valIssue.setText(null);
-        }
-    }                                    
-
-    private void txtPhoneNumberKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPhoneNumberKeyReleased
-
-        if (!this.validations.ValidatePhoneNumber(txtPhoneNumber.getText()) ) {
-            valPhone.setText("Phone Number is Invalid");
-        }
-        else {
-            valPhone.setText(null);
-        }
-    }//GEN-LAST:event_txtPhoneNumberKeyReleased
-
-    private void txtEmailKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtEmailKeyReleased
-        // TODO add your handling code here:
-
-        int selectRowIndex = tblDetails.getSelectedRow();
-        if (selectRowIndex<0){
-            JOptionPane.showMessageDialog(this, "Please select a row to update");
-            return;
-        }
-        DefaultTableModel model = (DefaultTableModel)tblDetails.getModel();
-        String email = model.getValueAt(selectRowIndex, 7).toString();
-
-        if (!this.validations.ValidateEmail(txtEmail.getText()) ) {
-            valEmail.setText("Email address is Invalid");
-        } else if (!(txtEmail.getText().equals(email)) && MainJFrame.personDirectory.isPersonByEmailExist(txtEmail.getText())) {
-            valEmail.setText("Email address already exist");
-        }
-
-        else {
-            valEmail.setText(null);
-        }
-    }//GEN-LAST:event_txtEmailKeyReleased
-
-    private void btnMaleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMaleActionPerformed
-        valGender.setText(null);
-    }//GEN-LAST:event_btnMaleActionPerformed
-
-    private void btnFemaleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFemaleActionPerformed
-        valGender.setText(null);
-    }//GEN-LAST:event_btnFemaleActionPerformed
+    }// </editor-fold>//GEN-END:initComponents
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
         int selectRowIndex = tblDetails.getSelectedRow();
@@ -535,10 +465,10 @@ public class PatientViewUpdate extends javax.swing.JPanel {
             return;
         }
         DefaultTableModel model = (DefaultTableModel)tblDetails.getModel();
-        Patient selectedDetails = (Patient) model.getValueAt(selectRowIndex, 13);
-        String email = model.getValueAt(selectRowIndex, 8).toString();
-        String username = model.getValueAt(selectRowIndex, 9).toString();
-
+        Doctor selectedDetails = (Doctor) model.getValueAt(selectRowIndex, 11);
+        String email = model.getValueAt(selectRowIndex, 7).toString();
+        String username = model.getValueAt(selectRowIndex, 8).toString();
+        
         var valid = true;
 
         if (!this.validations.ValidateName(txtName.getText()) ) {
@@ -546,42 +476,42 @@ public class PatientViewUpdate extends javax.swing.JPanel {
             valid = false;
         }
 
-        if (!this.validations.ValidateEmpty(txtIssue.getText()) ) {
-            valIssue.setText("Details are required");
+        if (!this.validations.ValidateEmpty(txtAbout.getText()) ) {
+            valAbout.setText("Details are required");
             valid = false;
         }
-
+        
         if (btnGender.getSelection() == null) {
             valGender.setText("Gender is required");
             valid = false;
         }
-
+        
         if (!this.validations.ValidateEmail(txtEmail.getText()) ) {
             valEmail.setText("Email address is Invalid");
             valid = false;
         } else if (!(txtEmail.getText().equals(email)) && MainJFrame.personDirectory.isPersonByEmailExist(txtEmail.getText())) {
-            valEmail.setText("Email address already exist");
-            valid = false;
-        }
-
+                valEmail.setText("Email address already exist");
+                valid = false;
+            }
+        
         if (!this.validations.ValidatePhoneNumber(txtPhoneNumber.getText()) ) {
             valPhone.setText("Phone Number is Invalid");
             valid = false;
         }
-
+        
         if (!this.validations.ValidateAge(txtAge.getText()) ) {
             valAge.setText("Age is Invalid");
             valid = false;
         }
-
+        
         if (!this.validations.ValidateUsername(txtUsername.getText()) ) {
             valUsername.setText("Username is Invalid");
             valid = false;
         } else if (!(txtUsername.getText().equals(username)) && MainJFrame.personDirectory.isPersonByUsernameExist(txtUsername.getText())) {
-            valUsername.setText("Username already exist");
-            valid = false;
-        }
-
+                valUsername.setText("Username already exist");
+                valid = false;
+            }
+        
         String password = String.valueOf(txtPassword.getPassword());
         if (!this.validations.ValidatePassword(password) ) {
             valPassword.setText("Should be 5-12 character long");
@@ -590,7 +520,7 @@ public class PatientViewUpdate extends javax.swing.JPanel {
 
         //
         if (valid) {
-
+            
             String gender;
             if (btnMale.isSelected()) {
                 gender = "Male";
@@ -602,13 +532,6 @@ public class PatientViewUpdate extends javax.swing.JPanel {
                 gender = "Other";
             }
             
-            House house;
-            if (!selectedDetails.getCommunity().isAddressExist(ddHouse.getSelectedItem().toString(), "") ) {
-                house = selectedDetails.getCommunity().addHouse(ddHouse.getSelectedItem().toString(), "");
-            } else {
-                house = selectedDetails.getCommunity().getHouseObject(ddHouse.getSelectedItem().toString(), "");
-            }
-
             selectedDetails.setAge(Integer.parseInt(txtAge.getText()));
             selectedDetails.setName(txtName.getText());
             selectedDetails.setGender(gender);
@@ -616,37 +539,15 @@ public class PatientViewUpdate extends javax.swing.JPanel {
             selectedDetails.setUsername(txtUsername.getText());
             selectedDetails.setPassword(String.valueOf(txtPassword.getPassword()));
             selectedDetails.setEmail(txtEmail.getText());
-            selectedDetails.setIssue(txtIssue.getText());
-            selectedDetails.setHouse(house);
-
-            JOptionPane.showMessageDialog(this, "Patient details Updated");
+            selectedDetails.setAbout(txtAbout.getText());
+            
+            JOptionPane.showMessageDialog(this, "Doctor details Updated");
             setTextNull();
             setValidationNull();
             populateTable();
 
         }
     }//GEN-LAST:event_btnUpdateActionPerformed
-
-    private void txtUsernameKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtUsernameKeyReleased
-
-        int selectRowIndex = tblDetails.getSelectedRow();
-        if (selectRowIndex<0){
-            JOptionPane.showMessageDialog(this, "Please select a row to update");
-            return;
-        }
-        DefaultTableModel model = (DefaultTableModel)tblDetails.getModel();
-        String username = model.getValueAt(selectRowIndex, 8).toString();
-
-        if (!this.validations.ValidateUsername(txtUsername.getText()) ) {
-            valUsername.setText("Username is Invalid");
-        } else if (!(txtUsername.getText().equals(username)) && MainJFrame.personDirectory.isPersonByUsernameExist(txtUsername.getText())) {
-            valUsername.setText("Username already exist");
-        }
-
-        else {
-            valUsername.setText(null);
-        }
-    }//GEN-LAST:event_txtUsernameKeyReleased
 
     private void txtSearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSearchKeyReleased
 
@@ -668,10 +569,6 @@ public class PatientViewUpdate extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_txtSearchKeyReleased
 
-    private void btnOtherActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOtherActionPerformed
-        valGender.setText(null);
-    }//GEN-LAST:event_btnOtherActionPerformed
-
     private void tblDetailsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDetailsMouseClicked
 
         DefaultTableModel tblModel = (DefaultTableModel) tblDetails.getModel();
@@ -679,31 +576,28 @@ public class PatientViewUpdate extends javax.swing.JPanel {
         // set data to textfield when raw is selected
 
         String tblCity = tblModel.getValueAt(tblDetails.getSelectedRow(),0).toString();
+        String tblCommunity = tblModel.getValueAt(tblDetails.getSelectedRow(),1).toString();
         String tblHospital = tblModel.getValueAt(tblDetails.getSelectedRow(),2).toString();
-        String tblId = tblModel.getValueAt(tblDetails.getSelectedRow(),3).toString();
-        String tblName = tblModel.getValueAt(tblDetails.getSelectedRow(),4).toString();
-        String tblAge = tblModel.getValueAt(tblDetails.getSelectedRow(),5).toString();
-        String tblGender = tblModel.getValueAt(tblDetails.getSelectedRow(),6).toString();
-        String tblPhoneNumber = tblModel.getValueAt(tblDetails.getSelectedRow(),7).toString();
-        String tblEmail = tblModel.getValueAt(tblDetails.getSelectedRow(),8).toString();
-        String tblUsername = tblModel.getValueAt(tblDetails.getSelectedRow(),9).toString();
-        String tblPassword = tblModel.getValueAt(tblDetails.getSelectedRow(),10).toString();
-        String tblIssue = tblModel.getValueAt(tblDetails.getSelectedRow(),11).toString();
-        String tblHouse = tblModel.getValueAt(tblDetails.getSelectedRow(),12).toString();
-        Patient selectedDeatils = (Patient) tblModel.getValueAt(tblDetails.getSelectedRow(),13);
+        String tblName = tblModel.getValueAt(tblDetails.getSelectedRow(),3).toString();
+        String tblAge = tblModel.getValueAt(tblDetails.getSelectedRow(),4).toString();
+        String tblGender = tblModel.getValueAt(tblDetails.getSelectedRow(),5).toString();
+        String tblPhoneNumber = tblModel.getValueAt(tblDetails.getSelectedRow(),6).toString();
+        String tblEmail = tblModel.getValueAt(tblDetails.getSelectedRow(),7).toString();
+        String tblUsername = tblModel.getValueAt(tblDetails.getSelectedRow(),8).toString();
+        String tblPassword = tblModel.getValueAt(tblDetails.getSelectedRow(),9).toString();
+        String tblAbout = tblModel.getValueAt(tblDetails.getSelectedRow(),10).toString();
         
-
         if (null == tblGender) {
-            btnOther.setSelected(true);
-        }
-        else switch (tblGender) {
+           btnOther.setSelected(true);
+       }
+            else switch (tblGender) {
             case "Male" -> btnMale.setSelected(true);
             case "Female" -> btnFemale.setSelected(true);
             default -> btnOther.setSelected(true);
         }
 
         txtCity.setText(tblCity);
-        txtId.setText(tblId);
+        txtCommunity.setText(tblCommunity);
         txtHospital.setText(tblHospital);
         txtName.setText(tblName);
         txtAge.setText(tblAge);
@@ -711,14 +605,7 @@ public class PatientViewUpdate extends javax.swing.JPanel {
         txtEmail.setText(tblEmail);
         txtUsername.setText(tblUsername);
         txtPassword.setText(tblPassword);
-        txtIssue.setText(tblIssue);
-        txtIssue.setText(tblIssue);
-        ddHouse.removeAllItems();
-        
-        for (House h: selectedDeatils.getCommunity().getHouseList()) {
-            ddHouse.addItem(h.getFullAddress());
-        }
-        ddHouse.setSelectedItem(tblHouse);
+        txtAbout.setText(tblAbout);
 
         setValidationNull();
     }//GEN-LAST:event_tblDetailsMouseClicked
@@ -727,20 +614,10 @@ public class PatientViewUpdate extends javax.swing.JPanel {
 
         JFrame parent = (JFrame) SwingUtilities.getWindowAncestor(this);
         parent.dispose();
-        HospitalAdminJFrame adminArea = new HospitalAdminJFrame();
+        SystemAdminJFrame adminArea = new SystemAdminJFrame();
         adminArea.setVisible(true);
-        adminArea.setPatientCreateView();
+        adminArea.setDoctorCreateView();
     }//GEN-LAST:event_btn_createActionPerformed
-
-    private void txtPasswordKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPasswordKeyReleased
-
-        String password = String.valueOf(txtPassword.getPassword());
-        if (!this.validations.ValidatePassword(password) ) {
-            valPassword.setText("Should be 5-12 character long");
-        } else {
-            valPassword.setText(null);
-        }
-    }//GEN-LAST:event_txtPasswordKeyReleased
 
     private void txtNameKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNameKeyReleased
 
@@ -762,37 +639,127 @@ public class PatientViewUpdate extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_txtAgeKeyReleased
 
-    private void ddHouseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ddHouseActionPerformed
-        Object house = ddHouse.getSelectedItem();
+    private void txtPhoneNumberKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPhoneNumberKeyReleased
 
-        if (house == null || house.toString().equals("")) {
-            valHouse.setText("Please Select or type address");
-        } else {
-            valHouse.setText(null);
+        if (!this.validations.ValidatePhoneNumber(txtPhoneNumber.getText()) ) {
+            valPhone.setText("Phone Number is Invalid");
         }
-    }//GEN-LAST:event_ddHouseActionPerformed
+        else {
+            valPhone.setText(null);
+        }
+    }//GEN-LAST:event_txtPhoneNumberKeyReleased
+
+    private void txtEmailKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtEmailKeyReleased
+        // TODO add your handling code here:
+        
+        int selectRowIndex = tblDetails.getSelectedRow();
+        if (selectRowIndex<0){
+            JOptionPane.showMessageDialog(this, "Please select a row to update");
+            return;
+        }
+        DefaultTableModel model = (DefaultTableModel)tblDetails.getModel();
+        String email = model.getValueAt(selectRowIndex, 7).toString();
+        
+        if (!this.validations.ValidateEmail(txtEmail.getText()) ) {
+            valEmail.setText("Email address is Invalid");
+        } else if (!(txtEmail.getText().equals(email)) && MainJFrame.personDirectory.isPersonByEmailExist(txtEmail.getText())) {
+            valEmail.setText("Email address already exist");
+        }
+
+        else {
+            valEmail.setText(null);
+        }
+
+    }//GEN-LAST:event_txtEmailKeyReleased
+
+    private void btnMaleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMaleActionPerformed
+        valGender.setText(null);
+    }//GEN-LAST:event_btnMaleActionPerformed
+
+    private void btnFemaleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFemaleActionPerformed
+        valGender.setText(null);
+    }//GEN-LAST:event_btnFemaleActionPerformed
+
+    private void txtUsernameKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtUsernameKeyReleased
+        
+        int selectRowIndex = tblDetails.getSelectedRow();
+        if (selectRowIndex<0){
+            JOptionPane.showMessageDialog(this, "Please select a row to update");
+            return;
+        }
+        DefaultTableModel model = (DefaultTableModel)tblDetails.getModel();
+        String username = model.getValueAt(selectRowIndex, 8).toString();
+        
+        if (!this.validations.ValidateUsername(txtUsername.getText()) ) {
+            valUsername.setText("Username is Invalid");
+        } else if (!(txtUsername.getText().equals(username)) && MainJFrame.personDirectory.isPersonByUsernameExist(txtUsername.getText())) {
+            valUsername.setText("Username already exist");
+        }
+
+        else {
+            valUsername.setText(null);
+        }
+    }//GEN-LAST:event_txtUsernameKeyReleased
+
+    private void btnOtherActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOtherActionPerformed
+        valGender.setText(null);
+    }//GEN-LAST:event_btnOtherActionPerformed
+
+    private void txtPasswordKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPasswordKeyReleased
+
+        String password = String.valueOf(txtPassword.getPassword());
+        if (!this.validations.ValidatePassword(password) ) {
+            valPassword.setText("Should be 5-12 character long");
+        } else {
+            valPassword.setText(null);
+        }
+    }//GEN-LAST:event_txtPasswordKeyReleased
+
+    private void txtAboutKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtAboutKeyReleased
+        if (!this.validations.ValidateEmpty(txtAbout.getText()) ) {
+            valAbout.setText("Details are required");
+        }
+        else {
+            valAbout.setText(null);
+        }
+    }//GEN-LAST:event_txtAboutKeyReleased
+
+    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
+        int slectRowIndex = tblDetails.getSelectedRow();
+        if (slectRowIndex<0){
+             JOptionPane.showMessageDialog(this, "Please select a row to delete");
+             return;
+         }
+        DefaultTableModel model = (DefaultTableModel)tblDetails.getModel();
+        Doctor selectedDetails = (Doctor) model.getValueAt(slectRowIndex, 11);
+        
+        MainJFrame.doctorDirectory.deleteDoctor(selectedDetails);
+        
+        JOptionPane.showMessageDialog(this, "Selected details deleted");
+        populateTable();     
+        setValidationNull();
+        setTextNull();
+    }//GEN-LAST:event_btnDeleteActionPerformed
 
     private void populateTable() {
         
         DefaultTableModel model = (DefaultTableModel) tblDetails.getModel();
         model.setRowCount(0);
         
-        for (Patient c : MainJFrame.patientDirectory.getPatientList()){
-            Object[] row = new Object[14];
+        for (Doctor c : MainJFrame.doctorDirectory.getDoctorList()){
+            Object[] row = new Object[12];
             row[0] = c.getCity().getName();
             row[1] = c.getCommunity().getName();
             row[2] = c.getHospital().getName();
-            row[3] = c.getPatientID();
-            row[4] = c.getName();
-            row[5] = c.getAge();
-            row[6] = c.getGender();
-            row[7] = c.getPhoneNumber();
-            row[8] = c.getEmail();
-            row[9] = c.getUsername();
-            row[10] = c.getPassword();
-            row[11] = c.getIssue();
-            row[12] = c.getHouse().getFullAddress();
-            row[13] = c;
+            row[3] = c.getName();
+            row[4] = c.getAge();
+            row[5] = c.getGender();
+            row[6] = c.getPhoneNumber();
+            row[7] = c.getEmail();
+            row[8] = c.getUsername();
+            row[9] = c.getPassword();
+            row[10] = c.getAbout();
+            row[11] = c;
             
             model.addRow(row);
         }
@@ -800,39 +767,38 @@ public class PatientViewUpdate extends javax.swing.JPanel {
     
     private void setTextNull() {
         btnGender.clearSelection();
-        txtId.setText(null);
-        txtCity.setText(null);
-        txtHospital.setText(null);
         txtName.setText(null);
         txtAge.setText(null);
         txtPhoneNumber.setText(null);
         txtEmail.setText(null);
         txtUsername.setText(null);
         txtPassword.setText(null);
-        txtIssue.setText(null);
-        ddHouse.removeAllItems();
+        txtAbout.setText(null);
+        txtCity.setText(null);
+        txtCommunity.setText(null);
+        txtHospital.setText(null);
+        
     }
     
     private void setValidationNull() {
         valName.setText(null);
-        valIssue.setText(null);
+        valAbout.setText(null);
         valAge.setText(null);
         valGender.setText(null);
         valPhone.setText(null);
         valEmail.setText(null);
         valUsername.setText(null);
         valPassword.setText(null);
-        valHouse.setText(null);
     }
-    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnDelete;
     private javax.swing.JRadioButton btnFemale;
     private javax.swing.ButtonGroup btnGender;
     private javax.swing.JRadioButton btnMale;
     private javax.swing.JRadioButton btnOther;
     private javax.swing.JButton btnUpdate;
     private javax.swing.JButton btn_create;
-    private javax.swing.JComboBox<String> ddHouse;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblAge;
     private javax.swing.JLabel lblCity;
@@ -841,29 +807,27 @@ public class PatientViewUpdate extends javax.swing.JPanel {
     private javax.swing.JLabel lblDoctorRecord;
     private javax.swing.JLabel lblEmail;
     private javax.swing.JLabel lblGender;
-    private javax.swing.JLabel lblHouse;
-    private javax.swing.JLabel lblIssue;
     private javax.swing.JLabel lblName;
     private javax.swing.JLabel lblPassword;
+    private javax.swing.JLabel lblPassword1;
     private javax.swing.JLabel lblPhoneNumber;
     private javax.swing.JLabel lblUsername;
     private javax.swing.JTable tblDetails;
+    private javax.swing.JTextField txtAbout;
     private javax.swing.JTextField txtAge;
     private javax.swing.JTextField txtCity;
+    private javax.swing.JTextField txtCommunity;
     private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtHospital;
-    private javax.swing.JTextField txtId;
-    private javax.swing.JTextField txtIssue;
     private javax.swing.JTextField txtName;
     private javax.swing.JPasswordField txtPassword;
     private javax.swing.JTextField txtPhoneNumber;
     private javax.swing.JTextField txtSearch;
     private javax.swing.JTextField txtUsername;
+    private javax.swing.JLabel valAbout;
     private javax.swing.JLabel valAge;
     private javax.swing.JLabel valEmail;
     private javax.swing.JLabel valGender;
-    private javax.swing.JLabel valHouse;
-    private javax.swing.JLabel valIssue;
     private javax.swing.JLabel valName;
     private javax.swing.JLabel valPassword;
     private javax.swing.JLabel valPhone;

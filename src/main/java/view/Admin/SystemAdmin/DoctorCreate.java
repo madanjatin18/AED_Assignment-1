@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package view.Admin.HospitalAdmin;
+package view.Admin.SystemAdmin;
 
 import java.util.ArrayList;
 import javax.swing.JFrame;
@@ -11,7 +11,6 @@ import javax.swing.SwingUtilities;
 import models.City;
 import models.Community;
 import models.Hospital;
-import models.House;
 import models.Person;
 import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
 import resources.Validations;
@@ -21,24 +20,22 @@ import view.MainJFrame;
  *
  * @author madan
  */
-public class PatientCreate extends javax.swing.JPanel {
+public class DoctorCreate extends javax.swing.JPanel {
 
     /**
-     * Creates new form PatientCreate
+     * Creates new form DoctorCreate
      */
-     
+    
     Validations validations;
+    City city;
     Community community;
     Hospital hospital;
-    City city;
     
-    public PatientCreate() {
+    public DoctorCreate() {
         initComponents();
-        
         AutoCompleteDecorator.decorate(ddCity);
         AutoCompleteDecorator.decorate(ddCommunity);
         AutoCompleteDecorator.decorate(ddHospital);
-        AutoCompleteDecorator.decorate(ddHouse);
         
         ddCity.removeAllItems();
         ddCity.addItem("");
@@ -47,6 +44,7 @@ public class PatientCreate extends javax.swing.JPanel {
         }
         ddCity.setSelectedItem("");
         validations = new Validations();
+        
     }
 
     /**
@@ -59,21 +57,16 @@ public class PatientCreate extends javax.swing.JPanel {
     private void initComponents() {
 
         btnGender = new javax.swing.ButtonGroup();
+        btnSave = new javax.swing.JButton();
+        btnBack = new javax.swing.JButton();
+        ddCommunity = new javax.swing.JComboBox<>();
+        lblAbout = new javax.swing.JLabel();
+        valAbout = new javax.swing.JLabel();
         valCity = new javax.swing.JLabel();
         lblCity = new javax.swing.JLabel();
-        btnFemale = new javax.swing.JRadioButton();
-        lblUsername = new javax.swing.JLabel();
-        lblPassword = new javax.swing.JLabel();
-        txtUsername = new javax.swing.JTextField();
-        txtIssue = new javax.swing.JTextField();
-        valUsername = new javax.swing.JLabel();
-        valPassword = new javax.swing.JLabel();
         valCommunity = new javax.swing.JLabel();
-        lblHospital = new javax.swing.JLabel();
         lblCommunity = new javax.swing.JLabel();
-        valHospital = new javax.swing.JLabel();
         ddCity = new javax.swing.JComboBox<>();
-        txtPassword = new javax.swing.JPasswordField();
         jLabel1 = new javax.swing.JLabel();
         btnOther = new javax.swing.JRadioButton();
         valName = new javax.swing.JLabel();
@@ -81,7 +74,6 @@ public class PatientCreate extends javax.swing.JPanel {
         lblName = new javax.swing.JLabel();
         valGender = new javax.swing.JLabel();
         lblAge = new javax.swing.JLabel();
-        ddHospital = new javax.swing.JComboBox<>();
         lblGender = new javax.swing.JLabel();
         valPhone = new javax.swing.JLabel();
         valEmail = new javax.swing.JLabel();
@@ -92,14 +84,43 @@ public class PatientCreate extends javax.swing.JPanel {
         txtPhoneNumber = new javax.swing.JTextField();
         txtEmail = new javax.swing.JTextField();
         btnMale = new javax.swing.JRadioButton();
-        btnSave = new javax.swing.JButton();
-        btnBack = new javax.swing.JButton();
-        ddCommunity = new javax.swing.JComboBox<>();
-        lblIssue = new javax.swing.JLabel();
-        valHouse = new javax.swing.JLabel();
-        lblHouse = new javax.swing.JLabel();
-        ddHouse = new javax.swing.JComboBox<>();
-        valIssue = new javax.swing.JLabel();
+        btnFemale = new javax.swing.JRadioButton();
+        lblUsername = new javax.swing.JLabel();
+        lblPassword = new javax.swing.JLabel();
+        txtUsername = new javax.swing.JTextField();
+        txtAbout = new javax.swing.JTextField();
+        valUsername = new javax.swing.JLabel();
+        valPassword = new javax.swing.JLabel();
+        lblHospital = new javax.swing.JLabel();
+        valHospital = new javax.swing.JLabel();
+        txtPassword = new javax.swing.JPasswordField();
+        ddHospital = new javax.swing.JComboBox<>();
+
+        btnSave.setText("Save");
+        btnSave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSaveActionPerformed(evt);
+            }
+        });
+
+        btnBack.setText("<- Back");
+        btnBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBackActionPerformed(evt);
+            }
+        });
+
+        ddCommunity.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ddCommunityActionPerformed(evt);
+            }
+        });
+
+        lblAbout.setFont(new java.awt.Font("Hiragino Mincho ProN", 1, 18)); // NOI18N
+        lblAbout.setText("About:");
+
+        valAbout.setFont(new java.awt.Font("Helvetica Neue", 2, 13)); // NOI18N
+        valAbout.setForeground(new java.awt.Color(255, 0, 0));
 
         valCity.setFont(new java.awt.Font("Helvetica Neue", 2, 13)); // NOI18N
         valCity.setForeground(new java.awt.Color(255, 0, 0));
@@ -107,59 +128,15 @@ public class PatientCreate extends javax.swing.JPanel {
         lblCity.setFont(new java.awt.Font("Hiragino Mincho ProN", 1, 18)); // NOI18N
         lblCity.setText("City:");
 
-        btnGender.add(btnFemale);
-        btnFemale.setText("Female");
-        btnFemale.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnFemaleActionPerformed(evt);
-            }
-        });
-
-        lblUsername.setFont(new java.awt.Font("Hiragino Mincho ProN", 0, 18)); // NOI18N
-        lblUsername.setText("Username:");
-
-        lblPassword.setFont(new java.awt.Font("Hiragino Mincho ProN", 0, 18)); // NOI18N
-        lblPassword.setText("Password:");
-
-        txtUsername.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                txtUsernameKeyReleased(evt);
-            }
-        });
-
-        txtIssue.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                txtIssueKeyReleased(evt);
-            }
-        });
-
-        valUsername.setFont(new java.awt.Font("Helvetica Neue", 2, 13)); // NOI18N
-        valUsername.setForeground(new java.awt.Color(255, 0, 0));
-
-        valPassword.setFont(new java.awt.Font("Helvetica Neue", 2, 13)); // NOI18N
-        valPassword.setForeground(new java.awt.Color(255, 0, 0));
-
         valCommunity.setFont(new java.awt.Font("Helvetica Neue", 2, 13)); // NOI18N
         valCommunity.setForeground(new java.awt.Color(255, 0, 0));
-
-        lblHospital.setFont(new java.awt.Font("Hiragino Mincho ProN", 1, 18)); // NOI18N
-        lblHospital.setText("Hospital :");
 
         lblCommunity.setFont(new java.awt.Font("Hiragino Mincho ProN", 1, 18)); // NOI18N
         lblCommunity.setText("Community:");
 
-        valHospital.setFont(new java.awt.Font("Helvetica Neue", 2, 13)); // NOI18N
-        valHospital.setForeground(new java.awt.Color(255, 0, 0));
-
         ddCity.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ddCityActionPerformed(evt);
-            }
-        });
-
-        txtPassword.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                txtPasswordKeyReleased(evt);
             }
         });
 
@@ -188,12 +165,6 @@ public class PatientCreate extends javax.swing.JPanel {
 
         lblAge.setFont(new java.awt.Font("Hiragino Mincho ProN", 0, 18)); // NOI18N
         lblAge.setText("Age:");
-
-        ddHospital.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ddHospitalActionPerformed(evt);
-            }
-        });
 
         lblGender.setFont(new java.awt.Font("Hiragino Mincho ProN", 0, 18)); // NOI18N
         lblGender.setText("Gender:");
@@ -242,44 +213,55 @@ public class PatientCreate extends javax.swing.JPanel {
             }
         });
 
-        btnSave.setText("Save");
-        btnSave.addActionListener(new java.awt.event.ActionListener() {
+        btnGender.add(btnFemale);
+        btnFemale.setText("Female");
+        btnFemale.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSaveActionPerformed(evt);
+                btnFemaleActionPerformed(evt);
             }
         });
 
-        btnBack.setText("<- Back");
-        btnBack.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBackActionPerformed(evt);
+        lblUsername.setFont(new java.awt.Font("Hiragino Mincho ProN", 0, 18)); // NOI18N
+        lblUsername.setText("Username:");
+
+        lblPassword.setFont(new java.awt.Font("Hiragino Mincho ProN", 0, 18)); // NOI18N
+        lblPassword.setText("Password:");
+
+        txtUsername.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtUsernameKeyReleased(evt);
             }
         });
 
-        ddCommunity.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ddCommunityActionPerformed(evt);
+        txtAbout.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtAboutKeyReleased(evt);
             }
         });
 
-        lblIssue.setFont(new java.awt.Font("Hiragino Mincho ProN", 1, 18)); // NOI18N
-        lblIssue.setText("Describe Issue:");
+        valUsername.setFont(new java.awt.Font("Helvetica Neue", 2, 13)); // NOI18N
+        valUsername.setForeground(new java.awt.Color(255, 0, 0));
 
-        valHouse.setFont(new java.awt.Font("Helvetica Neue", 2, 13)); // NOI18N
-        valHouse.setForeground(new java.awt.Color(255, 0, 0));
+        valPassword.setFont(new java.awt.Font("Helvetica Neue", 2, 13)); // NOI18N
+        valPassword.setForeground(new java.awt.Color(255, 0, 0));
 
-        lblHouse.setFont(new java.awt.Font("Hiragino Mincho ProN", 1, 18)); // NOI18N
-        lblHouse.setText("House :");
+        lblHospital.setFont(new java.awt.Font("Hiragino Mincho ProN", 1, 18)); // NOI18N
+        lblHospital.setText("Hospital :");
 
-        ddHouse.setEditable(true);
-        ddHouse.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ddHouseActionPerformed(evt);
+        valHospital.setFont(new java.awt.Font("Helvetica Neue", 2, 13)); // NOI18N
+        valHospital.setForeground(new java.awt.Color(255, 0, 0));
+
+        txtPassword.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtPasswordKeyReleased(evt);
             }
         });
 
-        valIssue.setFont(new java.awt.Font("Helvetica Neue", 2, 13)); // NOI18N
-        valIssue.setForeground(new java.awt.Color(255, 0, 0));
+        ddHospital.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ddHospitalActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -328,21 +310,19 @@ public class PatientCreate extends javax.swing.JPanel {
                             .addComponent(lblCity)
                             .addComponent(lblCommunity)
                             .addComponent(lblHospital)
-                            .addComponent(lblIssue)
-                            .addComponent(lblHouse))
+                            .addComponent(lblAbout))
                         .addGap(92, 92, 92)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(btnBack)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(btnSave))
+                            .addComponent(ddCity, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(txtUsername, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 229, Short.MAX_VALUE)
-                            .addComponent(txtIssue, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 229, Short.MAX_VALUE)
+                            .addComponent(txtAbout, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 229, Short.MAX_VALUE)
                             .addComponent(ddCommunity, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(txtPassword)
-                            .addComponent(ddHospital, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(ddCity, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(ddHouse, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(ddHospital, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(valPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -350,9 +330,8 @@ public class PatientCreate extends javax.swing.JPanel {
                             .addComponent(valCity, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(valCommunity, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(valHospital, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(valHouse, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(valIssue, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(valAbout, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(274, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -429,54 +408,142 @@ public class PatientCreate extends javax.swing.JPanel {
                     .addComponent(valHospital, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblHouse)
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblIssue)
-                            .addComponent(txtIssue, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap())
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(valHouse, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(ddHouse, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(86, 86, 86)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(btnBack)
-                                    .addComponent(btnSave))
-                                .addGap(49, 49, 49))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(23, 23, 23)
-                                .addComponent(valIssue, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))))))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(lblAbout)
+                        .addComponent(txtAbout, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(valAbout, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(39, 39, 39)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnSave)
+                    .addComponent(btnBack))
+                .addContainerGap(268, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnFemaleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFemaleActionPerformed
-        valGender.setText(null);
-    }//GEN-LAST:event_btnFemaleActionPerformed
+    private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
 
-    private void txtUsernameKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtUsernameKeyReleased
+        var valid = true;
+
+        if (ddCity.getSelectedItem() == null || ddCity.getSelectedItem().toString().isEmpty()) {
+            valCity.setText("Please Select City");
+            valid = false;
+        }
+
+        if (ddCommunity.getSelectedItem() == null || ddCommunity.getSelectedItem().toString().isEmpty()) {
+            valCommunity.setText("Please Select Community");
+            valid = false;
+        }
+        
+        if (ddHospital.getSelectedItem() == null || ddHospital.getSelectedItem().toString().isEmpty()) {
+            valHospital.setText("Please Select Hospital");
+            valid = false;
+        }
+
+        if (!this.validations.ValidateName(txtName.getText()) ) {
+            valName.setText("Name is Invalid");
+            valid = false;
+        }
+
+        if (!this.validations.ValidateEmpty(txtAbout.getText()) ) {
+            valAbout.setText("Details are required");
+            valid = false;
+        }
+        
+        if (btnGender.getSelection() == null) {
+            valGender.setText("Gender is required");
+            valid = false;
+        }
+        
+        if (!this.validations.ValidateEmail(txtEmail.getText()) ) {
+            valEmail.setText("Email address is Invalid");
+            valid = false;
+        } else if (MainJFrame.personDirectory.isPersonByEmailExist(txtEmail.getText())) {
+                valEmail.setText("Email address already exist");
+                valid = false;
+            }
+        
+        if (!this.validations.ValidatePhoneNumber(txtPhoneNumber.getText()) ) {
+            valPhone.setText("Phone Number is Invalid");
+            valid = false;
+        }
+        
+        if (!this.validations.ValidateAge(txtAge.getText()) ) {
+            valAge.setText("Age is Invalid");
+            valid = false;
+        }
+        
         if (!this.validations.ValidateUsername(txtUsername.getText()) ) {
             valUsername.setText("Username is Invalid");
+            valid = false;
         } else if (MainJFrame.personDirectory.isPersonByUsernameExist(txtUsername.getText())) {
-            valUsername.setText("Username already exist");
+                valUsername.setText("Username already exist");
+                valid = false;
+            }
+        
+        String password = String.valueOf(txtPassword.getPassword());
+        if (!this.validations.ValidatePassword(password) ) {
+            valPassword.setText("Should be 5-12 character long");
+            valid = false;
         }
 
-        else {
-            valUsername.setText(null);
-        }
-    }//GEN-LAST:event_txtUsernameKeyReleased
+        //
+        if (valid) {
+            
+            String gender;
+            if (btnMale.isSelected()) {
+                gender = "Male";
+            }
+            else if (btnFemale.isSelected()) {
+                gender = "Female";
+            }
+            else {
+                gender = "Other";
+            }
+            
+            MainJFrame.doctorDirectory.newDoctor(txtAbout.getText(), this.hospital, txtName.getText(), Integer.parseInt(txtAge.getText()), txtEmail.getText(), gender, txtPhoneNumber.getText(), city, community, txtUsername.getText(), String.valueOf(txtPassword.getPassword()));
+            JOptionPane.showMessageDialog(this, "Doctor details Added");
+            setTextNull();
+            setValidationNull();
 
-    private void txtIssueKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtIssueKeyReleased
-        if (!this.validations.ValidateEmpty(txtIssue.getText()) ) {
-            valIssue.setText("Description is required");
+        }
+    }//GEN-LAST:event_btnSaveActionPerformed
+
+    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
+        JFrame parent = (JFrame) SwingUtilities.getWindowAncestor(this);
+        parent.dispose();
+        SystemAdminJFrame adminArea = new SystemAdminJFrame();
+        adminArea.setVisible(true);
+        adminArea.setDoctorCreateView();
+    }//GEN-LAST:event_btnBackActionPerformed
+
+    private void ddCommunityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ddCommunityActionPerformed
+
+        Object communityName = ddCommunity.getSelectedItem();
+        Object cityName = ddCity.getSelectedItem();
+        
+        if (communityName == null) {
+            communityName = "";
+        }
+                
+
+        if (communityName.toString().equals("")) {
+            valCommunity.setText("Please Select Community");
+            ddHospital.removeAllItems();
+            valHospital.setText(null);
         } else {
-            valIssue.setText(null);
+            valHospital.setText(null);
+            valCommunity.setText(null);
+            ddHospital.removeAllItems();
+            community = MainJFrame.communityDirectory.getCommunity(cityName.toString(),communityName.toString());
+            ArrayList<Hospital> hospitalList = MainJFrame.hospitalDirectory.searchHospitalByCommunity(community);
+
+            ddHospital.addItem("");
+            for (Hospital c: hospitalList) {
+                ddHospital.addItem(c.getName());
+            }
+            ddHospital.setSelectedItem("");
         }
-    }//GEN-LAST:event_txtIssueKeyReleased
+    }//GEN-LAST:event_ddCommunityActionPerformed
 
     private void ddCityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ddCityActionPerformed
 
@@ -486,17 +553,13 @@ public class PatientCreate extends javax.swing.JPanel {
             valCity.setText("Please Select City");
             ddCommunity.removeAllItems();
             ddHospital.removeAllItems();
-            ddHouse.removeAllItems();
             valHospital.setText(null);
             valCommunity.setText(null);
-            valHouse.setText(null);
         } else {
             valCity.setText(null);
             valHospital.setText(null);
-            ddHouse.removeAllItems();
             ddCommunity.removeAllItems();
             ddHospital.removeAllItems();
-            valHouse.setText(null);
             city = MainJFrame.cityDirectory.findCity(city_name.toString());
             ArrayList<Community> communityList = MainJFrame.communityDirectory.searchCommunitiesByCityObject(city);
 
@@ -508,31 +571,9 @@ public class PatientCreate extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_ddCityActionPerformed
 
-    private void txtPasswordKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPasswordKeyReleased
-
-        String password = String.valueOf(txtPassword.getPassword());
-        if (!this.validations.ValidatePassword(password) ) {
-            valPassword.setText("Should be 5-12 character long");
-        } else {
-            valPassword.setText(null);
-        }
-    }//GEN-LAST:event_txtPasswordKeyReleased
-
     private void btnOtherActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOtherActionPerformed
         valGender.setText(null);
     }//GEN-LAST:event_btnOtherActionPerformed
-
-    private void ddHospitalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ddHospitalActionPerformed
-        Object hospitalName = ddHospital.getSelectedItem();
-
-        if (hospitalName == null || hospitalName.toString().equals("")) {
-            valHospital.setText("Please Select Hospital");
-        } else {
-            valHospital.setText(null);
-            hospital = MainJFrame.hospitalDirectory.getHospitalObject(hospitalName.toString(), city, community);
-
-        }
-    }//GEN-LAST:event_ddHospitalActionPerformed
 
     private void txtNameKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNameKeyReleased
 
@@ -569,173 +610,68 @@ public class PatientCreate extends javax.swing.JPanel {
         if (!this.validations.ValidateEmail(txtEmail.getText()) ) {
             valEmail.setText("Email address is Invalid");
         } else if (MainJFrame.personDirectory.isPersonByEmailExist(txtEmail.getText())) {
-            valEmail.setText("Email address already exist");
-        }
-
+                valEmail.setText("Email address already exist");
+            }
+        
         else {
             valEmail.setText(null);
         }
-
+        
     }//GEN-LAST:event_txtEmailKeyReleased
 
     private void btnMaleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMaleActionPerformed
         valGender.setText(null);
     }//GEN-LAST:event_btnMaleActionPerformed
 
-    private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
+    private void btnFemaleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFemaleActionPerformed
+        valGender.setText(null);
+    }//GEN-LAST:event_btnFemaleActionPerformed
 
-        var valid = true;
-
-        if (ddCity.getSelectedItem() == null || ddCity.getSelectedItem().toString().isEmpty()) {
-            valCity.setText("Please Select City");
-            valid = false;
-        }
-
-        if (ddCommunity.getSelectedItem() == null || ddCommunity.getSelectedItem().toString().isEmpty()) {
-            valCommunity.setText("Please Select Community");
-            valid = false;
-        }
-
-        if (ddHospital.getSelectedItem() == null || ddHospital.getSelectedItem().toString().isEmpty()) {
-            valHospital.setText("Please Select Hospital");
-            valid = false;
-        }
-        
-        if (ddHouse.getSelectedItem() == null || ddHouse.getSelectedItem().toString().isEmpty()) {
-            valHouse.setText("Please Select or type address");
-            valid = false;
-        }
-
-        if (!this.validations.ValidateName(txtName.getText()) ) {
-            valName.setText("Name is Invalid");
-            valid = false;
-        }
-
-        if (!this.validations.ValidateEmpty(txtIssue.getText()) ) {
-            valHouse.setText("Details are required");
-            valid = false;
-        }
-
-        if (btnGender.getSelection() == null) {
-            valGender.setText("Gender is required");
-            valid = false;
-        }
-
-        if (!this.validations.ValidateEmail(txtEmail.getText()) ) {
-            valEmail.setText("Email address is Invalid");
-            valid = false;
-        } else if (MainJFrame.personDirectory.isPersonByEmailExist(txtEmail.getText())) {
-            valEmail.setText("Email address already exist");
-            valid = false;
-        }
-
-        if (!this.validations.ValidatePhoneNumber(txtPhoneNumber.getText()) ) {
-            valPhone.setText("Phone Number is Invalid");
-            valid = false;
-        }
-
-        if (!this.validations.ValidateAge(txtAge.getText()) ) {
-            valAge.setText("Age is Invalid");
-            valid = false;
-        }
-
+    private void txtUsernameKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtUsernameKeyReleased
         if (!this.validations.ValidateUsername(txtUsername.getText()) ) {
-            valUsername.setText("Username is Invalid");
-            valid = false;
+                valUsername.setText("Username is Invalid");
         } else if (MainJFrame.personDirectory.isPersonByUsernameExist(txtUsername.getText())) {
-            valUsername.setText("Username already exist");
-            valid = false;
+                valUsername.setText("Username already exist");
+            }
+        
+        else {
+            valUsername.setText(null);
+        }
+    }//GEN-LAST:event_txtUsernameKeyReleased
+
+    private void txtAboutKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtAboutKeyReleased
+        if (!this.validations.ValidateEmpty(txtAbout.getText()) ) {
+            valAbout.setText("Description is required");
+        } else {
+            valAbout.setText(null);
+        }
+    }//GEN-LAST:event_txtAboutKeyReleased
+
+    private void ddHospitalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ddHospitalActionPerformed
+        Object hospitalName = ddHospital.getSelectedItem();
+        
+        if (hospitalName == null) {
+            hospitalName = "";
         }
 
+        if (hospitalName.toString().equals("")) {
+            valHospital.setText("Please Select Hospital");
+        } else {
+            valHospital.setText(null);
+            hospital = MainJFrame.hospitalDirectory.getHospitalObject(hospitalName.toString(), city, community);
+
+        }
+    }//GEN-LAST:event_ddHospitalActionPerformed
+
+    private void txtPasswordKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPasswordKeyReleased
+        
         String password = String.valueOf(txtPassword.getPassword());
         if (!this.validations.ValidatePassword(password) ) {
             valPassword.setText("Should be 5-12 character long");
-            valid = false;
-        }
-
-        //
-        if (valid) {
-
-            String gender;
-            if (btnMale.isSelected()) {
-                gender = "Male";
-            }
-            else if (btnFemale.isSelected()) {
-                gender = "Female";
-            }
-            else {
-                gender = "Other";
-            }
-            House house;
-
-            
-            if (!community.isAddressExist(ddHouse.getSelectedItem().toString(), "") ) {
-                house = community.addHouse(ddHouse.getSelectedItem().toString(), "");
-            } else {
-                house = community.getHouseObject(ddHouse.getSelectedItem().toString(), "");
-            }
-            
-            MainJFrame.patientDirectory.newPatient(txtIssue.getText(), house, hospital, txtName.getText(), Integer.parseInt(txtAge.getText()), txtEmail.getText(), gender, txtPhoneNumber.getText(), city, community, txtUsername.getText(), String.valueOf(txtPassword.getPassword()));
-            JOptionPane.showMessageDialog(this, "Patient details Added");
-            setTextNull();
-            setValidationNull();
-
-        }
-    }//GEN-LAST:event_btnSaveActionPerformed
-
-    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
-        JFrame parent = (JFrame) SwingUtilities.getWindowAncestor(this);
-        parent.dispose();
-        HospitalAdminJFrame adminArea = new HospitalAdminJFrame();
-        adminArea.setVisible(true);
-        adminArea.setPatientUpdateView();
-    }//GEN-LAST:event_btnBackActionPerformed
-
-    private void ddCommunityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ddCommunityActionPerformed
-
-        Object communityName = ddCommunity.getSelectedItem();
-        Object cityName = ddCity.getSelectedItem();
-
-        if (communityName == null) {
-            communityName = "";
-        }
- 
-        if (communityName.toString().equals("")) {
-            valCommunity.setText("Please Select Community");
-            ddHospital.removeAllItems();
-            valHospital.setText(null);
         } else {
-            valHospital.setText(null);
-            valCommunity.setText(null);
-            valHouse.setText(null);
-            ddHospital.removeAllItems();
-            ddHouse.removeAllItems();
-            community = MainJFrame.communityDirectory.getCommunity(cityName.toString(),communityName.toString());
-            ArrayList<Hospital> hospitalList = MainJFrame.hospitalDirectory.searchHospitalByCommunity(community);
-
-            ddHospital.addItem("");
-            for (Hospital c: hospitalList) {
-                ddHospital.addItem(c.getName());
-            }
-            ddHospital.setSelectedItem("");
-            
-            ddHouse.addItem("");
-            for (House h: community.getHouseList()) {
-                ddHouse.addItem(h.getFullAddress());
-            }
-            ddHouse.setSelectedItem("");
+            valPassword.setText(null);
         }
-    }//GEN-LAST:event_ddCommunityActionPerformed
-
-    private void ddHouseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ddHouseActionPerformed
-        Object house = ddHouse.getSelectedItem();
-        
-        if (house == null || house.toString().equals("")) {
-            valHouse.setText("Please Select or type address");
-        } else {
-            valHouse.setText(null);
-        }
-    }//GEN-LAST:event_ddHouseActionPerformed
+    }//GEN-LAST:event_txtPasswordKeyReleased
 
     private void setTextNull() {
         ddCity.setSelectedItem("");
@@ -748,8 +684,8 @@ public class PatientCreate extends javax.swing.JPanel {
         txtEmail.setText(null);
         txtUsername.setText(null);
         txtPassword.setText(null);
-        txtIssue.setText(null);
-        ddHouse.setSelectedItem("");
+        txtAbout.setText(null);
+        
     }
     
     private void setValidationNull() {
@@ -757,14 +693,13 @@ public class PatientCreate extends javax.swing.JPanel {
         valCommunity.setText(null);
         valHospital.setText(null);
         valName.setText(null);
-        valIssue.setText(null);
+        valAbout.setText(null);
         valAge.setText(null);
         valGender.setText(null);
         valPhone.setText(null);
         valEmail.setText(null);
         valUsername.setText(null);
         valPassword.setText(null);
-        valHouse.setText(null);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -777,35 +712,32 @@ public class PatientCreate extends javax.swing.JPanel {
     private javax.swing.JComboBox<String> ddCity;
     private javax.swing.JComboBox<String> ddCommunity;
     private javax.swing.JComboBox<String> ddHospital;
-    private javax.swing.JComboBox<String> ddHouse;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel lblAbout;
     private javax.swing.JLabel lblAge;
     private javax.swing.JLabel lblCity;
     private javax.swing.JLabel lblCommunity;
     private javax.swing.JLabel lblEmail;
     private javax.swing.JLabel lblGender;
     private javax.swing.JLabel lblHospital;
-    private javax.swing.JLabel lblHouse;
-    private javax.swing.JLabel lblIssue;
     private javax.swing.JLabel lblName;
     private javax.swing.JLabel lblPassword;
     private javax.swing.JLabel lblPhoneNumber;
     private javax.swing.JLabel lblUsername;
+    private javax.swing.JTextField txtAbout;
     private javax.swing.JTextField txtAge;
     private javax.swing.JTextField txtEmail;
-    private javax.swing.JTextField txtIssue;
     private javax.swing.JTextField txtName;
     private javax.swing.JPasswordField txtPassword;
     private javax.swing.JTextField txtPhoneNumber;
     private javax.swing.JTextField txtUsername;
+    private javax.swing.JLabel valAbout;
     private javax.swing.JLabel valAge;
     private javax.swing.JLabel valCity;
     private javax.swing.JLabel valCommunity;
     private javax.swing.JLabel valEmail;
     private javax.swing.JLabel valGender;
     private javax.swing.JLabel valHospital;
-    private javax.swing.JLabel valHouse;
-    private javax.swing.JLabel valIssue;
     private javax.swing.JLabel valName;
     private javax.swing.JLabel valPassword;
     private javax.swing.JLabel valPhone;

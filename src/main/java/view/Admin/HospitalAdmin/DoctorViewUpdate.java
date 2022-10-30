@@ -13,7 +13,10 @@ import models.Doctor;
 import resources.Validations;
 import view.MainJFrame;
 
-
+/**
+ *
+ * @author madan
+ */
 public class DoctorViewUpdate extends javax.swing.JPanel {
 
     /**
@@ -22,20 +25,12 @@ public class DoctorViewUpdate extends javax.swing.JPanel {
     
     Vector originalTableModel;
     Validations validations;
-    static String type;
-    static String username;
-    public DoctorViewUpdate(String type,String username) {
+    public DoctorViewUpdate() {
         initComponents();
-        this.type = type;
-        this.username = username;
-        btnDelete.setVisible(false);
         MainJFrame.defaultSearchText(txtSearch, "Search ...");
         validations = new Validations();
         populateTable();
         originalTableModel = (Vector) ((DefaultTableModel) tblDetails.getModel()).getDataVector().clone();
-        if(type=="sys"){
-            btnDelete.setVisible(true);
-        }
     }
 
     /**
@@ -86,7 +81,6 @@ public class DoctorViewUpdate extends javax.swing.JPanel {
         valPassword = new javax.swing.JLabel();
         valAbout = new javax.swing.JLabel();
         txtAbout = new javax.swing.JTextField();
-        btnDelete = new javax.swing.JButton();
 
         btnUpdate.setText("Update");
         btnUpdate.addActionListener(new java.awt.event.ActionListener() {
@@ -175,10 +169,10 @@ public class DoctorViewUpdate extends javax.swing.JPanel {
 
         txtHospital.setEditable(false);
 
-        lblPhoneNumber.setFont(new java.awt.Font("Hiragino Mincho ProN", 1, 18)); // NOI18N
+        lblPhoneNumber.setFont(new java.awt.Font("Hiragino Mincho ProN", 0, 18)); // NOI18N
         lblPhoneNumber.setText("Number :");
 
-        lblEmail.setFont(new java.awt.Font("Hiragino Mincho ProN", 1, 18)); // NOI18N
+        lblEmail.setFont(new java.awt.Font("Hiragino Mincho ProN", 0, 18)); // NOI18N
         lblEmail.setText("Email :");
 
         txtName.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -221,10 +215,10 @@ public class DoctorViewUpdate extends javax.swing.JPanel {
             }
         });
 
-        lblUsername.setFont(new java.awt.Font("Hiragino Mincho ProN", 1, 18)); // NOI18N
+        lblUsername.setFont(new java.awt.Font("Hiragino Mincho ProN", 0, 18)); // NOI18N
         lblUsername.setText("Username :");
 
-        lblPassword.setFont(new java.awt.Font("Hiragino Mincho ProN", 1, 18)); // NOI18N
+        lblPassword.setFont(new java.awt.Font("Hiragino Mincho ProN", 0, 18)); // NOI18N
         lblPassword.setText("Password :");
 
         txtUsername.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -247,7 +241,7 @@ public class DoctorViewUpdate extends javax.swing.JPanel {
         valAge.setFont(new java.awt.Font("Helvetica Neue", 2, 13)); // NOI18N
         valAge.setForeground(new java.awt.Color(255, 0, 0));
 
-        lblName.setFont(new java.awt.Font("Hiragino Mincho ProN", 1, 18)); // NOI18N
+        lblName.setFont(new java.awt.Font("Hiragino Mincho ProN", 0, 18)); // NOI18N
         lblName.setText("Name :");
 
         txtPassword.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -259,10 +253,10 @@ public class DoctorViewUpdate extends javax.swing.JPanel {
         valGender.setFont(new java.awt.Font("Helvetica Neue", 2, 13)); // NOI18N
         valGender.setForeground(new java.awt.Color(255, 0, 0));
 
-        lblAge.setFont(new java.awt.Font("Hiragino Mincho ProN", 1, 18)); // NOI18N
+        lblAge.setFont(new java.awt.Font("Hiragino Mincho ProN", 0, 18)); // NOI18N
         lblAge.setText("Age :");
 
-        lblGender.setFont(new java.awt.Font("Hiragino Mincho ProN", 1, 18)); // NOI18N
+        lblGender.setFont(new java.awt.Font("Hiragino Mincho ProN", 0, 18)); // NOI18N
         lblGender.setText("Gender :");
 
         valPhone.setFont(new java.awt.Font("Helvetica Neue", 2, 13)); // NOI18N
@@ -271,7 +265,7 @@ public class DoctorViewUpdate extends javax.swing.JPanel {
         valEmail.setFont(new java.awt.Font("Helvetica Neue", 2, 13)); // NOI18N
         valEmail.setForeground(new java.awt.Color(255, 0, 0));
 
-        lblPassword1.setFont(new java.awt.Font("Hiragino Mincho ProN", 1, 18)); // NOI18N
+        lblPassword1.setFont(new java.awt.Font("Hiragino Mincho ProN", 0, 18)); // NOI18N
         lblPassword1.setText("About :");
 
         valUsername.setFont(new java.awt.Font("Helvetica Neue", 2, 13)); // NOI18N
@@ -286,13 +280,6 @@ public class DoctorViewUpdate extends javax.swing.JPanel {
         txtAbout.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtAboutKeyReleased(evt);
-            }
-        });
-
-        btnDelete.setText("Delete");
-        btnDelete.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnDeleteActionPerformed(evt);
             }
         });
 
@@ -334,23 +321,25 @@ public class DoctorViewUpdate extends javax.swing.JPanel {
                                         .addComponent(valName, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(layout.createSequentialGroup()
                                         .addGap(40, 40, 40)
+                                        .addComponent(txtAbout)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(valAbout, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(40, 40, 40)
                                         .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(valPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                .addComponent(btnUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addGap(40, 40, 40)
-                                                .addComponent(txtAbout)))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(valAbout, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                        .addComponent(valPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(188, 188, 188)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtCommunity, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(txtCommunity, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(133, 133, 133)
+                                .addComponent(btnUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(txtCity, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(133, 133, 133)
+                                .addComponent(btn_create, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(txtHospital, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -372,15 +361,8 @@ public class DoctorViewUpdate extends javax.swing.JPanel {
                                     .addComponent(valUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(valAge, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(valPhone, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(valEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(txtCity, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(133, 133, 133)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(btnDelete, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(btn_create, javax.swing.GroupLayout.DEFAULT_SIZE, 87, Short.MAX_VALUE))))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addGap(308, 308, Short.MAX_VALUE))
+                                    .addComponent(valEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                .addGap(314, 314, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -397,15 +379,11 @@ public class DoctorViewUpdate extends javax.swing.JPanel {
                         .addComponent(txtCity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(lblCity))
                     .addComponent(btn_create))
+                .addGap(6, 6, 6)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblCommunity)
-                            .addComponent(txtCommunity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnDelete)))
+                    .addComponent(lblCommunity)
+                    .addComponent(txtCommunity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnUpdate))
                 .addGap(6, 6, 6)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtHospital, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -461,9 +439,7 @@ public class DoctorViewUpdate extends javax.swing.JPanel {
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(lblPassword1)
                         .addComponent(txtAbout, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
-                .addComponent(btnUpdate)
-                .addContainerGap())
+                .addGap(73, 73, 73))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -485,7 +461,7 @@ public class DoctorViewUpdate extends javax.swing.JPanel {
             valid = false;
         }
 
-        if (!this.validations.ValidateAbout(txtAbout.getText()) ) {
+        if (!this.validations.ValidateEmpty(txtAbout.getText()) ) {
             valAbout.setText("Details are required");
             valid = false;
         }
@@ -541,13 +517,13 @@ public class DoctorViewUpdate extends javax.swing.JPanel {
                 gender = "Other";
             }
             
-            selectedDetails.getPerson().setAge(Integer.parseInt(txtAge.getText()));
-            selectedDetails.getPerson().setName(txtName.getText());
-            selectedDetails.getPerson().setGender(gender);
-            selectedDetails.getPerson().setPhoneNumber(txtPhoneNumber.getText());
-            selectedDetails.getPerson().setUsername(txtUsername.getText());
-            selectedDetails.getPerson().setPassword(String.valueOf(txtPassword.getPassword()));
-            selectedDetails.getPerson().setEmail(txtEmail.getText());
+            selectedDetails.setAge(Integer.parseInt(txtAge.getText()));
+            selectedDetails.setName(txtName.getText());
+            selectedDetails.setGender(gender);
+            selectedDetails.setPhoneNumber(txtPhoneNumber.getText());
+            selectedDetails.setUsername(txtUsername.getText());
+            selectedDetails.setPassword(String.valueOf(txtPassword.getPassword()));
+            selectedDetails.setEmail(txtEmail.getText());
             selectedDetails.setAbout(txtAbout.getText());
             
             JOptionPane.showMessageDialog(this, "Doctor details Updated");
@@ -555,9 +531,6 @@ public class DoctorViewUpdate extends javax.swing.JPanel {
             setValidationNull();
             populateTable();
 
-        }
-        else{
-            JOptionPane.showMessageDialog(this, "Check errors !!");
         }
     }//GEN-LAST:event_btnUpdateActionPerformed
 
@@ -603,9 +576,9 @@ public class DoctorViewUpdate extends javax.swing.JPanel {
            btnOther.setSelected(true);
        }
             else switch (tblGender) {
-            case ("Male"): btnMale.setSelected(true);
-            case ("Female"): btnFemale.setSelected(true);
-            default: btnOther.setSelected(true);
+            case "Male" -> btnMale.setSelected(true);
+            case "Female" -> btnFemale.setSelected(true);
+            default -> btnOther.setSelected(true);
         }
 
         txtCity.setText(tblCity);
@@ -626,7 +599,7 @@ public class DoctorViewUpdate extends javax.swing.JPanel {
 
         JFrame parent = (JFrame) SwingUtilities.getWindowAncestor(this);
         parent.dispose();
-        HospitalAdminJFrame adminArea = new HospitalAdminJFrame(type,username);
+        HospitalAdminJFrame adminArea = new HospitalAdminJFrame();
         adminArea.setVisible(true);
         adminArea.setDoctorCreateView();
     }//GEN-LAST:event_btn_createActionPerformed
@@ -728,32 +701,13 @@ public class DoctorViewUpdate extends javax.swing.JPanel {
     }//GEN-LAST:event_txtPasswordKeyReleased
 
     private void txtAboutKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtAboutKeyReleased
-        if (!this.validations.ValidateAbout(txtAbout.getText()) ) {
+        if (!this.validations.ValidateEmpty(txtAbout.getText()) ) {
             valAbout.setText("Details are required");
         }
         else {
             valAbout.setText(null);
         }
     }//GEN-LAST:event_txtAboutKeyReleased
-
-    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
-        // TODO add your handling code here:
-        int selectedRowIndex = tblDetails.getSelectedRow();
-        if (selectedRowIndex<0)
-        {
-            JOptionPane.showMessageDialog(this,"No Record selected to delete");
-            return;
-        }
-
-        DefaultTableModel model = (DefaultTableModel) tblDetails.getModel();
-        Doctor selectedDoctor = (Doctor) model.getValueAt(selectedRowIndex , 11);
-
-        MainJFrame.doctorDirectory.deleteHospital(selectedDoctor);
-
-        populateTable();
-        setTextNull();
-        JOptionPane.showMessageDialog(this,"The selected record has been deleted");
-    }//GEN-LAST:event_btnDeleteActionPerformed
 
     private void populateTable() {
         
@@ -762,16 +716,16 @@ public class DoctorViewUpdate extends javax.swing.JPanel {
         
         for (Doctor c : MainJFrame.doctorDirectory.getDoctorList()){
             Object[] row = new Object[12];
-            row[0] = c.getPerson().getCity().getName();
-            row[1] = c.getPerson().getCommunity().getName();
+            row[0] = c.getCity().getName();
+            row[1] = c.getCommunity().getName();
             row[2] = c.getHospital().getName();
-            row[3] = c.getPerson().getName();
-            row[4] = c.getPerson().getAge();
-            row[5] = c.getPerson().getGender();
-            row[6] = c.getPerson().getPhoneNumber();
-            row[7] = c.getPerson().getEmail();
-            row[8] = c.getPerson().getUsername();
-            row[9] = c.getPerson().getPassword();
+            row[3] = c.getName();
+            row[4] = c.getAge();
+            row[5] = c.getGender();
+            row[6] = c.getPhoneNumber();
+            row[7] = c.getEmail();
+            row[8] = c.getUsername();
+            row[9] = c.getPassword();
             row[10] = c.getAbout();
             row[11] = c;
             
@@ -806,7 +760,6 @@ public class DoctorViewUpdate extends javax.swing.JPanel {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnDelete;
     private javax.swing.JRadioButton btnFemale;
     private javax.swing.ButtonGroup btnGender;
     private javax.swing.JRadioButton btnMale;

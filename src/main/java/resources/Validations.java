@@ -4,20 +4,14 @@
  */
 package resources;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.time.format.DateTimeFormatter;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-
+/**
+ *
+ * @author madan
+ */
 public class Validations {
-    
-    DateTimeFormatter formatter;
-    
-    public void Validations(){
-         formatter = DateTimeFormatter.ofPattern("dd-mm-yyyy HH:mm");
-    }
     public boolean ValidatePhoneNumber(String value) {
         String PATTERN = "^(\\+\\d{1,3}( )?)?(\\d{3}[ ]?){2}\\d{4}$";
         return MatchPattern(PATTERN, value);
@@ -29,7 +23,7 @@ public class Validations {
     }
     
     public boolean ValidateUsername(String value) {
-        String PATTERN = "^(?=.{4,20}$)(?![.])[a-zA-Z0-9._]+(?<![.])$";
+        String PATTERN = "^(?=.{3,20}$)(?![.])[a-zA-Z0-9._]+(?<![.])$";
         return MatchPattern(PATTERN, value);
     }
     
@@ -57,34 +51,24 @@ public class Validations {
         String PATTERN = "^[0-9]{1,2}$";
         return MatchPattern(PATTERN, value);
     }
-    /*
-    public boolean ValidateDate(String value) {
-        String error = "Date should be in DD-MM-YYYY HH:MM";
-        try 
-            { 
-                formatter.parse(value);              
-            }  
-	catch (ParseException e)  
-            { 
-
-                System.out.println(error);
-                return false;
-            }
-        return true;
-        }
-    }
-    */
     
-    public boolean ValidateGender(String value) {
+    public boolean ValidateInt(String value) {
+        String PATTERN = "^[0-9]{1,3}$";
+        return MatchPattern(PATTERN, value);
+    }
+    
+    public boolean ValidateFloat(String value) {
+        String PATTERN = "[+-]?([0-9]*[.])?[0-9]+";
+        return MatchPattern(PATTERN, value);
+    }
+    
+    public boolean ValidateEmpty(String value) {
         return !value.isEmpty();
     }
     
-    public boolean ValidateAbout(String value) {
-        return !value.isEmpty();
-    }
-    
-    public boolean ValidateAddress(String value) {
-        return !value.isEmpty();
+    public boolean ValidateBloodPressure(String value) {
+        String PATTERN = "[+-]?((\\d+\\.?\\d*)|(\\.\\d+))";
+        return MatchPattern(PATTERN, value);
     }
     
     private boolean MatchPattern(String pattern, String value) {

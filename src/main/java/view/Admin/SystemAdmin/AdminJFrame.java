@@ -2,14 +2,17 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package view.Admin;
+package view.Admin.SystemAdmin;
 
 import view.Admin.CommunityAdmin.CommunityAdmin;
 import view.Admin.HospitalAdmin.HospitalAdminJFrame;
-import view.Admin.SystemAdmin.SystemAdminJFrame;
 import view.MainJFrame;
+import view.login.LoginView;
 
-
+/**
+ *
+ * @author madan
+ */
 public class AdminJFrame extends javax.swing.JFrame {
 
     /**
@@ -17,7 +20,7 @@ public class AdminJFrame extends javax.swing.JFrame {
      */
     public AdminJFrame() {
         initComponents();
-        getContentPane().setBackground(new java.awt.Color(102, 102, 102));
+        getContentPane().setBackground(new java.awt.Color(102, 255, 204));
         setLocationRelativeTo(null);
     }
 
@@ -37,12 +40,11 @@ public class AdminJFrame extends javax.swing.JFrame {
         btn_hospital_admin = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setBackground(new java.awt.Color(153, 153, 153));
 
         lbl_admin.setFont(new java.awt.Font("Hiragino Maru Gothic ProN", 1, 18)); // NOI18N
         lbl_admin.setText("Select the type of admin");
 
-        btn_back_main.setText("<- Logout");
+        btn_back_main.setText("<- Back");
         btn_back_main.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_back_mainActionPerformed(evt);
@@ -75,35 +77,33 @@ public class AdminJFrame extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(48, 48, 48)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(69, 69, 69)
                         .addComponent(btn_system_admin)
-                        .addGap(36, 36, 36)
+                        .addGap(38, 38, 38)
                         .addComponent(btn_community_admin)
-                        .addGap(28, 28, 28)
+                        .addGap(36, 36, 36)
                         .addComponent(btn_hospital_admin))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(176, 176, 176)
-                        .addComponent(lbl_admin))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(26, 26, 26)
-                        .addComponent(btn_back_main)))
-                .addContainerGap(84, Short.MAX_VALUE))
+                        .addComponent(btn_back_main)
+                        .addGap(32, 32, 32)
+                        .addComponent(lbl_admin)))
+                .addContainerGap(95, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(26, 26, 26)
-                .addComponent(btn_back_main)
-                .addGap(16, 16, 16)
-                .addComponent(lbl_admin)
-                .addGap(54, 54, 54)
+                .addGap(40, 40, 40)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lbl_admin)
+                    .addComponent(btn_back_main))
+                .addGap(77, 77, 77)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_system_admin)
                     .addComponent(btn_community_admin)
                     .addComponent(btn_hospital_admin))
-                .addContainerGap(186, Short.MAX_VALUE))
+                .addContainerGap(189, Short.MAX_VALUE))
         );
 
         pack();
@@ -112,7 +112,6 @@ public class AdminJFrame extends javax.swing.JFrame {
     private void btn_back_mainActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_back_mainActionPerformed
         
         this.setVisible(false);
-        this.dispose();
         new MainJFrame().setVisible(true); // Main Form to show after the Login Form..
     
     }//GEN-LAST:event_btn_back_mainActionPerformed
@@ -120,17 +119,20 @@ public class AdminJFrame extends javax.swing.JFrame {
     private void btn_system_adminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_system_adminActionPerformed
         // TODO add your handling code here:
         this.dispose();
-        new SystemAdminJFrame("sys",null).setVisible(true);
+        new LoginView("system").setVisible(true);
     }//GEN-LAST:event_btn_system_adminActionPerformed
 
     private void btn_hospital_adminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_hospital_adminActionPerformed
+        
         this.dispose();
-        new HospitalAdminJFrame("hosp",null).setVisible(true);
+        new LoginView("hospital").setVisible(true);
+        
     }//GEN-LAST:event_btn_hospital_adminActionPerformed
 
     private void btn_community_adminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_community_adminActionPerformed
         this.dispose();
-        new CommunityAdmin().setVisible(true);
+        new LoginView("community").setVisible(true);
+        
     }//GEN-LAST:event_btn_community_adminActionPerformed
 
     /**
@@ -163,7 +165,6 @@ public class AdminJFrame extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
-            @Override
             public void run() {
                 new AdminJFrame().setVisible(true);
             }
