@@ -62,11 +62,6 @@
                   </Group>
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="txtBloodPressure" alignment="1" min="-2" pref="207" max="-2" attributes="0"/>
-                          <Group type="102" alignment="1" attributes="0">
-                              <Component id="lblDate" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="233" max="-2" attributes="0"/>
-                          </Group>
                           <Component id="btnUpdate" alignment="1" min="-2" pref="87" max="-2" attributes="0"/>
                           <Group type="102" alignment="1" attributes="0">
                               <Group type="103" groupAlignment="1" attributes="0">
@@ -80,6 +75,14 @@
                                   <Component id="txtTemperature" min="-2" pref="207" max="-2" attributes="0"/>
                                   <Component id="txtPulseRate" min="-2" pref="207" max="-2" attributes="0"/>
                                   <Component id="txtBreathing" min="-2" pref="207" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <Group type="102" alignment="1" attributes="0">
+                              <Component id="lblDate" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="txtDate" min="-2" pref="211" max="-2" attributes="0"/>
+                                  <Component id="txtBloodPressure" min="-2" pref="207" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -125,7 +128,10 @@
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="lblDate" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" alignment="0" groupAlignment="3" attributes="0">
+                      <Component id="lblDate" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtDate" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
                   <Component id="valDate" alignment="0" min="-2" pref="16" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
@@ -403,6 +409,12 @@
           <Color blue="0" green="0" red="ff" type="rgb"/>
         </Property>
       </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="txtDate">
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtDateActionPerformed"/>
+        <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtDateKeyReleased"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

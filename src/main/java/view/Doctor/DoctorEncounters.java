@@ -30,10 +30,13 @@ public class DoctorEncounters extends javax.swing.JFrame {
     
     Validations validations;
     Vector originalTableModel;
-    
+    Date date;
+    SimpleDateFormat formatter;
+    Boolean valid;
     public DoctorEncounters() {
         initComponents();
         setLocationRelativeTo(null);
+        formatter = new SimpleDateFormat("yyyy-M-dd");
         MainJFrame.defaultSearchText(txtSearch, "Search by city or community");
         validations = new Validations();
         populateTable();
@@ -74,14 +77,15 @@ public class DoctorEncounters extends javax.swing.JFrame {
         valPulse = new javax.swing.JLabel();
         valTemperature = new javax.swing.JLabel();
         valBreathing = new javax.swing.JLabel();
+        txtDate = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        lblDate.setText("Date :");
         lblDate.setFont(new java.awt.Font("Hiragino Mincho ProN", 1, 18)); // NOI18N
+        lblDate.setText("Date :");
 
-        lblDoctorRecord.setText("Patients & Encounters");
         lblDoctorRecord.setFont(new java.awt.Font("Hiragino Mincho ProN", 1, 24)); // NOI18N
+        lblDoctorRecord.setText("Patients & Encounters");
 
         tblDetails.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -137,11 +141,11 @@ public class DoctorEncounters extends javax.swing.JFrame {
 
         txtEncounterId.setEditable(false);
 
-        lblCommunity.setText("Patient :");
         lblCommunity.setFont(new java.awt.Font("Hiragino Mincho ProN", 1, 18)); // NOI18N
+        lblCommunity.setText("Patient :");
 
-        lblCity.setText("Encounter ID :");
         lblCity.setFont(new java.awt.Font("Hiragino Mincho ProN", 1, 18)); // NOI18N
+        lblCity.setText("Encounter ID :");
 
         valDate.setFont(new java.awt.Font("Helvetica Neue", 2, 13)); // NOI18N
         valDate.setForeground(new java.awt.Color(255, 0, 0));
@@ -160,17 +164,17 @@ public class DoctorEncounters extends javax.swing.JFrame {
             }
         });
 
-        lblCommunity1.setText("Blood Pressure :");
         lblCommunity1.setFont(new java.awt.Font("Hiragino Mincho ProN", 1, 18)); // NOI18N
+        lblCommunity1.setText("Blood Pressure :");
 
-        lblCommunity3.setText("Pluse Rate :");
         lblCommunity3.setFont(new java.awt.Font("Hiragino Mincho ProN", 1, 18)); // NOI18N
+        lblCommunity3.setText("Pluse Rate :");
 
-        lblCommunity4.setText("Temperature :");
         lblCommunity4.setFont(new java.awt.Font("Hiragino Mincho ProN", 1, 18)); // NOI18N
+        lblCommunity4.setText("Temperature :");
 
-        lblCommunity5.setText("Breathing :");
         lblCommunity5.setFont(new java.awt.Font("Hiragino Mincho ProN", 1, 18)); // NOI18N
+        lblCommunity5.setText("Breathing :");
 
         txtBloodPressure.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
@@ -208,6 +212,17 @@ public class DoctorEncounters extends javax.swing.JFrame {
         valBreathing.setFont(new java.awt.Font("Helvetica Neue", 2, 13)); // NOI18N
         valBreathing.setForeground(new java.awt.Color(255, 0, 0));
 
+        txtDate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtDateActionPerformed(evt);
+            }
+        });
+        txtDate.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtDateKeyReleased(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -242,10 +257,6 @@ public class DoctorEncounters extends javax.swing.JFrame {
                         .addComponent(btn_create, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtBloodPressure, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(lblDate)
-                                .addGap(233, 233, 233))
                             .addComponent(btnUpdate, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -257,7 +268,13 @@ public class DoctorEncounters extends javax.swing.JFrame {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(txtTemperature, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(txtPulseRate, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtBreathing, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addComponent(txtBreathing, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(lblDate)
+                                .addGap(26, 26, 26)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtDate, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtBloodPressure, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(valDate, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -290,7 +307,9 @@ public class DoctorEncounters extends javax.swing.JFrame {
                     .addComponent(txtPatient, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblDate)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(lblDate)
+                        .addComponent(txtDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(valDate, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -339,7 +358,7 @@ public class DoctorEncounters extends javax.swing.JFrame {
 
         txtEncounterId.setText(tblEncounterID);
         txtPatient.setText(tblPatient);
-        datePicker.setDate(localDate);
+        txtDate.setText(tblDate.toString());
         txtPulseRate.setText(String.valueOf(v.getPulseRate()));
         txtBreathing.setText(String.valueOf(v.getRespiratoryRate()));
         txtBloodPressure.setText(v.getBloodPressure());
@@ -379,9 +398,19 @@ public class DoctorEncounters extends javax.swing.JFrame {
 
         var valid = true;
 
-        if (!this.validations.ValidateEmpty(datePicker.getDateStringOrEmptyString()) ) {
-            valDate.setText("Date of joining is required");
+        if (!this.validations.ValidateEmpty(txtDate.getText()) ) {
+            valDate.setText("Date is required");
             valid = false;
+        }
+        if (txtDate.getText()!=null){
+                      
+            try {
+                date = formatter.parse(txtDate.getText());
+                
+            } catch (ParseException ex) {
+                valid=false;
+                valDate.setText("Date should be in yyyy-mm-dd");
+            }
         }
         
         if (!this.validations.ValidateBloodPressure(txtBloodPressure.getText()) ) {
@@ -407,17 +436,6 @@ public class DoctorEncounters extends javax.swing.JFrame {
         //
         if (valid) {
 
-            Date date;
-
-            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-M-dd");
-
-            try {
-                date = formatter.parse(datePicker.getDateStringOrEmptyString());
-
-            } catch (ParseException ex) {
-                date = new Date(1970, 01, 01);
-            }
-
             selectedDetails.setDate(date);
             selectedDetails.getVitalSigns().setBloodPressure(txtBloodPressure.getText());
             selectedDetails.getVitalSigns().setBodyTemperature(Float.parseFloat(txtTemperature.getText()));
@@ -438,7 +456,7 @@ public class DoctorEncounters extends javax.swing.JFrame {
         CreateEncounter adminArea = new CreateEncounter();
         adminArea.setVisible(true);
     }//GEN-LAST:event_btn_createActionPerformed
-
+/*
     private void datePickerKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_datePickerKeyReleased
         if (!this.validations.ValidateEmpty(datePicker.getDateStringOrEmptyString()) ) {
             valDate.setText("Date of joining is required");
@@ -447,7 +465,7 @@ public class DoctorEncounters extends javax.swing.JFrame {
             valDate.setText(null);
         }
     }//GEN-LAST:event_datePickerKeyReleased
-
+*/
     private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutActionPerformed
         MainJFrame.loginSession.setObject(null);
         this.dispose();
@@ -490,6 +508,25 @@ public class DoctorEncounters extends javax.swing.JFrame {
             valTemperature.setText(null);
         }
     }//GEN-LAST:event_txtTemperatureKeyReleased
+
+    private void txtDateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDateActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtDateActionPerformed
+
+    private void txtDateKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDateKeyReleased
+        // TODO add your handling code here:
+        if ((txtDate.getText() == null) ) {
+            valDate.setText("Date is required");
+        }
+        try {
+            date = formatter.parse(txtDate.getText());
+
+        }
+        catch (ParseException ex) {
+            valid=false;
+            valDate.setText("Date should be in yyyy-mm-dd");
+        }
+    }//GEN-LAST:event_txtDateKeyReleased
 
     /**
      * @param args the command line arguments
@@ -563,7 +600,7 @@ public class DoctorEncounters extends javax.swing.JFrame {
         txtPatient.setText(null);
         txtPulseRate.setText(null);   
         txtTemperature.setText(null);
-        datePicker.setDate(null);
+        txtDate.setText(null);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -582,6 +619,7 @@ public class DoctorEncounters extends javax.swing.JFrame {
     private javax.swing.JTable tblDetails;
     private javax.swing.JTextField txtBloodPressure;
     private javax.swing.JTextField txtBreathing;
+    private javax.swing.JTextField txtDate;
     private javax.swing.JTextField txtEncounterId;
     private javax.swing.JTextField txtPatient;
     private javax.swing.JTextField txtPulseRate;

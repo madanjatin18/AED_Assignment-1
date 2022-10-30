@@ -7,6 +7,7 @@ package view.login;
 import models.Admins;
 import models.Doctor;
 import models.Patient;
+import view.Admin.AdminJFrame;
 import view.Admin.CommunityAdmin.CommunityAdmin;
 import view.Admin.HospitalAdmin.HospitalAdminJFrame;
 import view.Admin.SystemAdmin.SystemAdminJFrame;
@@ -16,7 +17,7 @@ import view.Patient.PatientView;
 
 /**
  *
- * @author madan
+ * @author vaibhav
  */
 public class LoginView extends javax.swing.JFrame {
 
@@ -37,11 +38,11 @@ public class LoginView extends javax.swing.JFrame {
         }
         
         switch(type) {
-            case("patient") -> lblLogin.setText("Patient Login");
-            case("doctor") -> lblLogin.setText("Doctor Login");
-            case("system") -> lblLogin.setText("System Admin Login");
-            case("community") -> lblLogin.setText("Community Admin Login");
-            case("hospital") -> lblLogin.setText("Hospital Admin Login");
+            case("patient") : lblLogin.setText("Patient Login");break;
+            case("doctor") : lblLogin.setText("Doctor Login");break;
+            case("system") : lblLogin.setText("System Admin Login");break;
+            case("community") : lblLogin.setText("Community Admin Login");break;
+            case("hospital") : lblLogin.setText("Hospital Admin Login");break;
         }
     }
 
@@ -205,7 +206,7 @@ public class LoginView extends javax.swing.JFrame {
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         this.dispose();
-        new MainJFrame().setVisible(true);
+        new AdminJFrame().setVisible(true);
     }//GEN-LAST:event_btnBackActionPerformed
 
     private void btnRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegisterActionPerformed

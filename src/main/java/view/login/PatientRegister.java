@@ -16,7 +16,7 @@ import view.MainJFrame;
 
 /**
  *
- * @author madan
+ * @author vaibhav
  */
 public class PatientRegister extends javax.swing.JFrame {
 

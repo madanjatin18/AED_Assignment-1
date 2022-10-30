@@ -559,9 +559,9 @@ public class AdminViewUpdate extends javax.swing.JPanel {
             
             Admins.AdminType admin;
             switch (ddAdmin.getSelectedItem().toString()) {
-                case("COMMUNITY") -> admin = Admins.AdminType.COMMUNITY;
-                case("HOSPITAL") -> admin = Admins.AdminType.HOSPITAL;
-                default -> admin = Admins.AdminType.SYSTEM;
+                case("COMMUNITY") : admin = Admins.AdminType.COMMUNITY;
+                case("HOSPITAL") : admin = Admins.AdminType.HOSPITAL;
+                default : admin = Admins.AdminType.SYSTEM;
             }
 
             selectedDetails.setAge(Integer.parseInt(txtAge.getText()));
@@ -648,9 +648,9 @@ public class AdminViewUpdate extends javax.swing.JPanel {
             btnOther.setSelected(true);
         }
         else switch (tblGender) {
-            case "Male" -> btnMale.setSelected(true);
-            case "Female" -> btnFemale.setSelected(true);
-            default -> btnOther.setSelected(true);
+            case "Male" : btnMale.setSelected(true);
+            case "Female" : btnFemale.setSelected(true);
+            default : btnOther.setSelected(true);
         }
 
         txtCity.setText(tblCity);
@@ -668,9 +668,9 @@ public class AdminViewUpdate extends javax.swing.JPanel {
         ddAdmin.addItem("SYSTEM");
         
         switch (tblAdmin) {
-            case COMMUNITY -> ddAdmin.setSelectedItem("COMMUNITY");
-            case HOSPITAL -> ddAdmin.setSelectedItem("HOSPITAL");
-            default -> ddAdmin.setSelectedItem("SYSTEM");
+            case COMMUNITY : ddAdmin.setSelectedItem("COMMUNITY");
+            case HOSPITAL : ddAdmin.setSelectedItem("HOSPITAL");
+            default : ddAdmin.setSelectedItem("SYSTEM");
         }
 
         setValidationNull();

@@ -7,22 +7,21 @@ package view;
 import java.awt.Color;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
-import java.util.ArrayList;
 import javax.swing.JTextField;
 import models.AdminDirectory;
 import models.Admins;
+import models.City;
 import models.CityDirectory;
+import models.Community;
 import models.CommunityDirectory;
-import models.Doctor;
 import models.DoctorDirectory;
 import models.EncounterDirectory;
 import models.HospitalDirectory;
-import models.Patient;
+import models.LoginSession;
 import models.PatientDirectory;
 import models.PersonDirectory;
-import view.Admin.AdminJFrame;
 import resources.CreateDefaultData;
-import models.LoginSession;
+import view.Admin.AdminJFrame;
 import view.login.LoginView;
 
 /**
@@ -34,8 +33,6 @@ public class MainJFrame extends javax.swing.JFrame {
     /**
      * Creates new form MainJFrame
      */
-    
-    // initialize objects
     public static CommunityDirectory communityDirectory = new CommunityDirectory();
     public static CityDirectory cityDirectory = new CityDirectory();
     public static HospitalDirectory hospitalDirectory = new HospitalDirectory();
@@ -46,13 +43,19 @@ public class MainJFrame extends javax.swing.JFrame {
     public static AdminDirectory adminDirectory = new AdminDirectory();
     public static LoginSession loginSession = new LoginSession();
     private static boolean create = true;
-    
     public MainJFrame() {
         initComponents();
-        getContentPane().setBackground(new java.awt.Color(102, 102, 102));
-        CreateDefaultData.createData();
+           if (create) {
+            //CreateDefaultData.createData();
+            City boston = MainJFrame.cityDirectory.newCity("Boston");
+            Community jp = MainJFrame.communityDirectory.newCommunity("Jamaica Plain", boston);
+            Admins ad1 = MainJFrame.adminDirectory.newAdmin("jatin", 24, "madanjatin18@gmail.com", "Male", "6179358513", boston, jp, "jatin", "jatin123", Admins.AdminType.SYSTEM);
+            Admins ad2 = MainJFrame.adminDirectory.newAdmin("jatin", 24, "madanjatin18@gmail.com", "Male", "6179358513", boston, jp, "jatin", "jatin123", Admins.AdminType.HOSPITAL);
+            Admins ad3 = MainJFrame.adminDirectory.newAdmin("jatin", 24, "madanjatin18@gmail.com", "Male", "6179358513", boston, jp, "jatin", "jatin123", Admins.AdminType.COMMUNITY);
+            
+            create = false; 
+        }
         setLocationRelativeTo(null);
-        //lblComment.setText("Enter Admin Credentials");
     }
 
     /**
@@ -65,30 +68,54 @@ public class MainJFrame extends javax.swing.JFrame {
     private void initComponents() {
 
         lbl_title = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        lblError = new javax.swing.JLabel();
-        btn_admins = new javax.swing.JButton();
         btn_doctors = new javax.swing.JButton();
+        btn_admins = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
         btn_person = new javax.swing.JButton();
-        jLabel5 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        lbl_title1 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setBackground(new java.awt.Color(153, 153, 153));
 
-        lbl_title.setBackground(new java.awt.Color(153, 153, 153));
+        lbl_title.setBackground(new java.awt.Color(255, 51, 51));
         lbl_title.setFont(new java.awt.Font("Hiragino Maru Gothic ProN", 1, 36)); // NOI18N
-        lbl_title.setForeground(new java.awt.Color(204, 153, 0));
-        lbl_title.setText("     HHS.gov");
+        lbl_title.setForeground(new java.awt.Color(255, 255, 255));
+        lbl_title.setText(".gov");
 
-        jLabel2.setText("U.S. Department of Health & Human Services");
+        btn_doctors.setText("DOCTOR LOGIN");
+        btn_doctors.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_doctorsActionPerformed(evt);
+            }
+        });
 
-        btn_admins.setText("Admins");
+        btn_admins.setText("ADMIN LOGIN");
+        btn_admins.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_adminsActionPerformed(evt);
+            }
+        });
 
-        btn_doctors.setText("Doctors");
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel1.setText("Please select the login type");
 
-        btn_person.setText("Patient");
+        btn_person.setText("PATIENT LOGIN");
+        btn_person.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_personActionPerformed(evt);
+            }
+        });
 
-        jLabel5.setText("Please select the login type");
+        jLabel2.setText("       About HHS          Programs & Services        Grants & Contracts          Laws & Regulations ");
+
+        lbl_title1.setBackground(new java.awt.Color(255, 51, 51));
+        lbl_title1.setFont(new java.awt.Font("Hiragino Maru Gothic ProN", 1, 36)); // NOI18N
+        lbl_title1.setForeground(new java.awt.Color(255, 204, 0));
+        lbl_title1.setText("HHS");
+
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel3.setText("HHS.gov U.S. Department of Health & Human Services");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -96,92 +123,69 @@ public class MainJFrame extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(59, 59, 59))
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 528, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
+                .addGap(297, 297, 297)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(btn_doctors)
+                    .addComponent(btn_person, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btn_admins, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(265, 265, 265)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(172, 172, 172)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(219, 219, 219)
-                        .addComponent(lblError, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(160, 160, 160)
-                        .addComponent(lbl_title, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(108, 108, 108)
-                        .addComponent(btn_admins)
-                        .addGap(68, 68, 68)
-                        .addComponent(btn_doctors)
-                        .addGap(52, 52, 52)
-                        .addComponent(btn_person)))
-                .addGap(117, 152, Short.MAX_VALUE))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(jLabel5)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(lbl_title1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lbl_title, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(128, 128, 128))
+                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 388, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(187, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(36, 36, 36)
-                .addComponent(lbl_title, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 116, Short.MAX_VALUE)
+                .addGap(75, 75, 75)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btn_admins)
-                    .addComponent(btn_doctors)
-                    .addComponent(btn_person))
-                .addGap(47, 47, 47)
-                .addComponent(lblError)
-                .addContainerGap(55, Short.MAX_VALUE))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(jLabel5)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+                    .addComponent(lbl_title1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbl_title, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel3)
+                .addGap(46, 46, 46)
+                .addComponent(jLabel1)
+                .addGap(24, 24, 24)
+                .addComponent(btn_admins)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btn_person)
+                .addGap(12, 12, 12)
+                .addComponent(btn_doctors)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 66, Short.MAX_VALUE)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(MainJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(MainJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(MainJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(MainJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
+    private void btn_doctorsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_doctorsActionPerformed
+        this.dispose();
+        new LoginView("doctor").setVisible(true);
+    }//GEN-LAST:event_btn_doctorsActionPerformed
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                new MainJFrame().setVisible(true);
-            }
-        });
-    }
-    
+    private void btn_adminsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_adminsActionPerformed
+        this.dispose();
+        new AdminJFrame().setVisible(true);
+    }//GEN-LAST:event_btn_adminsActionPerformed
+
+    private void btn_personActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_personActionPerformed
+        this.dispose();
+        new LoginView("patient").setVisible(true);
+    }//GEN-LAST:event_btn_personActionPerformed
+
     // public functions
     public static void defaultSearchText(JTextField txtSearch, String content) {
         String defaultValue = content;
@@ -209,17 +213,49 @@ public class MainJFrame extends javax.swing.JFrame {
 		}
 	});
     }
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(MainJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(MainJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(MainJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(MainJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new MainJFrame().setVisible(true);
+            }
+        });
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_admins;
     private javax.swing.JButton btn_doctors;
     private javax.swing.JButton btn_person;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel lblError;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel lbl_title;
+    private javax.swing.JLabel lbl_title1;
     // End of variables declaration//GEN-END:variables
-
-
-
 }

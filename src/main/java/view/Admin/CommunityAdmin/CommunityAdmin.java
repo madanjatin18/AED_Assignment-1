@@ -72,7 +72,7 @@ public class CommunityAdmin extends javax.swing.JFrame {
 
         btn_back_admin.setBackground(new java.awt.Color(255, 255, 255));
         btn_back_admin.setForeground(new java.awt.Color(51, 51, 255));
-        btn_back_admin.setText("<- Logout");
+        btn_back_admin.setText(" Logout");
         btn_back_admin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_back_adminActionPerformed(evt);
@@ -85,10 +85,10 @@ public class CommunityAdmin extends javax.swing.JFrame {
             controlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(controlPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(controlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btn_back_admin)
-                    .addComponent(btn_community)
-                    .addComponent(btn_houses))
+                .addGroup(controlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btn_community, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btn_houses, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btn_back_admin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         controlPanelLayout.setVerticalGroup(
@@ -100,7 +100,7 @@ public class CommunityAdmin extends javax.swing.JFrame {
                 .addComponent(btn_community)
                 .addGap(18, 18, 18)
                 .addComponent(btn_houses)
-                .addContainerGap(446, Short.MAX_VALUE))
+                .addContainerGap(449, Short.MAX_VALUE))
         );
 
         splitPane.setLeftComponent(controlPanel);

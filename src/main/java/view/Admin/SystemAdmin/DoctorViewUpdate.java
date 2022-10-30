@@ -591,9 +591,9 @@ public class DoctorViewUpdate extends javax.swing.JPanel {
            btnOther.setSelected(true);
        }
             else switch (tblGender) {
-            case "Male" -> btnMale.setSelected(true);
-            case "Female" -> btnFemale.setSelected(true);
-            default -> btnOther.setSelected(true);
+            case "Male" : btnMale.setSelected(true);
+            case "Female" : btnFemale.setSelected(true);
+            default : btnOther.setSelected(true);
         }
 
         txtCity.setText(tblCity);

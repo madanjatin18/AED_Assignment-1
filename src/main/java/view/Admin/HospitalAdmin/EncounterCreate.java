@@ -36,9 +36,13 @@ public class EncounterCreate extends javax.swing.JPanel {
     Doctor doctor;
     Patient patient;
     Validations validations;
+    Date date;
+    SimpleDateFormat formatter;
+    Boolean valid;
     
     public EncounterCreate() {
         initComponents();
+        formatter = new SimpleDateFormat("yyyy-MM-dd");
         ddCity.removeAllItems();
         ddCity.addItem("");
         for (City c: MainJFrame.cityDirectory.getCityList()) {
@@ -77,6 +81,7 @@ public class EncounterCreate extends javax.swing.JPanel {
         valDate = new javax.swing.JLabel();
         btnSave = new javax.swing.JButton();
         btnBack = new javax.swing.JButton();
+        txtDate = new javax.swing.JTextField();
 
         valCommunity.setFont(new java.awt.Font("Helvetica Neue", 2, 13)); // NOI18N
         valCommunity.setForeground(new java.awt.Color(255, 0, 0));
@@ -161,6 +166,17 @@ public class EncounterCreate extends javax.swing.JPanel {
             }
         });
 
+        txtDate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtDateActionPerformed(evt);
+            }
+        });
+        txtDate.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtDateKeyReleased(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -183,7 +199,8 @@ public class EncounterCreate extends javax.swing.JPanel {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(btnBack)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnSave))))
+                                .addComponent(btnSave))
+                            .addComponent(txtDate)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(193, 193, 193)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -244,9 +261,11 @@ public class EncounterCreate extends javax.swing.JPanel {
                         .addComponent(ddPatient, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblDate)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(lblDate)
+                        .addComponent(txtDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(valDate, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(23, 23, 23)
+                .addGap(22, 22, 22)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnBack)
                     .addComponent(btnSave))
@@ -402,11 +421,11 @@ public class EncounterCreate extends javax.swing.JPanel {
             valHospital.setText("Please Select Hospital");
             valid = false;
         }
-        
+        /*
         if (!this.validations.ValidateEmpty(datePicker.getDateStringOrEmptyString()) ) {
             valDate.setText("Date of joining is required");
             valid = false;
-        }
+        }*/
 
         if (ddDoctor.getSelectedItem() == null || ddDoctor.getSelectedItem().toString().isEmpty()) {
             valDoctor.setText("Please Select doctor");
@@ -417,28 +436,26 @@ public class EncounterCreate extends javax.swing.JPanel {
             valPatient.setText("Please Select patient");
             valid = false;
         }
-        if (valid) {
-
-            Date date;
-            
-            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-M-dd");
-            
+        
+        if (txtDate.getText()!=null){
+                       
             try {
-                date = formatter.parse(datePicker.getDateStringOrEmptyString());
+                date = formatter.parse(txtDate.getText());
                 
             } catch (ParseException ex) {
-                date = new Date(1970, 01, 01);
+                valid=false;
+                valDate.setText("Date should be in yyyy-mm-dd");
             }
-
-            MainJFrame.encounterDirectory.newEncounter(date, doctor, hospital, patient);
-            
+        }
+        if (valid) {
+            MainJFrame.encounterDirectory.newEncounter(date, doctor, hospital, patient);  
             JOptionPane.showMessageDialog(this, "encounter details Added");
             ddCity.setSelectedItem("");
             ddCommunity.setSelectedItem("");
             ddHospital.setSelectedItem("");
             ddDoctor.setSelectedItem("");
             ddPatient.setSelectedItem("");
-            datePicker.setDate(null);
+            txtDate.setText(null);
             valCity.setText(null);
             valCommunity.setText(null);
             valDate.setText(null);
@@ -456,7 +473,7 @@ public class EncounterCreate extends javax.swing.JPanel {
         adminArea.setVisible(true);
         adminArea.setEncounterUpdateView();
     }//GEN-LAST:event_btnBackActionPerformed
-
+/*
     private void datePickerKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_datePickerKeyReleased
         if (!this.validations.ValidateEmpty(datePicker.getDateStringOrEmptyString()) ) {
             valDate.setText("Date of joining is required");
@@ -465,6 +482,25 @@ public class EncounterCreate extends javax.swing.JPanel {
             valDate.setText(null);
         }
     }//GEN-LAST:event_datePickerKeyReleased
+*/
+    private void txtDateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDateActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtDateActionPerformed
+
+    private void txtDateKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDateKeyReleased
+        // TODO add your handling code here:
+        if ((txtDate.getText() == null) ) {
+            valDate.setText("Date is required");
+        }
+        try {
+            date = formatter.parse(txtDate.getText());
+
+        } 
+        catch (ParseException ex) {
+            valid=false;
+            valDate.setText("Date should be in yyyy-mm-dd");
+        }
+    }//GEN-LAST:event_txtDateKeyReleased
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;
@@ -481,6 +517,7 @@ public class EncounterCreate extends javax.swing.JPanel {
     private javax.swing.JLabel lblDoctor;
     private javax.swing.JLabel lblHospital;
     private javax.swing.JLabel lblPatient;
+    private javax.swing.JTextField txtDate;
     private javax.swing.JLabel valCity;
     private javax.swing.JLabel valCommunity;
     private javax.swing.JLabel valDate;

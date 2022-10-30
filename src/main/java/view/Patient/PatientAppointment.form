@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
 <Form version="1.5" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JPanelFormInfo">
+  <NonVisualComponents>
+    <Component class="javax.swing.JTextField" name="txtDate">
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtDateActionPerformed"/>
+        <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtDateKeyReleased"/>
+      </Events>
+    </Component>
+  </NonVisualComponents>
   <AuxValues>
     <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
     <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
@@ -26,39 +34,46 @@
                   </Group>
                   <Component id="jScrollPane1" alignment="0" min="-2" pref="586" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+              <EmptySpace min="0" pref="72" max="32767" attributes="0"/>
           </Group>
-          <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="1" attributes="0">
-                  <Component id="txtCommunity" alignment="1" min="-2" pref="207" max="-2" attributes="0"/>
-                  <Group type="102" alignment="1" attributes="0">
+          <Group type="102" attributes="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="1" attributes="0">
-                          <Component id="lblCommunity" min="-2" max="-2" attributes="0"/>
-                          <Component id="lblCommunity4" alignment="1" min="-2" max="-2" attributes="0"/>
-                          <Component id="lblCommunity3" alignment="1" min="-2" max="-2" attributes="0"/>
-                          <Component id="lblCommunity1" alignment="1" min="-2" max="-2" attributes="0"/>
-                          <Component id="lblCity" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="103" alignment="1" groupAlignment="0" attributes="0">
-                              <Component id="txtGender" alignment="0" min="-2" pref="207" max="-2" attributes="0"/>
-                              <Component id="txtHospital" alignment="0" min="-2" pref="207" max="-2" attributes="0"/>
+                          <Component id="txtCommunity" alignment="1" min="-2" pref="207" max="-2" attributes="0"/>
+                          <Group type="102" alignment="1" attributes="0">
+                              <Group type="103" groupAlignment="1" attributes="0">
+                                  <Component id="lblCommunity" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lblCommunity4" alignment="1" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lblCommunity3" alignment="1" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lblCommunity1" alignment="1" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lblCity" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lblCommunity5" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="103" alignment="1" groupAlignment="0" max="-2" attributes="0">
+                                      <Component id="txtGender" alignment="0" pref="207" max="32767" attributes="0"/>
+                                      <Component id="txtHospital" alignment="0" pref="207" max="32767" attributes="0"/>
+                                      <Component id="txtDate1" alignment="0" max="32767" attributes="0"/>
+                                  </Group>
+                                  <Group type="103" alignment="1" groupAlignment="0" attributes="0">
+                                      <Component id="txtAbout" alignment="0" min="-2" pref="207" max="-2" attributes="0"/>
+                                      <Component id="txtDoctor" alignment="0" min="-2" pref="207" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
                           </Group>
-                          <Group type="103" alignment="1" groupAlignment="0" attributes="0">
-                              <Component id="txtAbout" alignment="0" min="-2" pref="207" max="-2" attributes="0"/>
-                              <Component id="txtDoctor" alignment="0" min="-2" pref="207" max="-2" attributes="0"/>
-                          </Group>
                       </Group>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="valDate" min="-2" pref="206" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="264" max="-2" attributes="0"/>
+                      <Component id="btn_create" min="-2" pref="135" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="btn_create" alignment="1" min="-2" pref="87" max="-2" attributes="0"/>
-                  <Component id="valDate" alignment="1" min="-2" pref="206" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -72,36 +87,44 @@
               </Group>
               <EmptySpace min="27" pref="27" max="-2" attributes="0"/>
               <Component id="jScrollPane1" min="-2" pref="136" max="-2" attributes="0"/>
-              <EmptySpace min="42" pref="42" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="txtDoctor" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="lblCity" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="txtAbout" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="lblCommunity" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <Component id="valDate" min="-2" pref="16" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="txtAbout" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblCommunity" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="lblCommunity1" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="txtCommunity" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="btn_create" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="lblCommunity3" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="txtHospital" alignment="3" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="1" attributes="0">
+                  <Group type="102" attributes="0">
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="lblCommunity3" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtHospital" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="lblCommunity4" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtGender" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="txtDate1" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblCommunity5" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                  <Component id="valDate" min="-2" pref="16" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="lblCommunity4" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="txtGender" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace pref="31" max="32767" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Component id="btn_create" min="-2" max="-2" attributes="0"/>
+              <EmptySpace pref="41" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -219,7 +242,7 @@
     </Component>
     <Component class="javax.swing.JButton" name="btn_create">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Create"/>
+        <Property name="text" type="java.lang.String" value="Book Appointment"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_createActionPerformed"/>
@@ -264,6 +287,20 @@
         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="0" green="0" red="ff" type="rgb"/>
         </Property>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="txtDate1">
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtDate1ActionPerformed"/>
+        <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtDate1KeyReleased"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblCommunity5">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Hiragino Mincho ProN" size="18" style="1"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Date :"/>
       </Properties>
     </Component>
   </SubComponents>

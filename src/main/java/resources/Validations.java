@@ -66,6 +66,8 @@ public class Validations {
         return !value.isEmpty();
     }
     
+    
+    
     public boolean ValidateBloodPressure(String value) {
         String PATTERN = "[+-]?((\\d+\\.?\\d*)|(\\.\\d+))";
         return MatchPattern(PATTERN, value);

@@ -31,8 +31,12 @@ public class EncounterViewUpdate extends javax.swing.JPanel {
     
     Validations validations;
     Vector originalTableModel;
+    Date date;
+    SimpleDateFormat formatter;
+    Boolean valid;
     public EncounterViewUpdate() {
         initComponents();
+        formatter = new SimpleDateFormat("yyyy-M-dd");
         MainJFrame.defaultSearchText(txtSearch, "Search by city or community");
         validations = new Validations();
         populateTable();
@@ -66,6 +70,7 @@ public class EncounterViewUpdate extends javax.swing.JPanel {
         txtPatient = new javax.swing.JTextField();
         lblDate = new javax.swing.JLabel();
         valDate = new javax.swing.JLabel();
+        txtDate = new javax.swing.JTextField();
 
         btnUpdate.setText("Update");
         btnUpdate.addActionListener(new java.awt.event.ActionListener() {
@@ -152,11 +157,22 @@ public class EncounterViewUpdate extends javax.swing.JPanel {
 
         txtPatient.setEditable(false);
 
-        lblDate.setText("Date :");
         lblDate.setFont(new java.awt.Font("Hiragino Mincho ProN", 1, 18)); // NOI18N
+        lblDate.setText("Date :");
 
         valDate.setFont(new java.awt.Font("Helvetica Neue", 2, 13)); // NOI18N
         valDate.setForeground(new java.awt.Color(255, 0, 0));
+
+        txtDate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtDateActionPerformed(evt);
+            }
+        });
+        txtDate.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtDateKeyReleased(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -189,17 +205,24 @@ public class EncounterViewUpdate extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtCommunity, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(txtCity, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(133, 133, 133)
+                        .addGap(340, 340, 340)
                         .addComponent(btn_create, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(txtHospital, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtPatient, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(120, 120, 120)
-                        .addComponent(btnUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(120, 120, 120)
+                                .addComponent(btnUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtCity, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(valDate, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(44, Short.MAX_VALUE))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(227, 227, 227)
+                    .addComponent(txtDate, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(227, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -212,11 +235,9 @@ public class EncounterViewUpdate extends javax.swing.JPanel {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(42, 42, 42)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(txtCity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(lblCity))
+                    .addComponent(lblCity)
                     .addComponent(btn_create))
-                .addGap(6, 6, 6)
+                .addGap(7, 7, 7)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblCommunity)
                     .addComponent(txtCommunity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -235,16 +256,23 @@ public class EncounterViewUpdate extends javax.swing.JPanel {
                     .addComponent(txtPatient, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblDate)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(lblDate)
+                        .addComponent(txtCity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(valDate, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(btnUpdate)
-                .addContainerGap(67, Short.MAX_VALUE))
+                .addContainerGap(66, Short.MAX_VALUE))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(271, 271, 271)
+                    .addComponent(txtDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(272, Short.MAX_VALUE)))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
-        int selectRowIndex = tblDetails.getSelectedRow();
+             int selectRowIndex = tblDetails.getSelectedRow();
         if (selectRowIndex<0){
             JOptionPane.showMessageDialog(this, "Please select a row to update");
             return;
@@ -254,26 +282,24 @@ public class EncounterViewUpdate extends javax.swing.JPanel {
 
         var valid = true;
         
-        if (!this.validations.ValidateEmpty(datePicker.getDateStringOrEmptyString()) ) {
-            valDate.setText("Date of joining is required");
+        if (!this.validations.ValidateEmpty(txtDate.getText()) ) {
+            valDate.setText("Date is required");
             valid = false;
+        }
+        if (txtDate.getText()!=null){
+                       
+            try {
+                date = formatter.parse(txtDate.getText());
+                
+            } catch (ParseException ex) {
+                valid=false;
+                valDate.setText("Date should be in yyyy-mm-dd");
+            }
         }
 
         //
         if (valid) {
-
-            Date date;
-            
-            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-M-dd");
-            
-            try {
-                date = formatter.parse(datePicker.getDateStringOrEmptyString());
-                
-            } catch (ParseException ex) {
-                date = new Date(1970, 01, 01);
-            }
-
-
+     
             selectedDetails.setDate(date);
 
             JOptionPane.showMessageDialog(this, "Encounter details Updated");
@@ -325,7 +351,7 @@ public class EncounterViewUpdate extends javax.swing.JPanel {
         txtHospital.setText(tblHospital);
         txtDoctor.setText(tblDoctor);
         txtPatient.setText(tblPatient);
-        datePicker.setDate(localDate);
+        txtDate.setText(tblDate.toString());
 
         valDate.setText(null);
     }//GEN-LAST:event_tblDetailsMouseClicked
@@ -338,7 +364,7 @@ public class EncounterViewUpdate extends javax.swing.JPanel {
         adminArea.setVisible(true);
         adminArea.setEncounterCreateView();
     }//GEN-LAST:event_btn_createActionPerformed
-
+/*
     private void datePickerKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_datePickerKeyReleased
         if (!this.validations.ValidateEmpty(datePicker.getDateStringOrEmptyString()) ) {
             valDate.setText("Date of joining is required");
@@ -347,6 +373,25 @@ public class EncounterViewUpdate extends javax.swing.JPanel {
             valDate.setText(null);
         }
     }//GEN-LAST:event_datePickerKeyReleased
+*/
+    private void txtDateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDateActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtDateActionPerformed
+
+    private void txtDateKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDateKeyReleased
+        // TODO add your handling code here:
+        if ((txtDate.getText() == null) ) {
+            valDate.setText("Date is required");
+        }
+        try {
+            date = formatter.parse(txtDate.getText());
+
+        }
+        catch (ParseException ex) {
+            valid=false;
+            valDate.setText("Date should be in yyyy-mm-dd");
+        }
+    }//GEN-LAST:event_txtDateKeyReleased
 
     private void populateTable() {
         
@@ -373,7 +418,7 @@ public class EncounterViewUpdate extends javax.swing.JPanel {
         txtDoctor.setText(null);
         txtPatient.setText(null);
         txtHospital.setText(null);
-        datePicker.setDate(null);
+        txtDate.setText(null);
                
     }
 
@@ -391,6 +436,7 @@ public class EncounterViewUpdate extends javax.swing.JPanel {
     private javax.swing.JTable tblDetails;
     private javax.swing.JTextField txtCity;
     private javax.swing.JTextField txtCommunity;
+    private javax.swing.JTextField txtDate;
     private javax.swing.JTextField txtDoctor;
     private javax.swing.JTextField txtHospital;
     private javax.swing.JTextField txtPatient;

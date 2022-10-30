@@ -53,16 +53,11 @@ public class CreateDefaultData {
         Hospital f = MainJFrame.hospitalDirectory.newHospital("kgf", "At home", 452003, "ok sir", boston, jp);
         
         // create person
-        Person p1 = MainJFrame.personDirectory.newPerson("vaibhav", 24, "vaibhav@gmail.com", "Male", "7878787878", boston, jp, "vbhv", "vbhv10");
-        Person p2 = MainJFrame.personDirectory.newPerson("megha", 25, "megha@gmail.com", "Female", "7878743878", springField, gb, "megha", "vbhv10");
+        Person p1 = MainJFrame.personDirectory.newPerson("Jatin", 24, "vaibhav@gmail.com", "Male", "7878787878", boston, jp, "vbhv", "vbhv10");
+        Person p2 = MainJFrame.personDirectory.newPerson("Adnan", 25, "megha@gmail.com", "Female", "7878743878", springField, gb, "megha", "vbhv10");
         Person p3 = MainJFrame.personDirectory.newPerson("nalin", 26, "nalin@gmail.com", "Male", "9878787878", worcester, vn, "nalin", "vbhv10");
         Person p4 = MainJFrame.personDirectory.newPerson("amit", 27, "amit@gmail.com", "Male", "2378787878", cambridge, sn, "amit", "vbhv10");
         Person p5 = MainJFrame.personDirectory.newPerson("adi", 24, "adi@gmail.com", "Male", "3578787878", brockton, r, "adi", "vbhv10");
-        Person p6 = MainJFrame.personDirectory.newPerson("avi", 24, "avi@gmail.com", "Male", "7878787878", boston, jp, "avi", "vbhv10");
-        Person p7 = MainJFrame.personDirectory.newPerson("ankit", 24, "ankit@gmail.com", "Male", "7878787878", worcester, rn, "ankit", "vbhv10");
-        Person p8 = MainJFrame.personDirectory.newPerson("anki", 29, "anki@gmail.com", "Male", "9878787878", lowell, ai, "anki", "vbhv10");
-        Person p9 = MainJFrame.personDirectory.newPerson("mahi", 24, "mahi@gmail.com", "Female", "9878783478", boston, sb, "mahi", "vbhv10");
-        Person p10 = MainJFrame.personDirectory.newPerson("sayoni", 24, "sayoni@gmail.com", "Female", "2547878787", lowell, mr, "sayoni", "vbhv10");
         
         // create doctor
         Doctor d1 = MainJFrame.doctorDirectory.newDoctor("gynic", a, "vaibhav", 24, "vaibhav@gmail.com", "Male", "7878787878", boston, jp, "vbhv", "vbhv10");
@@ -86,7 +81,7 @@ public class CreateDefaultData {
         Patient pa5 = MainJFrame.patientDirectory.newPatient("Heark attack", h2, e, "sayoni", 24, "sayoni@gmail.com", "Female", "2547878787", lowell, mr, "sayoni", "vbhv10");
         
         // Create Admins
-        Admins ad1 = MainJFrame.adminDirectory.newAdmin("vaibhav", 24, "vaibhav@gmail.com", "Male", "7878787878", boston, jp, "vbhv", "vbhv10", Admins.AdminType.SYSTEM);
+        Admins ad1 = MainJFrame.adminDirectory.newAdmin("jatin", 24, "vaibhav@gmail.com", "Male", "7878787878", boston, jp, "madan", "madan123", Admins.AdminType.SYSTEM);
         Admins ad2 = MainJFrame.adminDirectory.newAdmin("megha", 25, "megha@gmail.com", "Female", "7878743878", springField, gb, "megha", "vbhv10", Admins.AdminType.COMMUNITY);
         Admins ad3 = MainJFrame.adminDirectory.newAdmin("nalin", 26, "nalin@gmail.com", "Male", "9878787878", worcester, vn, "nalin", "vbhv10", Admins.AdminType.HOSPITAL);
         

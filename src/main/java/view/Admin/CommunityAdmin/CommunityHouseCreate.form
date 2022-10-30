@@ -19,10 +19,10 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="94" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="lblCity" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="lblCommunity" alignment="0" min="-2" max="-2" attributes="0"/>
                   <Component id="lblAddressLine1" alignment="0" min="-2" max="-2" attributes="0"/>
                   <Component id="lblAddressLine2" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblCommunity" alignment="1" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblCity" alignment="1" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
@@ -33,9 +33,9 @@
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
-                              <Component id="btn_back_community_admin" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="62" max="-2" attributes="0"/>
-                              <Component id="btn_save" min="-2" max="-2" attributes="0"/>
+                              <Component id="btn_back_community_admin" min="-2" pref="68" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="74" max="-2" attributes="0"/>
+                              <Component id="btn_save" min="-2" pref="66" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="ddCity" min="-2" pref="212" max="-2" attributes="0"/>
@@ -71,11 +71,9 @@
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="lblCommunity" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="ddCommunity" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
+                  <Component id="ddCommunity" min="-2" max="-2" attributes="0"/>
                   <Component id="valCommunity" min="-2" pref="16" max="-2" attributes="0"/>
+                  <Component id="lblCommunity" alignment="0" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -115,7 +113,7 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Hiragino Mincho ProN" size="18" style="1"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="City : "/>
+        <Property name="text" type="java.lang.String" value="City :"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="lblCommunity">
@@ -144,7 +142,7 @@
     </Component>
     <Component class="javax.swing.JButton" name="btn_back_community_admin">
       <Properties>
-        <Property name="text" type="java.lang.String" value="&lt;- Back"/>
+        <Property name="text" type="java.lang.String" value="Back"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_back_community_adminActionPerformed"/>

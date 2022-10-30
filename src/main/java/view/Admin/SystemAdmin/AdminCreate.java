@@ -602,9 +602,9 @@ public class AdminCreate extends javax.swing.JPanel {
         } else {
             valAdmin.setText(null);
             switch (adminType.toString()) {
-                case("COMMUNITY") -> admin = AdminType.COMMUNITY;
-                case("HOSPITAL") -> admin = AdminType.HOSPITAL;
-                case("SYSTEM") -> admin = AdminType.SYSTEM;
+                case("COMMUNITY") : admin = AdminType.COMMUNITY;
+                case("HOSPITAL") : admin = AdminType.HOSPITAL;
+                case("SYSTEM") : admin = AdminType.SYSTEM;
             }
         }
         

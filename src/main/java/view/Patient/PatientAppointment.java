@@ -30,7 +30,10 @@ public class PatientAppointment extends javax.swing.JPanel {
     Vector originalTableModel;
     Validations validations;
     Patient patient;
-    
+    Date date;
+    Date now;
+    SimpleDateFormat formatter;
+    Boolean valid;
     public PatientAppointment() {
         initComponents();
         MainJFrame.defaultSearchText(txtSearch, "Search ...");
@@ -39,7 +42,7 @@ public class PatientAppointment extends javax.swing.JPanel {
         validations = new Validations();
         originalTableModel = (Vector) ((DefaultTableModel) tblDetails.getModel()).getDataVector().clone();
         btn_create.setVisible(false);
-        datePicker.setVisible(false);
+        txtDate1.setVisible(false);
     }
 
     /**
@@ -51,6 +54,7 @@ public class PatientAppointment extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        txtDate = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblDetails = new javax.swing.JTable();
         lblDoctorRecord = new javax.swing.JLabel();
@@ -67,6 +71,19 @@ public class PatientAppointment extends javax.swing.JPanel {
         txtAbout = new javax.swing.JTextField();
         txtSearch = new javax.swing.JTextField();
         valDate = new javax.swing.JLabel();
+        txtDate1 = new javax.swing.JTextField();
+        lblCommunity5 = new javax.swing.JLabel();
+
+        txtDate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtDateActionPerformed(evt);
+            }
+        });
+        txtDate.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtDateKeyReleased(evt);
+            }
+        });
 
         tblDetails.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -120,7 +137,7 @@ public class PatientAppointment extends javax.swing.JPanel {
         lblCommunity1.setFont(new java.awt.Font("Hiragino Mincho ProN", 1, 18)); // NOI18N
         lblCommunity1.setText("Community :");
 
-        btn_create.setText("Create");
+        btn_create.setText("Book Appointment");
         btn_create.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_createActionPerformed(evt);
@@ -146,6 +163,20 @@ public class PatientAppointment extends javax.swing.JPanel {
         valDate.setFont(new java.awt.Font("Helvetica Neue", 2, 13)); // NOI18N
         valDate.setForeground(new java.awt.Color(255, 0, 0));
 
+        txtDate1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtDate1ActionPerformed(evt);
+            }
+        });
+        txtDate1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtDate1KeyReleased(evt);
+            }
+        });
+
+        lblCommunity5.setFont(new java.awt.Font("Hiragino Mincho ProN", 1, 18)); // NOI18N
+        lblCommunity5.setText("Date :");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -158,31 +189,36 @@ public class PatientAppointment extends javax.swing.JPanel {
                         .addGap(38, 38, 38)
                         .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 291, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 586, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(0, 72, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
-                .addGap(24, 24, 24)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(txtCommunity, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(lblCommunity)
-                            .addComponent(lblCommunity4)
-                            .addComponent(lblCommunity3)
-                            .addComponent(lblCommunity1)
-                            .addComponent(lblCity))
-                        .addGap(26, 26, 26)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(txtGender, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(txtHospital, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(txtAbout, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(txtDoctor, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addGap(42, 42, 42)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btn_create, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(valDate, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(24, 24, 24)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(txtCommunity, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(lblCommunity)
+                                    .addComponent(lblCommunity4)
+                                    .addComponent(lblCommunity3)
+                                    .addComponent(lblCommunity1)
+                                    .addComponent(lblCity)
+                                    .addComponent(lblCommunity5))
+                                .addGap(26, 26, 26)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(txtGender, javax.swing.GroupLayout.DEFAULT_SIZE, 207, Short.MAX_VALUE)
+                                        .addComponent(txtHospital, javax.swing.GroupLayout.DEFAULT_SIZE, 207, Short.MAX_VALUE)
+                                        .addComponent(txtDate1))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(txtAbout, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(txtDoctor, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addGap(18, 18, 18)
+                        .addComponent(valDate, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(264, 264, 264)
+                        .addComponent(btn_create, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -198,25 +234,31 @@ public class PatientAppointment extends javax.swing.JPanel {
                     .addComponent(txtDoctor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblCity))
                 .addGap(6, 6, 6)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(txtAbout, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(lblCommunity))
-                    .addComponent(valDate, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtAbout, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblCommunity))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblCommunity1)
-                    .addComponent(txtCommunity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btn_create))
+                    .addComponent(txtCommunity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(17, 17, 17)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblCommunity3)
-                    .addComponent(txtHospital, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblCommunity4)
-                    .addComponent(txtGender, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(31, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblCommunity3)
+                            .addComponent(txtHospital, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblCommunity4)
+                            .addComponent(txtGender, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtDate1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblCommunity5)))
+                    .addComponent(valDate, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(btn_create)
+                .addContainerGap(41, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -239,7 +281,7 @@ public class PatientAppointment extends javax.swing.JPanel {
         txtGender.setText(tblGender);
         
         btn_create.setVisible(true);
-        datePicker.setVisible(true);
+        txtDate1.setVisible(true);
     }//GEN-LAST:event_tblDetailsMouseClicked
 
     private void btn_createActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_createActionPerformed
@@ -249,23 +291,31 @@ public class PatientAppointment extends javax.swing.JPanel {
         
         var valid = true;
         
-        if (!this.validations.ValidateEmpty(datePicker.getDateStringOrEmptyString()) ) {
-            valDate.setText("Date of joining is required");
+        if (!this.validations.ValidateEmpty(txtDate.getText()) ) {
+            valDate.setText("Date of appointment is required");
             valid = false;
         }
-        
-        if (valid) {
-            Date date;
-            
-            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-M-dd");
-            
+        if (txtDate1.getText()!=null){
+
+            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+
             try {
-                date = formatter.parse(datePicker.getDateStringOrEmptyString());
-                
+                date = formatter.parse(txtDate1.getText());
+                now = formatter.parse("2022-10-30");
             } catch (ParseException ex) {
-                date = new Date(1970, 01, 01);
+                valid=false;
+                valDate.setText("Date should be in yyyy-mm-dd");
             }
             
+            if(date!= null){
+                if(date.compareTo(now) > 0){
+                    valid = false;
+                    valDate.setText("Date should be of future");
+                }
+            }
+        }
+        if (valid) {
+                      
             if (!doctor.getHospital().isPatientExist(patient)) {
                doctor.getHospital().addPatient(patient);
             }
@@ -282,7 +332,7 @@ public class PatientAppointment extends javax.swing.JPanel {
 
         setTextNull();
         btn_create.setVisible(false);
-        datePicker.setVisible(false);
+        txtDate.setVisible(false);
         
         DefaultTableModel model = (DefaultTableModel)tblDetails.getModel();
 
@@ -298,6 +348,33 @@ public class PatientAppointment extends javax.swing.JPanel {
             }
         }
     }//GEN-LAST:event_txtSearchKeyReleased
+
+    private void txtDateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDateActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtDateActionPerformed
+
+    private void txtDateKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDateKeyReleased
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_txtDateKeyReleased
+
+    private void txtDate1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDate1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtDate1ActionPerformed
+
+    private void txtDate1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDate1KeyReleased
+        // TODO add your handling code here:
+        if ((txtDate1.getText() == null) ) {
+            valDate.setText("Date is required");
+        }
+        try {
+            date = formatter.parse(txtDate1.getText());
+        }
+        catch (ParseException ex) {
+            valid=false;
+            valDate.setText("Date should be in yyyy-mm-dd");
+        }
+    }//GEN-LAST:event_txtDate1KeyReleased
 
     private void populateTable() {
         
@@ -334,10 +411,13 @@ public class PatientAppointment extends javax.swing.JPanel {
     private javax.swing.JLabel lblCommunity1;
     private javax.swing.JLabel lblCommunity3;
     private javax.swing.JLabel lblCommunity4;
+    private javax.swing.JLabel lblCommunity5;
     private javax.swing.JLabel lblDoctorRecord;
     private javax.swing.JTable tblDetails;
     private javax.swing.JTextField txtAbout;
     private javax.swing.JTextField txtCommunity;
+    private javax.swing.JTextField txtDate;
+    private javax.swing.JTextField txtDate1;
     private javax.swing.JTextField txtDoctor;
     private javax.swing.JTextField txtGender;
     private javax.swing.JTextField txtHospital;
