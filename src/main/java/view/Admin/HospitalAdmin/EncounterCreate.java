@@ -261,15 +261,13 @@ public class EncounterCreate extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addComponent(ddDoctor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(12, 12, 12)
+                .addGap(9, 9, 9)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(valPatient, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(lblPatient))
-                    .addGroup(layout.createSequentialGroup()
+                    .addComponent(valPatient, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(ddPatient, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(8, 8, 8)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(lblPatient)))
+                .addGap(8, 8, 8)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblDate)
                     .addComponent(LabelDate))
@@ -429,7 +427,11 @@ public class EncounterCreate extends javax.swing.JPanel {
                 valDoctor.setText("Please Select Doctor");
             } else {
                 valDoctor.setText(null);
-                doctor = hospital.getDoctorByName(doctorName.toString());
+                
+                ddPatient.addItem("");
+                for (Patient c: hospital.getPatientInHospitalWithDoctor(doctorName.toString())) {
+                    ddPatient.addItem(c.getPerson().getName());
+                }
 
             }
         }
@@ -437,7 +439,7 @@ public class EncounterCreate extends javax.swing.JPanel {
 
     private void ddPatientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ddPatientActionPerformed
         Object patientName = ddPatient.getSelectedItem();
-        Object doctorName = ddDoctor.getSelectedItem();
+        //Object doctorName = ddDoctor.getSelectedItem();
         if(checkDoctor()){ 
             if (patientName == null || patientName.toString().equals("")) {
                 valPatient.setText("Please Select Patient");
@@ -447,18 +449,18 @@ public class EncounterCreate extends javax.swing.JPanel {
                 for (Patient p: invidoctor.getPatientList()) {
                     ddPatient.addItem(p.getPerson().getName());
                 }
-                ddPatient.setSelectedItem("");
+                //ddPatient.setSelectedItem("");
                         
             }
         }
         else{
-            doctor = MainJFrame.doctorDirectory.getDoctorObject(doctorName.toString());
-                ddPatient.addItem("");
+            //doctor = MainJFrame.doctorDirectory.getDoctorObject(doctorName.toString());
+                //ddPatient.addItem("");
                 valPatient.setText(null);
-                for (Patient c: doctor.getPatientList()) {
+                /*for (Patient c: doctor.getPatientList()) {
                     ddPatient.addItem(c.getPerson().getName());
-                }
-                ddPatient.setSelectedItem("");
+                }*/
+                //ddPatient.setSelectedItem("");
         }
     }//GEN-LAST:event_ddPatientActionPerformed
 
@@ -480,12 +482,6 @@ public class EncounterCreate extends javax.swing.JPanel {
             valHospital.setText("Please Select Hospital");
             valid = false;
         }
-        /*
-        if (!this.validations.ValidateDate(datePicker.getDateStringOrEmptyString()) ) {
-            valDate.setText("Date of joining is required");
-            valid = false;
-        }
-*/
         if (ddDoctor.getSelectedItem() == null || ddDoctor.getSelectedItem().toString().isEmpty()) {
             valDoctor.setText("Please Select doctor");
             valid = false;
@@ -498,8 +494,9 @@ public class EncounterCreate extends javax.swing.JPanel {
         if (valid) {
 
                       
-            Encounter enc = MainJFrame.encounterDirectory.newEncounter(date,doctor,hospital,patient);
-            doctor.setEncounter(enc);
+            MainJFrame.encounterDirectory.newEncounter(date,
+                    hospital.getDoctorByName(ddDoctor.getSelectedItem().toString()),
+                    hospital,patient);
             JOptionPane.showMessageDialog(this, "Encounter details Added");
             
            
@@ -531,15 +528,16 @@ public class EncounterCreate extends javax.swing.JPanel {
             case "sys":
                 {
                     SystemAdminJFrame adminArea = new SystemAdminJFrame("sys",null);
-                    adminArea.setVisible(true);
                     adminArea.setEncounterUpdateView();
+                    adminArea.setVisible(true);
+                    
                     break;
                 }
             case "doc":
                 {
                     DoctorAdminJFrame adminArea = new DoctorAdminJFrame("doc",username);
                     adminArea.setVisible(true);
-                    //adminArea.setEncounterUpdateView();
+                    adminArea.setEncounterUpdateView();
                     break;
                 }
             default:

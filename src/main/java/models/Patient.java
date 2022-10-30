@@ -2,33 +2,24 @@ package models;
 
 import java.util.ArrayList;
 
-
-public class Patient {
+/**
+ *
+ * @author madan
+ */
+public class Patient extends Person {
     
     private int patientID;
     private String issue;
     private ArrayList<Encounter> encounterList;
-    private Person person;
     private House house;
     private Hospital hospital;
-    private Doctor doctor;
-
-    public Doctor getDoctor() {
-        return doctor;
-    }
-
-    public void setDoctor(Doctor doctor) {
-        this.doctor = doctor;
-    }
     
-    public Patient (String issue, House house, Person person, int patientID, Hospital hospital,Doctor doctor){
-        
+    public Patient (String issue, House house, int patientID, Hospital hospital, String name, int age, String email, String gender, String phoneNumber, City city, Community community, String username, String password){
+        super( name,  age,  email,  gender,  phoneNumber,  city,  community,  username,  password);
         this.issue = issue;
         this.patientID = patientID;
         this.house = house;
-        this.person = person;
         this.hospital = hospital;
-        this.doctor = doctor;
         
         encounterList = new  ArrayList();
     }
@@ -47,14 +38,6 @@ public class Patient {
 
     public void setIssue(String issue) {
         this.issue = issue;
-    }
-
-    public Person getPerson() {
-        return person;
-    }
-
-    public void setPerson(Person person) {
-        this.person = person;
     }
 
     public House getHouse() {
@@ -83,7 +66,7 @@ public class Patient {
     }
     
     public boolean isMatch(String name){
-        if(this.person.getName().equals(name)) return true;
+        if(this.getName().equals(name)) return true;
         return false;
     }
 }

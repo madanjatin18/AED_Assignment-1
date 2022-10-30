@@ -4,17 +4,20 @@
  */
 package models;
 
+/**
+ *
+ * @author madan
+ */
 public class Person {
-    public String name;
-    public int age;
-    public String email;
-    public String gender;
-    public String phoneNumber;
-    public City city;
-    public Community community;
-    public String username;
-    public String password;
-    //private String type;
+    private String name;
+    private int age;
+    private String email;
+    private String gender;
+    private String phoneNumber;
+    private City city;
+    private Community community;
+    private String username;
+    private String password;
 
     public Person(String name, int age, String email, String gender, String phoneNumber, City city, Community community, String username, String password) {
         this.name = name;

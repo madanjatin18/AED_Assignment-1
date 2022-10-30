@@ -6,7 +6,10 @@ package models;
 
 import java.util.ArrayList;
 
-
+/**
+ *
+ * @author madan
+ */
 public class HospitalDirectory {
     private ArrayList<Hospital> hospitalList;
     
@@ -65,19 +68,16 @@ public class HospitalDirectory {
         return searchHospitalDirectory;
     }
     
-    public ArrayList<Doctor> searcDoctorByCommunity(Community community)
+    public ArrayList<Doctor> getDoctorsInCommunity(Community community)
     {
         ArrayList<Doctor> searchDoctorDirectory = new ArrayList();
-        for(Hospital hospital: searchHospitalByCommunity(community))
-        {   
-            for (Doctor d:hospital.getDoctorList()){
-                searchDoctorDirectory.add(d);
-            }  
-        }
+        for(Hospital hospital: hospitalList)
+        {
+            if(hospital.getCommunity().equals(community))
+            {
+                searchDoctorDirectory.addAll(hospital.getDoctorList());
+            
+        }}
         return searchDoctorDirectory;
-    }
-    
-    public void deleteHospital(Hospital selectedHospital) {
-        hospitalList.remove(selectedHospital);       
     }
 }

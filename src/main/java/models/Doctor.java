@@ -6,21 +6,37 @@ package models;
 
 import java.util.ArrayList;
 
-
-public class Doctor {
+/**
+ *
+ * @author madan
+ */
+public class Doctor extends Person {
     private String about;
+    private int doctorID;
     private ArrayList<Patient> patientList;
     private ArrayList<Encounter> encounterList;
     private Hospital hospital;
-    private Person person;
-    
-    public Doctor (String about, Hospital hospital, Person person){
-        
+
+    public Doctor(String about, Hospital hospital, int doctorID, String name, int age, String email, String gender, String phoneNumber, City city, Community community, String username, String password) {
+        super(name, age, email, gender, phoneNumber, city, community, username, password);
         this.about = about;
         this.hospital = hospital;
-        this.person = person;
+        this.doctorID = doctorID;
         patientList = new  ArrayList();
         encounterList = new  ArrayList();
+    }
+    
+//    public Doctor (String about, Hospital hospital, int doctorID, ){
+//        
+        
+//    }
+
+    public int getDoctorID() {
+        return doctorID;
+    }
+
+    public void setDoctorID(int doctorID) {
+        this.doctorID = doctorID;
     }
 
     public ArrayList<Encounter> getEncounterList() {
@@ -42,10 +58,6 @@ public class Doctor {
     public ArrayList<Patient> getPatientList() {
         return patientList;
     }
-    
-    public void addPatient(Patient patient) {
-        patientList.add(patient);
-    }
 
     public void setPatientList(ArrayList<Patient> patientList) {
         this.patientList = patientList;
@@ -58,26 +70,9 @@ public class Doctor {
     public void setHospital(Hospital hospital) {
         this.hospital = hospital;
     }
-
-    public Person getPerson() {
-        return person;
-    }
-
-    public void setPerson(Person person) {
-        this.person = person;
-    }
     
     public boolean isMatch(String name){
-        if(this.person.getName().equals(name)) return true;
+        if(this.getName().equals(name)) return true;
         return false;
-    }
-    
-    public Patient getPatientByName(String patient) {
-        for (Patient d: patientList) {
-            if (d.getPerson().getName().equals(patient)) {
-                return d;
-            }
-        }    
-        return null;
     }
 }

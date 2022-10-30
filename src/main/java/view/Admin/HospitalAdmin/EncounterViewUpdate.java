@@ -356,6 +356,7 @@ public class EncounterViewUpdate extends javax.swing.JPanel {
     private void btn_createActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_createActionPerformed
 
         JFrame parent = (JFrame) SwingUtilities.getWindowAncestor(this);
+        parent.setVisible(false);
         parent.dispose();
         
         switch (type) {

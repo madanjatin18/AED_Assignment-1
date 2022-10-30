@@ -6,8 +6,12 @@ package models;
 
 import java.util.ArrayList;
 import java.util.Random;
+import view.MainJFrame;
 
-
+/**
+ *
+ * @author madan
+ */
 public class PatientDirectory {
     ArrayList<Patient> patientList ;
     
@@ -17,7 +21,7 @@ public class PatientDirectory {
 
     }
 
-    public Patient newPatient(String issue, House house, Person person, Hospital hospital, Doctor doctor) {
+    public Patient newPatient(String issue, House house, Hospital hospital, String name, int age, String email, String gender, String phoneNumber, City city, Community community, String username, String password) {
 
         int patientId = generateRandomId();
         while(isPatientIdExist(patientId)) {
@@ -25,10 +29,9 @@ public class PatientDirectory {
         }
         
         
-        Patient p = new Patient(issue, house, person, patientId, hospital,doctor);
+        Patient p = new Patient(issue, house, patientId, hospital, name, age, email, gender, phoneNumber, city, community, username, password);
         patientList.add(p);
         hospital.addPatient(p);
-        doctor.addPatient(p);
         return p;
     }
     
@@ -36,7 +39,6 @@ public class PatientDirectory {
 
         return patientList;
     }
-    
 
     public Patient findPatientByName(String name) {
 
@@ -70,8 +72,22 @@ public class PatientDirectory {
     private int generateRandomId() {
         return new Random().nextInt(900000) + 100000;
     }
-
-    public void deletePateint(Patient selectedPatient) {
-        patientList.remove(selectedPatient);
+    
+    public Patient checkPatientCredentials(String username, String password) {
+        for (Patient p : patientList) {
+            if (p.getUsername().equals(username) && p.getPassword().equals(password)) {
+                return p;
+            }
+        }
+        return null;
+    }
+    
+    public void deletePatient(Patient d) {
+        for (Encounter e: d.getEncounterList()) {
+            e.getDoctor().getEncounterList().remove(e);
+            MainJFrame.encounterDirectory.getEncouterList().remove(e);
+        }
+        patientList.remove(d);
+        d.getHospital().getPatientList().remove(d);
     }
 }

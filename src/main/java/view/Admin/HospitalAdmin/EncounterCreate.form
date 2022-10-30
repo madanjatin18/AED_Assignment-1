@@ -109,17 +109,15 @@
                       <Component id="ddDoctor" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="9" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="1" attributes="0">
-                  <Group type="103" alignment="1" groupAlignment="0" attributes="0">
-                      <Component id="valPatient" min="-2" pref="16" max="-2" attributes="0"/>
-                      <Component id="lblPatient" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="1" attributes="0">
-                      <Component id="ddPatient" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
+                  <Component id="valPatient" alignment="1" min="-2" pref="16" max="-2" attributes="0"/>
+                  <Group type="103" alignment="1" groupAlignment="3" attributes="0">
+                      <Component id="ddPatient" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="lblPatient" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
+              <EmptySpace min="8" pref="8" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="lblDate" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="LabelDate" alignment="3" min="-2" max="-2" attributes="0"/>

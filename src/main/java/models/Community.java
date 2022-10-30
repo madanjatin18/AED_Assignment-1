@@ -6,7 +6,10 @@ package models;
 
 import java.util.ArrayList;
 
-
+/**
+ *
+ * @author madan
+ */
 public class Community {
     String name;
     City city;

@@ -1,8 +1,5 @@
 package models;
 
-import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.Date;
 
 /*
@@ -10,43 +7,37 @@ import java.util.Date;
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 
-
+/**
+ *
+ * @author madan
+ */
 public class Encounter {
+    private int encounterID;
     private Date date;
     private Doctor doctor;
     private Hospital hospital;
-    private VitalSigns vitalSigns; 
+    private VitalSigns vitalSigns;
     private Patient patient;
-    private ArrayList<Doctor> doctorList;
-    private ArrayList<Patient> patientList; 
+
     
-    public Encounter(Date date, Doctor doctor, Hospital hospital,Patient patient) {
+    
+    public Encounter(Date date, Doctor doctor, Hospital hospital, Patient patient, int encounterID) {
         this.date = date;
         this.doctor = doctor;
         this.hospital = hospital;
         this.patient = patient;
-        this.doctorList = hospital.getDoctorList();
+        this.encounterID = encounterID;
+        this.vitalSigns = new VitalSigns();
+    }
+
+    public int getEncounterID() {
+        return encounterID;
+    }
+
+    public void setEncounterID(int encounterID) {
+        this.encounterID = encounterID;
     }
     
-    public Doctor getDoctorByUsername(String username) {
-        for (Doctor d: doctorList) {
-            if (d.getPerson().getUsername().equals(username)) {
-                return d;
-            }
-        }
-        
-        return null;
-    }
-    
-    public Patient getPatientByUsername(String username) {
-        for (Patient p: patientList) {
-            if (p.getPerson().getUsername().equals(username)) {
-                return p;
-            }
-        }
-        
-        return null;
-    }
     public Patient getPatient() {
         return patient;
     }
@@ -60,7 +51,6 @@ public class Encounter {
     }
 
     public void setDate(Date date) {
-        
         this.date = date;
     }
 

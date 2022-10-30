@@ -5,52 +5,54 @@
 package models;
 
 import java.util.ArrayList;
-import java.util.Random;
+import models.Admins.AdminType;
 
-
+/**
+ *
+ * @author madan
+ */
 public class AdminDirectory {
-  
-    ArrayList<Admins> adminsList ;
+    ArrayList<Admins> adminlist ;
     
     public AdminDirectory (){
           
-        adminsList = new ArrayList();
+        adminlist = new ArrayList();
 
     }
 
-    public Admins newAdmins(String name, int age, String email, String gender, String phoneNumber, String username, String password) {
-        
-        Admins a = new Admins(name,age,email,gender,phoneNumber,username,password);
-        adminsList.add(a);
-        return a;
+    public Admins newAdmin(String name, int age, String email, String gender, String phoneNumber, City city, Community community, String username, String password, AdminType type) {
+
+        Admins c = new Admins(name, age, email, gender, phoneNumber, city, community, username, password, type);
+        adminlist.add(c);
+        return c;
     }
     
     public ArrayList<Admins> getAdminsList() {
 
-        return adminsList;
+        return adminlist;
     }
 
-    public Admins findAdminsByName(String name) {
+    public Admins findAdmin(String username) {
 
-        for (Admins c : adminsList) {
+        for (Admins c : adminlist) {
 
-            if (c.isMatch(name)) {
+            if (c.getUsername().equals(username)) {
                 return c;
             }
         }
             return null; //not found after going through the whole list
          }
     
-    public boolean isAdminsUsernameExist(String username) {
-        for (Admins p : adminsList) {
-            if (p.getUsername() == username) {
-                return true;
+    public Admins checkAdminCredentials(String username, String password, Admins.AdminType type) {
+        
+        for (Admins p : adminlist) {
+            if (p.getUsername().equals(username) && p.getPassword().equals(password) && p.getAdminType().equals(type)) {
+                return p;
             }
         }
-        return false;
+        return null;
     }
-
-    public void deleteAdmin (Admins selectedAdmins) {
-        adminsList.remove(selectedAdmins);
+    public void deleteAdmin(Admins admin) {
+        adminlist.remove(admin);
     }
 }

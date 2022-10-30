@@ -5,7 +5,10 @@ package models;
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 
-
+/**
+ *
+ * @author madan
+ */
 public class House {
     String addressLine1;
     String addressLine2;

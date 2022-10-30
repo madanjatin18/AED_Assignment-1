@@ -6,7 +6,10 @@ package models;
 
 import java.util.ArrayList;
 
-
+/**
+ *
+ * @author madan
+ */
 public class Hospital {
     private String name;
     private String about;
@@ -103,7 +106,7 @@ public class Hospital {
     
     public Doctor getDoctorByName(String doctor) {
         for (Doctor d: doctorList) {
-            if (d.getPerson().getName().equals(doctor)) {
+            if (d.getName().equals(doctor)) {
                 return d;
             }
         }
@@ -113,11 +116,20 @@ public class Hospital {
     
     public Patient getPatientByName(String patient) {
         for (Patient d: patientList) {
-            if (d.getPerson().getName().equals(patient)) {
+            if (d.getName().equals(patient)) {
                 return d;
             }
         }
         
         return null;
+    }
+    
+    public boolean isPatientExist(Patient patient) {
+        for (Patient d: patientList) {
+            if (d.equals(patient)) {
+                return true;
+            }
+        }
+        return false;
     }
 }
