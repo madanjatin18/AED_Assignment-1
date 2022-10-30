@@ -56,10 +56,8 @@
                   <Component id="txtHospital" alignment="0" min="-2" pref="207" max="-2" attributes="0"/>
                   <Component id="txtPatient" alignment="0" min="-2" pref="207" max="-2" attributes="0"/>
                   <Group type="102" alignment="0" attributes="0">
-                      <Group type="103" groupAlignment="1" attributes="0">
-                          <Component id="btnUpdate" min="-2" pref="87" max="-2" attributes="0"/>
-                          <Component id="datePicker" min="-2" pref="207" max="-2" attributes="0"/>
-                      </Group>
+                      <EmptySpace min="-2" pref="120" max="-2" attributes="0"/>
+                      <Component id="btnUpdate" min="-2" pref="87" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="valDate" min="-2" pref="214" max="-2" attributes="0"/>
                   </Group>
@@ -110,10 +108,7 @@
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="103" alignment="0" groupAlignment="3" attributes="0">
-                      <Component id="lblDate" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="datePicker" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
+                  <Component id="lblDate" alignment="0" min="-2" max="-2" attributes="0"/>
                   <Component id="valDate" alignment="0" min="-2" pref="16" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -289,16 +284,11 @@
     </Component>
     <Component class="javax.swing.JLabel" name="lblDate">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Date :"/>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Hiragino Mincho ProN" size="18" style="1"/>
         </Property>
+        <Property name="text" type="java.lang.String" value="Date :"/>
       </Properties>
-    </Component>
-    <Component class="com.github.lgooddatepicker.components.DatePicker" name="datePicker">
-      <Events>
-        <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="datePickerKeyReleased"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="valDate">
       <Properties>

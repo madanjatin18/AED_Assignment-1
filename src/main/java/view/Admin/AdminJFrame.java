@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package view.Admin.SystemAdmin;
+package view.Admin;
 
 import view.Admin.CommunityAdmin.CommunityAdmin;
 import view.Admin.HospitalAdmin.HospitalAdminJFrame;
@@ -20,7 +20,7 @@ public class AdminJFrame extends javax.swing.JFrame {
      */
     public AdminJFrame() {
         initComponents();
-        getContentPane().setBackground(new java.awt.Color(102, 255, 204));
+        getContentPane().setBackground(new java.awt.Color(102, 102, 102));
         setLocationRelativeTo(null);
     }
 

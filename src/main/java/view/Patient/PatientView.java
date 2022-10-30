@@ -2,28 +2,28 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package view.Doctor;
+package view.Patient;
 
+import models.Doctor;
 import view.Admin.HospitalAdmin.*;
 import view.Admin.AdminJFrame;
 import view.MainJFrame;
 
-
-public class DoctorAdminJFrame extends javax.swing.JFrame {
+/**
+ *
+ * @author madan
+ */
+public class PatientView extends javax.swing.JFrame {
 
     /**
-     * Creates new form HospitalAdminJFrame
+     * Creates new form PatientView
      */
-    static String username;
-    static String type;
-    public DoctorAdminJFrame(String type,String username) {
+    public PatientView() {
         initComponents();
-        this.username = username;
-        this.type=type;
         workArea.setSize(900, 900);
         setLocationRelativeTo(null);
-        EncounterViewUpdate encounterView = new EncounterViewUpdate(type,username);
-        splitPane.setRightComponent(encounterView);
+        PatientDetails hospitalView = new PatientDetails();
+        splitPane.setRightComponent(hospitalView);
         
     }
 
@@ -38,9 +38,9 @@ public class DoctorAdminJFrame extends javax.swing.JFrame {
 
         splitPane = new javax.swing.JSplitPane();
         controlPanel = new javax.swing.JPanel();
-        btnVitalSign = new javax.swing.JButton();
-        btn_encounters = new javax.swing.JButton();
-        btnLogout = new javax.swing.JButton();
+        btn_back_admin1 = new javax.swing.JButton();
+        btnDetails = new javax.swing.JButton();
+        btnAppointment = new javax.swing.JButton();
         workArea = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -48,30 +48,30 @@ public class DoctorAdminJFrame extends javax.swing.JFrame {
 
         controlPanel.setBackground(new java.awt.Color(102, 102, 102));
 
-        btnVitalSign.setBackground(new java.awt.Color(255, 255, 255));
-        btnVitalSign.setForeground(new java.awt.Color(51, 51, 255));
-        btnVitalSign.setText("VitalSign");
-        btnVitalSign.addActionListener(new java.awt.event.ActionListener() {
+        btn_back_admin1.setBackground(new java.awt.Color(255, 255, 255));
+        btn_back_admin1.setForeground(new java.awt.Color(51, 51, 255));
+        btn_back_admin1.setText("<- Logout");
+        btn_back_admin1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnVitalSignActionPerformed(evt);
+                btn_back_admin1ActionPerformed(evt);
             }
         });
 
-        btn_encounters.setBackground(new java.awt.Color(255, 255, 255));
-        btn_encounters.setForeground(new java.awt.Color(51, 51, 255));
-        btn_encounters.setText("Encounters");
-        btn_encounters.addActionListener(new java.awt.event.ActionListener() {
+        btnDetails.setBackground(new java.awt.Color(255, 255, 255));
+        btnDetails.setForeground(new java.awt.Color(51, 51, 255));
+        btnDetails.setText("Details");
+        btnDetails.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_encountersActionPerformed(evt);
+                btnDetailsActionPerformed(evt);
             }
         });
 
-        btnLogout.setBackground(new java.awt.Color(255, 255, 255));
-        btnLogout.setForeground(new java.awt.Color(51, 51, 255));
-        btnLogout.setText("<- Logout");
-        btnLogout.addActionListener(new java.awt.event.ActionListener() {
+        btnAppointment.setBackground(new java.awt.Color(255, 255, 255));
+        btnAppointment.setForeground(new java.awt.Color(51, 51, 255));
+        btnAppointment.setText("Appointment");
+        btnAppointment.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnLogoutActionPerformed(evt);
+                btnAppointmentActionPerformed(evt);
             }
         });
 
@@ -81,22 +81,24 @@ public class DoctorAdminJFrame extends javax.swing.JFrame {
             controlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(controlPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(controlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btn_encounters, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnVitalSign, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnLogout, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(9, Short.MAX_VALUE))
+                .addGroup(controlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnDetails, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, controlPanelLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btnAppointment))
+                    .addComponent(btn_back_admin1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         controlPanelLayout.setVerticalGroup(
             controlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(controlPanelLayout.createSequentialGroup()
-                .addGap(28, 28, 28)
-                .addComponent(btnLogout)
-                .addGap(87, 87, 87)
-                .addComponent(btn_encounters)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnVitalSign)
-                .addContainerGap(807, Short.MAX_VALUE))
+                .addGap(30, 30, 30)
+                .addComponent(btn_back_admin1)
+                .addGap(124, 124, 124)
+                .addComponent(btnDetails)
+                .addGap(18, 18, 18)
+                .addComponent(btnAppointment)
+                .addContainerGap(762, Short.MAX_VALUE))
         );
 
         splitPane.setLeftComponent(controlPanel);
@@ -130,20 +132,22 @@ public class DoctorAdminJFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnVitalSignActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVitalSignActionPerformed
-        PatientViewUpdate d = new PatientViewUpdate(type,username);
-        splitPane.setRightComponent(d);
-    }//GEN-LAST:event_btnVitalSignActionPerformed
+    private void btn_back_admin1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_back_admin1ActionPerformed
+        MainJFrame.loginSession.setObject(null);
 
-    private void btn_encountersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_encountersActionPerformed
-        EncounterViewUpdate d = new EncounterViewUpdate(type,username);
-        splitPane.setRightComponent(d);
-    }//GEN-LAST:event_btn_encountersActionPerformed
-
-    private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutActionPerformed
-        this.setVisible(false);
+        this.dispose();
         new MainJFrame().setVisible(true);
-    }//GEN-LAST:event_btnLogoutActionPerformed
+    }//GEN-LAST:event_btn_back_admin1ActionPerformed
+
+    private void btnDetailsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDetailsActionPerformed
+        PatientDetails h = new PatientDetails();
+        splitPane.setRightComponent(h);
+    }//GEN-LAST:event_btnDetailsActionPerformed
+
+    private void btnAppointmentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAppointmentActionPerformed
+        PatientAppointment d = new PatientAppointment();
+        splitPane.setRightComponent(d);
+    }//GEN-LAST:event_btnAppointmentActionPerformed
 
     /**
      * @param args the command line arguments
@@ -162,7 +166,7 @@ public class DoctorAdminJFrame extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(DoctorAdminJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PatientView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         //</editor-fold>
@@ -173,30 +177,22 @@ public class DoctorAdminJFrame extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
-       
             public void run() {
-                new DoctorAdminJFrame(type,username).setVisible(true);
+                new PatientView().setVisible(true);
             }
         });
     }
     
-    public void setEncounterCreateView() {                                               
+    public void setAppointmentView() {                                               
         // TODO add your handling code here:
-        EncounterCreate createPanel = new EncounterCreate(type,username);
+        PatientAppointment createPanel = new PatientAppointment();
         splitPane.setRightComponent(createPanel);
-    }    
-    
-    public void setEncounterUpdateView() {                                               
-        // TODO add your handling code here:
-        EncounterViewUpdate viewPanel = new EncounterViewUpdate(type,username);
-        splitPane.setRightComponent(viewPanel);
     }
 
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnLogout;
-    private javax.swing.JButton btnVitalSign;
-    private javax.swing.JButton btn_encounters;
+    private javax.swing.JButton btnAppointment;
+    private javax.swing.JButton btnDetails;
+    private javax.swing.JButton btn_back_admin1;
     private javax.swing.JPanel controlPanel;
     private javax.swing.JSplitPane splitPane;
     private javax.swing.JPanel workArea;

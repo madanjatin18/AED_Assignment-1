@@ -22,11 +22,13 @@ import models.PatientDirectory;
 import models.PersonDirectory;
 import view.Admin.AdminJFrame;
 import resources.CreateDefaultData;
-import view.Doctor.DoctorAdminJFrame;
-import view.Patient.PatientAdminJFrame;
+import models.LoginSession;
+import view.login.LoginView;
 
-
-
+/**
+ *
+ * @author madan
+ */
 public class MainJFrame extends javax.swing.JFrame {
 
     /**
@@ -42,7 +44,8 @@ public class MainJFrame extends javax.swing.JFrame {
     public static PatientDirectory patientDirectory = new PatientDirectory();
     public static EncounterDirectory encounterDirectory = new EncounterDirectory();
     public static AdminDirectory adminDirectory = new AdminDirectory();
-    //public static Doctor doctorMain = new Doctor();
+    public static LoginSession loginSession = new LoginSession();
+    private static boolean create = true;
     
     public MainJFrame() {
         initComponents();
@@ -62,15 +65,12 @@ public class MainJFrame extends javax.swing.JFrame {
     private void initComponents() {
 
         lbl_title = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
-        cbChoice = new javax.swing.JComboBox<>();
-        txtUsername = new javax.swing.JTextField();
-        btnLogin = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
-        txtPassword = new javax.swing.JPasswordField();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
         lblError = new javax.swing.JLabel();
+        btn_admins = new javax.swing.JButton();
+        btn_doctors = new javax.swing.JButton();
+        btn_person = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(153, 153, 153));
@@ -80,53 +80,20 @@ public class MainJFrame extends javax.swing.JFrame {
         lbl_title.setForeground(new java.awt.Color(204, 153, 0));
         lbl_title.setText("     HHS.gov");
 
-        jLabel1.setText("Please select the login type");
-
-        cbChoice.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Admin", "Doctor", "Patient" }));
-        cbChoice.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbChoiceActionPerformed(evt);
-            }
-        });
-
-        txtUsername.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtUsernameActionPerformed(evt);
-            }
-        });
-
-        btnLogin.setText("Login");
-        btnLogin.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnLoginActionPerformed(evt);
-            }
-        });
-
         jLabel2.setText("U.S. Department of Health & Human Services");
 
-        jLabel3.setText("Username :");
+        btn_admins.setText("Admins");
 
-        jLabel4.setText("Password :");
+        btn_doctors.setText("Doctors");
+
+        btn_person.setText("Patient");
+
+        jLabel5.setText("Please select the login type");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(142, 142, 142)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel3))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(lblError, javax.swing.GroupLayout.DEFAULT_SIZE, 119, Short.MAX_VALUE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(cbChoice, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(txtUsername, javax.swing.GroupLayout.DEFAULT_SIZE, 119, Short.MAX_VALUE)
-                        .addComponent(txtPassword)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 74, Short.MAX_VALUE)
-                .addComponent(btnLogin)
-                .addGap(117, 117, 117))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -134,12 +101,24 @@ public class MainJFrame extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(208, 208, 208)
-                        .addComponent(jLabel1))
+                        .addGap(219, 219, 219)
+                        .addComponent(lblError, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(160, 160, 160)
-                        .addComponent(lbl_title, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(lbl_title, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(108, 108, 108)
+                        .addComponent(btn_admins)
+                        .addGap(68, 68, 68)
+                        .addComponent(btn_doctors)
+                        .addGap(52, 52, 52)
+                        .addComponent(btn_person)))
+                .addGap(117, 152, Short.MAX_VALUE))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(jLabel5)
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -148,92 +127,23 @@ public class MainJFrame extends javax.swing.JFrame {
                 .addComponent(lbl_title, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel2)
-                .addGap(31, 31, 31)
-                .addComponent(jLabel1)
-                .addGap(18, 18, 18)
-                .addComponent(cbChoice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 116, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtUsername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4))
-                .addGap(10, 10, 10)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnLogin)
-                    .addComponent(lblError))
-                .addContainerGap(33, Short.MAX_VALUE))
+                    .addComponent(btn_admins)
+                    .addComponent(btn_doctors)
+                    .addComponent(btn_person))
+                .addGap(47, 47, 47)
+                .addComponent(lblError)
+                .addContainerGap(55, Short.MAX_VALUE))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(jLabel5)
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void txtUsernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUsernameActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtUsernameActionPerformed
-/*if (cbChoice.getSelectedItem().toString().equals("Admin")){
-            lblComment.setText("Enter Admin Credentials");}
-        if (cbChoice.getSelectedItem().toString().equals("Doctor")){
-            lblComment.setText("Enter Doctor Credentials");}
-        if (cbChoice.getSelectedItem().toString().equals("Patient")){
-            lblComment.setText("Enter Patient Credentials");}*/
-    private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
-        // TODO add your handling code here:
-        if (cbChoice.getSelectedItem().toString().equals("Admin")){
-            ArrayList<Admins> adminList = new ArrayList<>();
-            adminList =adminDirectory.getAdminsList();
-            for(Admins a : adminList){
-                if (txtUsername.getText().equals(a.getUsername()) && txtPassword.getText().equals(a.getPassword())){
-                    this.dispose();
-                    new AdminJFrame().setVisible(true);
-                }
-                else{
-                    lblError.setText("Invalid Credentials");
-                    lblError.setForeground(new java.awt.Color(255, 0, 0));
-                }
-            }
-            
-        }
-        
-        if (cbChoice.getSelectedItem().toString().equals("Doctor")){
-            ArrayList<Doctor> doctorList= new ArrayList<>();
-            doctorList = doctorDirectory.getDoctorList();
-            
-            for(Doctor d : doctorList){
-                if (txtUsername.getText().equals(d.getPerson().getUsername()) && txtPassword.getText().equals(d.getPerson().getPassword())){
-                    this.setVisible(false);
-                    this.dispose();
-                    new DoctorAdminJFrame("doc",d.getPerson().getUsername()).setVisible(true);
-                }
-                else{
-                    lblError.setText("Invalid Credentials");
-                    lblError.setForeground(new java.awt.Color(255, 0, 0));
-                }
-            }
-        }
-        
-        if (cbChoice.getSelectedItem().toString().equals("Patient")){
-            
-            ArrayList<Patient> patientList = new ArrayList<>();
-            patientList = patientDirectory.getPatientList();
-            for(Patient p : patientList){
-                if (txtUsername.getText().equals(p.getPerson().getUsername()) && txtPassword.getText().equals(p.getPerson().getPassword())){
-                    this.dispose();
-                    new PatientAdminJFrame("pat",p.getPerson().getUsername()).setVisible(true);
-                }
-                else{
-                    lblError.setText("Invalid Credentials");
-                    lblError.setForeground(new java.awt.Color(255, 0, 0));
-                }
-            }
-        }
-    }//GEN-LAST:event_btnLoginActionPerformed
-
-    private void cbChoiceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbChoiceActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cbChoiceActionPerformed
 
     /**
      * @param args the command line arguments
@@ -301,16 +211,13 @@ public class MainJFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnLogin;
-    private javax.swing.JComboBox<String> cbChoice;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JButton btn_admins;
+    private javax.swing.JButton btn_doctors;
+    private javax.swing.JButton btn_person;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel lblError;
     private javax.swing.JLabel lbl_title;
-    private javax.swing.JPasswordField txtPassword;
-    private javax.swing.JTextField txtUsername;
     // End of variables declaration//GEN-END:variables
 
 

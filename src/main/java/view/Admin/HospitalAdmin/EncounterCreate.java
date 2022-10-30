@@ -74,7 +74,6 @@ public class EncounterCreate extends javax.swing.JPanel {
         valDoctor = new javax.swing.JLabel();
         valPatient = new javax.swing.JLabel();
         lblDate = new javax.swing.JLabel();
-        datePicker = new com.github.lgooddatepicker.components.DatePicker();
         valDate = new javax.swing.JLabel();
         btnSave = new javax.swing.JButton();
         btnBack = new javax.swing.JButton();
@@ -145,12 +144,6 @@ public class EncounterCreate extends javax.swing.JPanel {
         lblDate.setFont(new java.awt.Font("Hiragino Mincho ProN", 1, 18)); // NOI18N
         lblDate.setText("Date :");
 
-        datePicker.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                datePickerKeyReleased(evt);
-            }
-        });
-
         valDate.setFont(new java.awt.Font("Helvetica Neue", 2, 13)); // NOI18N
         valDate.setForeground(new java.awt.Color(255, 0, 0));
 
@@ -187,7 +180,6 @@ public class EncounterCreate extends javax.swing.JPanel {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(ddDoctor, 0, 223, Short.MAX_VALUE)
                             .addComponent(ddPatient, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(datePicker, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(btnBack)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -206,7 +198,7 @@ public class EncounterCreate extends javax.swing.JPanel {
                     .addComponent(valDoctor, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(valPatient, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(valDate, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(67, Short.MAX_VALUE))
+                .addContainerGap(72, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addContainerGap()
@@ -253,7 +245,6 @@ public class EncounterCreate extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblDate)
-                    .addComponent(datePicker, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(valDate, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(23, 23, 23)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -478,7 +469,6 @@ public class EncounterCreate extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;
     private javax.swing.JButton btnSave;
-    private com.github.lgooddatepicker.components.DatePicker datePicker;
     private javax.swing.JComboBox<String> ddCity;
     private javax.swing.JComboBox<String> ddCommunity;
     private javax.swing.JComboBox<String> ddDoctor;

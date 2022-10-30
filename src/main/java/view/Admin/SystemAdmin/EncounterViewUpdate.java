@@ -65,7 +65,6 @@ public class EncounterViewUpdate extends javax.swing.JPanel {
         txtDoctor = new javax.swing.JTextField();
         txtPatient = new javax.swing.JTextField();
         lblDate = new javax.swing.JLabel();
-        datePicker = new com.github.lgooddatepicker.components.DatePicker();
         valDate = new javax.swing.JLabel();
 
         btnUpdate.setText("Update");
@@ -156,12 +155,6 @@ public class EncounterViewUpdate extends javax.swing.JPanel {
         lblDate.setText("Date :");
         lblDate.setFont(new java.awt.Font("Hiragino Mincho ProN", 1, 18)); // NOI18N
 
-        datePicker.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                datePickerKeyReleased(evt);
-            }
-        });
-
         valDate.setFont(new java.awt.Font("Helvetica Neue", 2, 13)); // NOI18N
         valDate.setForeground(new java.awt.Color(255, 0, 0));
 
@@ -187,8 +180,8 @@ public class EncounterViewUpdate extends javax.swing.JPanel {
                             .addComponent(lblCommunity, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(lblCity, javax.swing.GroupLayout.Alignment.TRAILING))
                         .addGap(41, 41, 41)
-                        .addComponent(txtDoctor, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                        .addComponent(txtDoctor, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(95, 95, 95)
                 .addComponent(lblDate)
@@ -202,9 +195,8 @@ public class EncounterViewUpdate extends javax.swing.JPanel {
                     .addComponent(txtHospital, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtPatient, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(btnUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(datePicker, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(120, 120, 120)
+                        .addComponent(btnUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(valDate, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(44, Short.MAX_VALUE))
@@ -243,9 +235,7 @@ public class EncounterViewUpdate extends javax.swing.JPanel {
                     .addComponent(txtPatient, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(lblDate)
-                        .addComponent(datePicker, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblDate)
                     .addComponent(valDate, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(btnUpdate)
@@ -390,7 +380,6 @@ public class EncounterViewUpdate extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnUpdate;
     private javax.swing.JButton btn_create;
-    private com.github.lgooddatepicker.components.DatePicker datePicker;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblAge;
     private javax.swing.JLabel lblCity;

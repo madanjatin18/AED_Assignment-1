@@ -50,7 +50,7 @@ public class CommunityAdmin extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(153, 255, 204));
 
-        controlPanel.setBackground(new java.awt.Color(153, 255, 204));
+        controlPanel.setBackground(new java.awt.Color(102, 102, 102));
 
         btn_community.setBackground(new java.awt.Color(255, 255, 255));
         btn_community.setForeground(new java.awt.Color(51, 51, 255));
@@ -105,7 +105,7 @@ public class CommunityAdmin extends javax.swing.JFrame {
 
         splitPane.setLeftComponent(controlPanel);
 
-        workArea.setBackground(new java.awt.Color(204, 255, 255));
+        workArea.setBackground(new java.awt.Color(153, 153, 153));
         workArea.setPreferredSize(new java.awt.Dimension(800, 700));
 
         javax.swing.GroupLayout workAreaLayout = new javax.swing.GroupLayout(workArea);
