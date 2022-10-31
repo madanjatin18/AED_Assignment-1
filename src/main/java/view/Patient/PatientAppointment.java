@@ -44,6 +44,7 @@ public class PatientAppointment extends javax.swing.JPanel {
         originalTableModel = (Vector) ((DefaultTableModel) tblDetails.getModel()).getDataVector().clone();
         btn_create.setVisible(false);
         txtDate1.setVisible(false);
+        lblDate.setVisible(false);
     }
 
     /**
@@ -73,7 +74,7 @@ public class PatientAppointment extends javax.swing.JPanel {
         txtSearch = new javax.swing.JTextField();
         valDate = new javax.swing.JLabel();
         txtDate1 = new javax.swing.JTextField();
-        lblCommunity5 = new javax.swing.JLabel();
+        lblDate = new javax.swing.JLabel();
 
         txtDate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -175,8 +176,8 @@ public class PatientAppointment extends javax.swing.JPanel {
             }
         });
 
-        lblCommunity5.setFont(new java.awt.Font("Hiragino Mincho ProN", 1, 18)); // NOI18N
-        lblCommunity5.setText("Date :");
+        lblDate.setFont(new java.awt.Font("Hiragino Mincho ProN", 1, 18)); // NOI18N
+        lblDate.setText("Date :");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -204,7 +205,7 @@ public class PatientAppointment extends javax.swing.JPanel {
                                     .addComponent(lblCommunity3)
                                     .addComponent(lblCommunity1)
                                     .addComponent(lblCity)
-                                    .addComponent(lblCommunity5))
+                                    .addComponent(lblDate))
                                 .addGap(26, 26, 26)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -255,7 +256,7 @@ public class PatientAppointment extends javax.swing.JPanel {
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtDate1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblCommunity5)))
+                            .addComponent(lblDate)))
                     .addComponent(valDate, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(btn_create)
@@ -283,6 +284,7 @@ public class PatientAppointment extends javax.swing.JPanel {
         
         btn_create.setVisible(true);
         txtDate1.setVisible(true);
+        lblDate.setVisible(false);
     }//GEN-LAST:event_tblDetailsMouseClicked
 
     private void btn_createActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_createActionPerformed
@@ -291,11 +293,7 @@ public class PatientAppointment extends javax.swing.JPanel {
         Doctor doctor = (Doctor) tblModel.getValueAt(tblDetails.getSelectedRow(),5);
         
         var valid = true;
-        
-        if (!this.validations.ValidateEmpty(txtDate.getText()) ) {
-            valDate.setText("Date of appointment is required");
-            valid = false;
-        }
+
         if (txtDate1.getText()!=null){
 
             SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
@@ -325,6 +323,8 @@ public class PatientAppointment extends javax.swing.JPanel {
             valDate.setText(null);
             
             JOptionPane.showMessageDialog(this, "Appointment Created");
+            txtDate1.setVisible(false);
+            lblDate.setVisible(false);
         }
         
     }//GEN-LAST:event_btn_createActionPerformed
@@ -412,7 +412,7 @@ public class PatientAppointment extends javax.swing.JPanel {
     private javax.swing.JLabel lblCommunity1;
     private javax.swing.JLabel lblCommunity3;
     private javax.swing.JLabel lblCommunity4;
-    private javax.swing.JLabel lblCommunity5;
+    private javax.swing.JLabel lblDate;
     private javax.swing.JLabel lblDoctorRecord;
     private javax.swing.JTable tblDetails;
     private javax.swing.JTextField txtAbout;
