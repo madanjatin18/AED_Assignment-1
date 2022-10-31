@@ -32,12 +32,11 @@
                       <Component id="txtSearch" min="-2" pref="291" max="-2" attributes="0"/>
                   </Group>
                   <Component id="jScrollPane1" alignment="0" min="-2" pref="586" max="-2" attributes="0"/>
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="9" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="lblCommunity" alignment="1" min="-2" max="-2" attributes="0"/>
-                          <Component id="lblCity" alignment="1" min="-2" max="-2" attributes="0"/>
-                      </Group>
+                  <Group type="103" alignment="0" groupAlignment="1" attributes="0">
+                      <Component id="lblCommunity1" min="-2" max="-2" attributes="0"/>
+                      <Component id="lblCommunity" alignment="1" min="-2" max="-2" attributes="0"/>
+                      <Component id="lblCity" alignment="1" min="-2" max="-2" attributes="0"/>
+                      <Component id="lblDate" alignment="1" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
@@ -61,6 +60,7 @@
                       <Component id="btn_create" min="-2" pref="87" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" attributes="0">
+                      <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="btnUpdate" alignment="1" min="-2" pref="87" max="-2" attributes="0"/>
                           <Group type="102" alignment="1" attributes="0">
@@ -68,7 +68,6 @@
                                   <Component id="lblCommunity4" min="-2" max="-2" attributes="0"/>
                                   <Component id="lblCommunity3" alignment="1" min="-2" max="-2" attributes="0"/>
                                   <Component id="lblCommunity5" min="-2" max="-2" attributes="0"/>
-                                  <Component id="lblCommunity1" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
@@ -77,13 +76,9 @@
                                   <Component id="txtBreathing" min="-2" pref="207" max="-2" attributes="0"/>
                               </Group>
                           </Group>
-                          <Group type="102" alignment="1" attributes="0">
-                              <Component id="lblDate" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="txtDate" min="-2" pref="211" max="-2" attributes="0"/>
-                                  <Component id="txtBloodPressure" min="-2" pref="207" max="-2" attributes="0"/>
-                              </Group>
+                          <Group type="103" alignment="1" groupAlignment="0" attributes="0">
+                              <Component id="txtDate" min="-2" pref="211" max="-2" attributes="0"/>
+                              <Component id="txtBloodPressure" min="-2" pref="207" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
@@ -104,9 +99,9 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="30" pref="30" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="lblDoctorRecord" alignment="0" min="-2" pref="38" max="-2" attributes="0"/>
-                  <Component id="txtSearch" alignment="0" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="lblDoctorRecord" alignment="3" min="-2" pref="38" max="-2" attributes="0"/>
+                  <Component id="txtSearch" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="27" pref="27" max="-2" attributes="0"/>
               <Component id="jScrollPane1" min="-2" pref="136" max="-2" attributes="0"/>
@@ -128,11 +123,9 @@
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="103" alignment="0" groupAlignment="3" attributes="0">
-                      <Component id="lblDate" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="txtDate" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
+                  <Component id="txtDate" alignment="0" min="-2" max="-2" attributes="0"/>
                   <Component id="valDate" alignment="0" min="-2" pref="16" max="-2" attributes="0"/>
+                  <Component id="lblDate" alignment="0" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">

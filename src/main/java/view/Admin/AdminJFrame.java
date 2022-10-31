@@ -38,6 +38,7 @@ public class AdminJFrame extends javax.swing.JFrame {
         btn_system_admin = new javax.swing.JButton();
         btn_community_admin = new javax.swing.JButton();
         btn_hospital_admin = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -72,38 +73,48 @@ public class AdminJFrame extends javax.swing.JFrame {
             }
         });
 
+        jLabel2.setText("       About HHS          Programs & Services        Grants & Contracts          Laws & Regulations ");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(48, 48, 48)
+                .addComponent(btn_back_main)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(63, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(btn_system_admin)
-                        .addGap(38, 38, 38)
-                        .addComponent(btn_community_admin)
-                        .addGap(36, 36, 36)
-                        .addComponent(btn_hospital_admin))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(btn_back_main)
-                        .addGap(32, 32, 32)
-                        .addComponent(lbl_admin)))
-                .addContainerGap(95, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(39, 39, 39)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(btn_community_admin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(btn_hospital_admin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(btn_system_admin, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(lbl_admin))
+                        .addGap(194, 194, 194))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 528, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(34, 34, 34))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(40, 40, 40)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lbl_admin)
-                    .addComponent(btn_back_main))
-                .addGap(77, 77, 77)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btn_system_admin)
-                    .addComponent(btn_community_admin)
-                    .addComponent(btn_hospital_admin))
-                .addContainerGap(189, Short.MAX_VALUE))
+                .addGap(43, 43, 43)
+                .addComponent(btn_back_main)
+                .addGap(76, 76, 76)
+                .addComponent(lbl_admin)
+                .addGap(18, 18, 18)
+                .addComponent(btn_system_admin)
+                .addGap(18, 18, 18)
+                .addComponent(btn_community_admin)
+                .addGap(18, 18, 18)
+                .addComponent(btn_hospital_admin)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 129, Short.MAX_VALUE)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
@@ -176,6 +187,7 @@ public class AdminJFrame extends javax.swing.JFrame {
     private javax.swing.JButton btn_community_admin;
     private javax.swing.JButton btn_hospital_admin;
     private javax.swing.JButton btn_system_admin;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel lbl_admin;
     // End of variables declaration//GEN-END:variables
 }

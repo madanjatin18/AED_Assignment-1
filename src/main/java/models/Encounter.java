@@ -18,9 +18,9 @@ public class Encounter {
     private Hospital hospital;
     private VitalSigns vitalSigns;
     private Patient patient;
+    
 
-    
-    
+   
     public Encounter(Date date, Doctor doctor, Hospital hospital, Patient patient, int encounterID) {
         this.date = date;
         this.doctor = doctor;
@@ -30,6 +30,7 @@ public class Encounter {
         this.vitalSigns = new VitalSigns();
     }
 
+    
     public int getEncounterID() {
         return encounterID;
     }

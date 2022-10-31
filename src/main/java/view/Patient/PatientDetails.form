@@ -20,26 +20,26 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" attributes="0">
-              <EmptySpace min="-2" pref="301" max="-2" attributes="0"/>
-              <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="32767" attributes="0"/>
-          </Group>
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jScrollPane2" pref="745" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
+          </Group>
+          <Group type="102" alignment="1" attributes="0">
+              <EmptySpace max="32767" attributes="0"/>
+              <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="281" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="53" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="59" max="-2" attributes="0"/>
               <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
               <Component id="jScrollPane2" min="-2" pref="594" max="-2" attributes="0"/>
-              <EmptySpace pref="17" max="32767" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -50,7 +50,7 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Helvetica Neue" size="18" style="1"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Personal Details"/>
+        <Property name="text" type="java.lang.String" value="PATIENT DETAILS"/>
       </Properties>
     </Component>
     <Container class="javax.swing.JScrollPane" name="jScrollPane2">
@@ -222,9 +222,9 @@
                           <Group type="103" alignment="0" groupAlignment="3" attributes="0">
                               <Component id="btnMale" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="lblGender" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="btnFemale" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="btnOther" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <Component id="btnFemale" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="btnOther" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="valGender" min="-2" pref="16" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -265,7 +265,7 @@
                           <Component id="lblCity" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="txtCity" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="lblCommunity" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="txtCommunity" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -409,7 +409,7 @@
             <Component class="javax.swing.JLabel" name="lblPassword">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Hiragino Mincho ProN" size="18" style="0"/>
+                  <Font name="Hiragino Mincho ProN" size="18" style="1"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Password:"/>
               </Properties>
@@ -417,7 +417,7 @@
             <Component class="javax.swing.JLabel" name="lblName">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Hiragino Mincho ProN" size="18" style="0"/>
+                  <Font name="Hiragino Mincho ProN" size="18" style="1"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Name:"/>
               </Properties>
@@ -430,7 +430,7 @@
             <Component class="javax.swing.JLabel" name="lblAge">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Hiragino Mincho ProN" size="18" style="0"/>
+                  <Font name="Hiragino Mincho ProN" size="18" style="1"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Age:"/>
               </Properties>
@@ -451,7 +451,7 @@
             <Component class="javax.swing.JLabel" name="lblEmail">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Hiragino Mincho ProN" size="18" style="0"/>
+                  <Font name="Hiragino Mincho ProN" size="18" style="1"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Email:"/>
               </Properties>
@@ -496,7 +496,7 @@
             <Component class="javax.swing.JLabel" name="lblUsername">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Hiragino Mincho ProN" size="18" style="0"/>
+                  <Font name="Hiragino Mincho ProN" size="18" style="1"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Username:"/>
               </Properties>
@@ -535,7 +535,7 @@
             <Component class="javax.swing.JLabel" name="lblPhoneNumber">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Hiragino Mincho ProN" size="18" style="0"/>
+                  <Font name="Hiragino Mincho ProN" size="18" style="1"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Phone Number:"/>
               </Properties>
@@ -548,7 +548,7 @@
             <Component class="javax.swing.JLabel" name="lblGender">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Hiragino Mincho ProN" size="18" style="0"/>
+                  <Font name="Hiragino Mincho ProN" size="18" style="1"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Gender:"/>
               </Properties>
