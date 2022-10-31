@@ -45,7 +45,7 @@ public class AdminJFrame extends javax.swing.JFrame {
         lbl_admin.setFont(new java.awt.Font("Hiragino Maru Gothic ProN", 1, 18)); // NOI18N
         lbl_admin.setText("Select the type of admin");
 
-        btn_back_main.setText("<- Back");
+        btn_back_main.setText("Back");
         btn_back_main.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_back_mainActionPerformed(evt);

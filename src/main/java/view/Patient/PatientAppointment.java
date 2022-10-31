@@ -37,6 +37,7 @@ public class PatientAppointment extends javax.swing.JPanel {
     public PatientAppointment() {
         initComponents();
         MainJFrame.defaultSearchText(txtSearch, "Search ...");
+        formatter = new SimpleDateFormat("yyyy-MM-dd");
         populateTable();
         patient = (Patient) MainJFrame.loginSession.getObject();
         validations = new Validations();
@@ -308,7 +309,7 @@ public class PatientAppointment extends javax.swing.JPanel {
             }
             
             if(date!= null){
-                if(date.compareTo(now) > 0){
+                if(date.compareTo(now) < 0){
                     valid = false;
                     valDate.setText("Date should be of future");
                 }

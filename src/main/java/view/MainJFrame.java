@@ -45,8 +45,9 @@ public class MainJFrame extends javax.swing.JFrame {
     private static boolean create = true;
     public MainJFrame() {
         initComponents();
+        getContentPane().setBackground(new java.awt.Color(102, 102, 102));
            if (create) {
-            //CreateDefaultData.createData();
+            CreateDefaultData.createData();
             City boston = MainJFrame.cityDirectory.newCity("Boston");
             Community jp = MainJFrame.communityDirectory.newCommunity("Jamaica Plain", boston);
             Admins ad1 = MainJFrame.adminDirectory.newAdmin("jatin", 24, "madanjatin18@gmail.com", "Male", "6179358513", boston, jp, "jatin", "jatin123", Admins.AdminType.SYSTEM);

@@ -85,7 +85,7 @@ public class CreateEncounter extends javax.swing.JFrame {
         lblDate.setFont(new java.awt.Font("Hiragino Mincho ProN", 1, 18)); // NOI18N
         lblDate.setText("Date :");
 
-        btnBack.setText("<- Back");
+        btnBack.setText(" Back");
         btnBack.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBackActionPerformed(evt);
